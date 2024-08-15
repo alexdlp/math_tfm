@@ -2,6 +2,7 @@ import pandas as pd
 import pandas_ta as ta
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from typing import List
 
 
 
@@ -145,13 +146,14 @@ def calculate_indicators(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-def normalize_data(data: pd.DataFrame) -> pd.DataFrame:
+def normalize_data(data: pd.DataFrame, exclude_columns: List[str] = []) -> pd.DataFrame:
     """
-    Normalize the DataFrame columns.
-    
+    Normalize the DataFrame columns, except for the specified columns.
+
     Parameters:
     data (pd.DataFrame): DataFrame with columns to normalize.
-    
+    exclude_columns (List[str]): List of column names to exclude from normalization.
+
     Returns:
     pd.DataFrame: Normalized DataFrame.
     """
@@ -160,7 +162,12 @@ def normalize_data(data: pd.DataFrame) -> pd.DataFrame:
     # Select only numeric columns
     numeric_columns = data.select_dtypes(include=['float64']).columns
 
-    data[numeric_columns] = scaler.fit_transform(data[numeric_columns])
+    # Exclude specified columns from normalization
+    columns_to_normalize = [col for col in numeric_columns if col not in exclude_columns]
+
+    # Apply scaling to the selected columns
+    data[columns_to_normalize] = scaler.fit_transform(data[columns_to_normalize])
+
     return data
 
 def filter_by_date(data: pd.DataFrame, cutoff_date: str) -> tuple[pd.DataFrame, pd.DataFrame]:

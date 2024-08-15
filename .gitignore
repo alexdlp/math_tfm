@@ -160,3 +160,13 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# archivos grandes .........
+/00_api_data/BTC_all.parquet
+/00_api_data/SPY_all.parquet
+
+/02_training_data/BTC_original_processed_in_sample.parquet
+/02_training_data/SPY_original_processed_in_sample.parquet
+
+/02_training_data/BTC_dollar_processed_in_sample.parquet
+/02_training_data/SPY_dollar_processed_in_sample.parquet

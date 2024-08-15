@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{Cont2001}
+Rama Cont.
+\newblock Empirical properties of asset returns: stylized facts and statistical
+  issues.
+\newblock {\em Quantitative Finance}, 1(2):223--236, 2001.
+
+\bibitem{DindosPipherRule2016}
+Martin Dindos, Jill Pipher, and David Rule.
+\newblock Boundary value problems for second-order elliptic operators
+  satisfying a carleson condition.
+\newblock {\em Commun Pure Appl Math}, 70(7):1316--1365, 2017.
+
+\bibitem{easley2012volume}
+David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
+\newblock The volume clock: Insights into the high frequency paradigm.
+\newblock {\em The Journal of Portfolio Management}, 39(1):19--29, 2012.
+
+\bibitem{quant_finance_stack_exchange}
+Quantitative Finance~Stack Exchange.
+\newblock Tick imbalance bars - advances in financial machine learning, 2019.
+
+\end{thebibliography}

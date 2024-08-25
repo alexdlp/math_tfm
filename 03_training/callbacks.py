@@ -6,36 +6,6 @@ from stable_baselines3.common.logger import HParam
 import numpy as np
 import config 
 
-import re
-from typing import Tuple
-
-def extract_asset_and_data_type(file_path: str) -> Tuple[str, str]:
-    """
-    Extracts the asset and data type from a parquet file path.
-    
-    Parameters:
-    file_path (str): The path of the parquet file.
-    
-    Returns:
-    Tuple[str, str]: A tuple containing the asset ('BTC' or 'SPY') and data type ('original', 'volume', 'dollar').
-    """
-    # Regular expressions to match the asset and data type
-    asset_pattern = re.compile(r'(BTC|SPY)')
-    data_type_pattern = re.compile(r'(original|volume|dollar)')
-    
-    # Extract the asset
-    asset_match = asset_pattern.search(file_path)
-    asset = asset_match.group(1) if asset_match else None
-    
-    # Extract the data type
-    data_type_match = data_type_pattern.search(file_path)
-    data_type = data_type_match.group(1) if data_type_match else None
-    
-    if asset is None or data_type is None:
-        raise ValueError("Unable to extract asset and data type from the file path.")
-    
-    return asset, data_type
-
 
 class TensorboardCallback(BaseCallback):
     def __init__(self, verbose=0):
@@ -50,12 +20,16 @@ class TensorboardCallback(BaseCallback):
         # print(self.locals)
         # import time
         # time.sleep(30)
+        
         info = self.locals['infos'][0]
         reward = info.get('reward', 0.0)
         portfolio_valuation = info.get('portfolio_valuation', 0.0)
         strategy_returns = info.get('strategy_returns', 0.0)
-        action_taken = info.get('action_taken')
-        self.logger.record('action_taken', action_taken)
+        # action_taken = info.get('agent_action')
+        # real_action_taken = info.get('real_action_taken')
+        #print(f"Agent action taken: {action_taken} | Real taken : {real_action_taken}")
+        # self.logger.record('action_taken', action_taken)
+        # self.logger.record('real_action_taken', real_action_taken)
 
         # Gather episode rewards and other metrics
         self.episode_rewards.append(reward)
@@ -63,7 +37,7 @@ class TensorboardCallback(BaseCallback):
         self.episode_strategy_returns.append(strategy_returns)
 
         # Log metrics every 1000 steps
-        if self.n_calls % 1000 == 0:
+        if self.n_calls % 1000== 0:
             mean_reward = np.mean(self.episode_rewards) if self.episode_rewards else 0
             mean_portfolio_valuation = np.mean(self.episode_portfolio_valuations) if self.episode_portfolio_valuations else 0
             mean_strategy_returns = np.mean(self.episode_strategy_returns) if self.episode_strategy_returns else 0
@@ -92,7 +66,7 @@ class TensorboardCallback(BaseCallback):
 
         return True
 
-asset, data_type = extract_asset_and_data_type(config.TRAINING_DATA)
+
 class HParamCallback(BaseCallback):
     """
     Saves the hyperparameters and metrics at the start of the training, and logs them to TensorBoard.
@@ -100,8 +74,8 @@ class HParamCallback(BaseCallback):
 
     def _on_training_start(self) -> None:
         hparam_dict = {
-            'asset': asset,
-            'data_type': data_type,
+            'asset': config.ASSET,
+            'data_type': config.DATA_TYPE,
             "algorithm": self.model.__class__.__name__,
             "learning rate": self.model.learning_rate,
             "gamma": self.model.gamma,

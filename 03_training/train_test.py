@@ -1,35 +1,41 @@
-from stable_baselines3 import A2C, PPO
-
-from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.vec_env import VecMonitor, DummyVecEnv
-
-from stable_baselines3.common.monitor import Monitor
-import gymnasium as gym
 import os
 import numpy as np
 import pandas as pd
 
+from stable_baselines3 import A2C, PPO
+
+from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.vec_env import VecMonitor, DummyVecEnv
+from stable_baselines3.common.monitor import Monitor
+import gymnasium as gym
+
+
 from stock_trading_env import reward_functions
 from stock_trading_env.trading_env import TradingEnv
-import config
+from callbacks import TensorboardCallback, HParamCallback
 
 from gymnasium.wrappers import RecordEpisodeStatistics, TimeLimit
 from torch.utils.tensorboard import SummaryWriter
+
+import config
+
 
 gym.envs.register(
     id='TradingEnv-v0',
     entry_point='stock_trading_env.trading_env:TradingEnv',
 )
 
-
 def create_envs(df_path: str, n_envs: int, monitor_dir: str) -> DummyVecEnv:
+    
     loaded_df = pd.read_parquet(df_path)
+    max_episode_steps = int(len(loaded_df)*0.1)
 
     if config.REWARD_FUNCTION == 'sharpe_ratio':
         reward_function = reward_functions.sharpe_reward
     elif config.REWARD_FUNCTION == 'dantas_and_silva_reward':
         reward_function = reward_functions.dantas_and_silva_reward
-
+    elif config.REWARD_FUNCTION == 'basic':
+        reward_function = reward_functions.basic_reward_function
     def make_env(rank: int) -> gym.Env:
         def _init() -> gym.Env:
             env = gym.make(
@@ -37,14 +43,14 @@ def create_envs(df_path: str, n_envs: int, monitor_dir: str) -> DummyVecEnv:
                 name="BTCUSD",
                 df=loaded_df,
                 windows=config.WINDOW,
-                positions=[-1, 0, 1],  # -1 (=SHORT), +1 (=LONG)
+                positions=[-1,0, 1],  # -1 (=SHORT), +1 (=LONG)
                 initial_position=0,  # Initial position
-                trading_fees=0.01 / 100,  # 0.01% per stock buy/sell
+                trading_fees=00.01 / 100,  # 0.01% per stock buy/sell
                 reward_function=reward_function,
-                portfolio_initial_value=100000,  # in FIAT (here, USD)
-                max_episode_duration=500000,
+                portfolio_initial_value=config.PORTFOLIO_INITIAL_VALUE,  # in FIAT (here, USD)
+                max_episode_duration=max_episode_steps,
             )
-            env = TimeLimit(env, max_episode_steps=500000)  # Asegura el número máximo de pasos por episodio
+            env = TimeLimit(env, max_episode_steps=max_episode_steps)  # Asegura el número máximo de pasos por episodio
             return env
 
         return _init
@@ -61,31 +67,31 @@ def create_envs(df_path: str, n_envs: int, monitor_dir: str) -> DummyVecEnv:
     return envs
 
 
-def create_envsII(df_path: str, n_envs: int, monitor_dir: str) -> DummyVecEnv:
+# def create_envsII(df_path: str, n_envs: int, monitor_dir: str) -> DummyVecEnv:
 
-    loaded_df = pd.read_parquet(df_path)
+#     loaded_df = pd.read_parquet(df_path)
 
-    if config.REWARD_FUNCTION == 'sharpe_ratio':
-        reward_function = reward_functions.sharpe_reward
-    elif config.REWARD_FUNCTION == 'dantas_and_silva_reward':
-        reward_function = reward_functions.dantas_and_silva_reward
+#     if config.REWARD_FUNCTION == 'sharpe_ratio':
+#         reward_function = reward_functions.sharpe_reward
+#     elif config.REWARD_FUNCTION == 'dantas_and_silva_reward':
+#         reward_function = reward_functions.dantas_and_silva_reward
 
-    envs =  make_vec_env(lambda: TradingEnv(df=loaded_df,
-                windows=config.WINDOW,
-                positions=[-1, 0, 1],  # -1 (=SHORT), +1 (=LONG)
-                initial_position=0,  # Initial position
-                trading_fees=0.01 / 100,  # 0.01% per stock buy/sell
-                reward_function=reward_function,
-                portfolio_initial_value=100000,  # in FIAT (here, USD)
-                max_episode_duration=500000), n_envs=n_envs)
+#     envs =  make_vec_env(lambda: TradingEnv(df=loaded_df,
+#                 windows=config.WINDOW,
+#                 positions=[-1, 0, 1],  # -1 (=SHORT), +1 (=LONG)
+#                 initial_position=0,  # Initial position
+#                 trading_fees=0.01 / 100,  # 0.01% per stock buy/sell
+#                 reward_function=reward_function,
+#                 portfolio_initial_value=100000,  # in FIAT (here, USD)
+#                 max_episode_duration=500000), n_envs=n_envs)
     
-    # Crear el directorio de monitor si no existe
-    os.makedirs(monitor_dir, exist_ok=True)
-    # Asignar un único archivo de monitor
-    monitor_file = os.path.join(monitor_dir, "monitor.csv")
-    envs = VecMonitor(envs, filename=monitor_file)  # Monitoriza el entorno vectorizado
+#     # Crear el directorio de monitor si no existe
+#     os.makedirs(monitor_dir, exist_ok=True)
+#     # Asignar un único archivo de monitor
+#     monitor_file = os.path.join(monitor_dir, "monitor.csv")
+#     envs = VecMonitor(envs, filename=monitor_file)  # Monitoriza el entorno vectorizado
 
-    return envs
+#     return envs
 
 
 # Directorios para guardar los modelos y logs
@@ -97,7 +103,6 @@ tensorboard_log = './tb_logs'
 os.makedirs(model_save_path, exist_ok=True)
 os.makedirs(log_path, exist_ok=True)
 os.makedirs(tensorboard_log, exist_ok=True)
-
 
     
 if __name__ == "__main__":
@@ -151,7 +156,7 @@ if __name__ == "__main__":
                 #progress_bar=True
                 )
     
-    model.save("ppo_cartpole")
+    model.save(f"ppo_{config.ASSET}_{config.DATA_TYPE}")
 
 
 

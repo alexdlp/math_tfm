@@ -11,13 +11,13 @@
 \contentsline {subsection}{\numberline {3.1.1}Introducción a la Serie Temporal}{4}{subsection.3.1.1}%
 \contentsline {subsubsection}{Frecuencia}{4}{section*.4}%
 \contentsline {subsection}{\numberline {3.1.2}Retornos de Activos}{4}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Hechos Estilizados}{6}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Propiedades Estadísticas}{7}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.2}Hechos Estilizados}{5}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Propiedades Estadísticas}{6}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Datos de Alta Frecuencia}{7}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Datos Utilizados}{8}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.3}Datos Utilizados}{7}{subsection.3.2.3}%
 \contentsline {subsubsection}{Datos de Bitcoin}{8}{section*.5}%
 \contentsline {subsubsection}{Datos del SPY}{8}{section*.6}%
-\contentsline {subsubsection}{Propiedades Estadísticas de los Datos}{9}{section*.7}%
+\contentsline {subsubsection}{Propiedades Estadísticas de los Datos}{8}{section*.7}%
 \contentsline {chapter}{\numberline {4}Imbalance bars}{10}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Barras Basadas en Información}{10}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Barras de Desequilibrio}{11}{subsection.4.1.1}%
@@ -31,27 +31,37 @@
 \contentsline {chapter}{\numberline {5}Deep Reinforcement Learning}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}{19}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Definición y Contexto General}{19}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Componentes Básicos del Aprendizaje por Refuerzo}{19}{subsection.5.1.2}%
-\contentsline {subsubsection}{Exploración vs. Explotación}{21}{section*.13}%
-\contentsline {subsection}{\numberline {5.1.3}Métodos Clásicos de Aprendizaje por Refuerzo}{21}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}{22}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Definición y Contexto General}{22}{subsection.5.2.1}%
-\contentsline {subsubsection}{Hipótesis de la Recompensa}{23}{section*.14}%
-\contentsline {subsection}{\numberline {5.2.2}Componentes Básicos del Aprendizaje por Refuerzo}{23}{subsection.5.2.2}%
-\contentsline {subsubsection}{Estados (\(S\))}{24}{section*.15}%
-\contentsline {subsubsection}{Política}{24}{section*.16}%
-\contentsline {subsubsection}{Función de Valor}{24}{section*.17}%
-\contentsline {subsubsection}{Ecuación de Bellman}{25}{section*.18}%
-\contentsline {subsection}{\numberline {5.2.3}Métodos Clásicos de Aprendizaje por Refuerzo}{25}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Trade-off Exploración-Explotación}{25}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Evolución del Deep Reinforcement Learning (DRL)}{26}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Combinación con Redes Neuronales}{26}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Principales Algoritmos de DRL}{26}{subsection.5.3.2}%
-\contentsline {subsubsection}{Deep Q-Networks (DQN)}{27}{section*.19}%
-\contentsline {subsubsection}{Policy Gradient Methods}{27}{section*.20}%
-\contentsline {subsubsection}{Actor-Critic Methods}{27}{section*.21}%
-\contentsline {subsection}{\numberline {5.3.3}Avances y Limitaciones}{27}{subsection.5.3.3}%
-\contentsline {chapter}{\numberline {6}Meta-labeling}{29}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusiones}{30}{chapter.7}%
-\contentsline {chapter}{\numberline {A}Demostración del teorema}{31}{appendix.Alph1}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{32}{appendix*.22}%
+\contentsline {subsubsection}{Hipótesis de la Recompensa}{19}{section*.13}%
+\contentsline {subsection}{\numberline {5.1.2}Componentes Básicos del Aprendizaje por Refuerzo}{20}{subsection.5.1.2}%
+\contentsline {subsubsection}{Política}{21}{section*.14}%
+\contentsline {subsubsection}{Exploración vs. Explotación}{22}{section*.15}%
+\contentsline {subsection}{\numberline {5.1.3}El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}{22}{subsection.5.1.3}%
+\contentsline {subsubsection}{Cálculo Numérico: Iteración de Valores}{24}{section*.16}%
+\contentsline {subsection}{\numberline {5.1.4}Métodos Clásicos de Aprendizaje por Refuerzo}{24}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}Evolución del Deep Reinforcement Learning (DRL)}{25}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Combinación con Redes Neuronales}{25}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Principales Enfoques y Algoritmos de DRL}{26}{subsection.5.2.2}%
+\contentsline {subsubsection}{Métodos Basados en Funciones de Valor}{26}{section*.17}%
+\contentsline {subsubsection}{Métodos de Gradiente de Política}{26}{section*.18}%
+\contentsline {subsubsection}{Métodos Actor-Critic}{26}{section*.19}%
+\contentsline {section}{\numberline {5.3}Proximal Policy Optimization (PPO) y su Implementación}{27}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Introducción a Proximal Policy Optimization (PPO)}{27}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Descripción Técnica de PPO}{27}{subsection.5.3.2}%
+\contentsline {subsubsection}{Problemas en el Aprendizaje por Refuerzo}{27}{section*.20}%
+\contentsline {subsubsection}{Función de Objetivo en PPO}{28}{section*.21}%
+\contentsline {subsubsection}{Ventaja y Estimación del Valor}{28}{section*.22}%
+\contentsline {subsubsection}{Procedimiento de Entrenamiento}{28}{section*.23}%
+\contentsline {section}{\numberline {5.4}Implementación del Entorno de Entrenamiento con Gymnasium}{29}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Introducción a Gymnasium}{29}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Creación del Entorno de Trading}{29}{subsection.5.4.2}%
+\contentsline {subsubsection}{Scripts del Entorno de Trading}{29}{section*.24}%
+\contentsline {subsubsection}{Definición del espacio de observaciones}{30}{section*.25}%
+\contentsline {chapter}{\numberline {6}Meta-labeling}{33}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Etiquetado de Datos Financieros}{33}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Limitaciones del Método del Horizonte de Tiempo Fijo}{33}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Problemas del Umbral Fijo}{34}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Alternativas Mejoradas}{34}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Consideración del Camino de Precios}{34}{subsection.6.2.3}%
+\contentsline {chapter}{\numberline {7}Conclusiones}{35}{chapter.7}%
+\contentsline {chapter}{\numberline {A}Demostración del teorema}{36}{appendix.Alph1}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{37}{appendix*.26}%

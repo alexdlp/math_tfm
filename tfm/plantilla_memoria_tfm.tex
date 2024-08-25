@@ -80,7 +80,7 @@ Máster Universitario en Modelización e Investigación Matemática, Estadístic
 \vspace*{1cm}
 \textsl{Trabajo Fin de Máster}\\
 \end{LARGE}
-\Huge{\textbf{Título del trabajo}} %Más significativo que el anterior
+\Huge{\textbf{Deep Reinforcement Learning en Trading Algorítmico: Una aplicación basada en ''Advances in Financial Machine Learning''}} %Más significativo que el anterior
 \vspace*{1cm}
 \rule{80mm}{0.1mm}\\
 \huge{Alexander de la Puente González}\\ %Separar cada autor con \\ 
@@ -88,7 +88,6 @@ Máster Universitario en Modelización e Investigación Matemática, Estadístic
 \begin{Large}
 Director/es\\
 Josu Doncel Vicente\\
-Nombre Apellido1 Apellido2\\
 Lugar y fecha de presentación prevista\\
 \end{Large}
 \end{center}
@@ -228,26 +227,7 @@ los retornos lineales y logarítmicos.
     \item \textbf{Logarítmicos}: $r_t := \log\left(\frac{p_t}{p_{t-1}}\right) = \log(p_t) - \log(p_{t-1}) = y_t - y_{t-1}$
 \end{itemize}
 
-Propiedades destacadas:
 
-\begin{enumerate}
-    \item $r_t = \log(1 + R_t)$
-    \item La serie de Taylor de $\log(1 + x) = \sum_{k=1}^{\infty} \frac{(-1)^{k+1} x^k}{k}$ da como resultado $r_t 
-    \approx R_t$ cuando $R_t \approx 0$.
-    \item Retornos lineales compuestos:
-
-    \[
-    R_t(k) := \frac{p_t - p_{t-k}}{p_{t-k}} = \frac{p_t}{p_{t-k}} - 1 = \left(1 + R_t\right) \cdot \left(1 + R_{t-1}\right) 
-    \cdots \left(1 + R_{t-(k-1)}\right) - 1
-    \]
-
-    \item Retornos logarítmicos compuestos:
-
-    \[
-    r_t(k) := \log\left(\frac{p_t}{p_{t-k}}\right) = y_t - y_{t-k} = (y_t - y_{t-1}) + \cdots + (y_{t-(k-1)} - 
-    y_{t-k}) = r_t + \cdots + r_{t-(k-1)}
-    \]
-\end{enumerate}
 
 
 
@@ -255,7 +235,7 @@ Propiedades destacadas:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/simple_and_log_ret_relation.png}
-    \caption{ola}
+    \caption{Relación entre retornos simples y logarítmicos}
     \label{fig:log-returns}
 \end{figure}
 
@@ -695,7 +675,7 @@ Para hacer frente a este problema, algunos investigadores han propuesto modifica
 a la implementación sugerida, tales como establecer un límite máximo al número esperado 
 de ticks por barra o seleccionar directamente un umbral fijo de desequilibrio \cite{quant_finance_stack_exchange}. 
 
-\subsection{Resultados}
+\subsection{Resultados} \label{sec:resultado-imbalance}
 Para este trabajo, se ha optado por aplicar la metodología con umbrales de desequilibrio fijos, definidos experimentalmente.
 Para cada activo y tipo de desequilibrio se ha seleccionado un umbral distinto, tal y como se muestra en la tabla \ref{tab:umbrales}.
 
@@ -811,19 +791,46 @@ aplicación de la metodología propuesta.
 
 \subsection{Definición y Contexto General}
 
-El \textit{Aprendizaje por Refuerzo} (Reinforcement Learning, RL) es una rama dentro de la inteligencia 
-artificial que se centra en cómo un agente aprende a tomar decisiones secuenciales optimizadas mediante 
-la interacción con un entorno dinámico. A diferencia de otros tipos de aprendizaje como el 
-\textit{aprendizaje supervisado}, donde el modelo aprende patrones extraídos de ejemplos previamente 
-etiquetados, o el \textit{aprendizaje no supervisado}, donde el modelo busca patrones en datos sin 
-etiquetas, un agente de RL basa su aprendizaje en la retroalimentación recibida por el entorno en 
-forma de recompensas o penalizaciones por las acciones que toma.
+El \textit{Aprendizaje por Refuerzo} (Reinforcement Learning, RL) es una rama de la inteligencia 
+artificial que se centra en cómo un agente aprende a tomar decisiones secuenciales optimizadas 
+mediante la interacción con un entorno dinámico. A diferencia de otros tipos de aprendizaje, como 
+el \textit{aprendizaje supervisado}, donde el modelo aprende patrones extraídos a partir de ejemplos 
+previamente etiquetados, o el \textit{aprendizaje no supervisado}, donde el modelo busca patrones 
+en datos sin etiquetas, el RL implica un aprendizaje activo donde el agente recibe retroalimentación 
+en forma de recompensas o penalizaciones por las acciones que toma. Este proceso permite al 
+agente aprender sin ejemplos de comportamiento óptimo, optimizando en su lugar una señal de recompensa.
 
-En un entorno de RL, se define un \textit{Proceso de Decisión de Markov} (MDP, por sus siglas en inglés), 
-el cual describe el problema de decisión. Un MDP se representa por un conjunto de estados \(S\), 
-un conjunto de acciones \(A\), una función de transición de estados \(P(s'|s, a)\), y una función de 
-recompensa \(R(s, a)\). El objetivo del agente es aprender una política \(\pi(a|s)\) que maximice la 
-recompensa acumulada a lo largo del tiempo. Este marco es ampliamente aplicable en situaciones donde 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./figures/A-brief-schema-of-Reinforcement-Learning-26.png}
+    \caption{Esquema Reiforcement Learning}
+    \label{fig:RF-schema}
+\end{figure}
+
+En cada paso de tiempo \(t\), el agente recibe una una observación \(O_t\) y una recompensa \(R_t\).
+La observación recibida le permite ejecutar una acción \(A_t\), la cual provocará que el entorno cambie
+y emita una nueva observación \(O_{t+1}\) y una nueva recompensa \(R_{t+1}\).
+
+\subsubsection{Hipótesis de la Recompensa}
+
+Una recompensa \(R_t\) es una señal de retroalimentación escalar que indica cómo de buena ha sido la accion 
+tomada por el agente en el paso \(t\). 
+
+A partir de esta señal de recopensa se formula
+la \textit{hipótesis de la recompensa}, que afirma que en un esquema de aprendizaje por refuerzo, cualquier 
+objetivo puede ser formalizado como el resultado de maximizar una recompensa acumulativa. Es decir, el objetivo del agente puede ser expresado como la maximización de una función de recompensa a lo 
+largo del tiempo.
+
+Esta función de recompensa se conoce como \textit{retorno} (\(G_t\)), y se define matemáticamente como el sumatorio
+de las recompensas futuras, descontadas por un factor de descuento  \(\gamma\):
+
+\[
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
+\]
+El retorno \(G_t\) es lo que el agente intenta maximizar, y es la base sobre la cual se definen otros elementos como la función de valor.
+
+
+Esto proporciona un marco ampliamente aplicable en situaciones donde 
 las decisiones se toman en una serie de pasos, lo que incluye problemas de control robótico, juegos, 
 y \textit{trading} financiero.
 
@@ -831,11 +838,27 @@ En el contexto particular del trading financiero, debido a la naturaleza secuenc
 los mercados, los agentes deben tomar decisiones basadas en información incompleta y en constante 
 cambio, buscando maximizar una recompensa a largo plazo, como la rentabilidad de una cartera.
 
+
 \subsection{Componentes Básicos del Aprendizaje por Refuerzo}
 
-El proceso de RL se puede modelar mediante un \textit{Proceso de Decisión de Markov} 
-(Markov Decision Process, MDP), que se define por un cuarteto \(\langle S, A, P, R \rangle\):
+El aprendizaje por refuerzo se formaliza mediante un \textit{Proceso de Decisión de Markov} (MDP), 
+que se define por un cuarteto \(\langle S, A, P, R \rangle\) el cual describe el problema de decisión.
 
+Un MDP se representa por un conjunto de estados \(S\), 
+un conjunto de acciones \(A\), una función de transición de estados \(P(s'|s, a)\), y una función de 
+recompensa \(R(s, a)\). El objetivo del agente es aprender una política \(\pi(a|s)\) que maximice la 
+recompensa acumulada a lo largo del tiempo.
+
+Un proceso de decisión se dice que es Markov si la probabilidad de transición depende únicamente
+del estado y acción actuales, no de la historia completa:
+
+\[
+p(r, s' | S_t, A_t) = p(r, s' | H_t, A_t)
+\]
+
+Esto significa que el estado contiene toda la información relevante de la historia, siendo la historia 
+la secuencia completa de observaciones, acciones y recompensas. No quiere decir que la historia contenga
+toda la información, sino más bien que el añadir cualquier información adicional no afectará la decisión.
 
 \begin{itemize}
     \item \textbf{Estados (\(S\))}: Representan todas las posibles situaciones en las que se puede 
@@ -885,6 +908,18 @@ En resumen, la función del valor del estado, \(V^{\pi}(s)\), mide cuán bueno e
 bajo una política \(\pi\), mientras que \(Q^{\pi}(s, a)\) mide cuán buena es una acción específica en 
 ese estado.
 
+\subsubsection{Política}
+
+La \textbf{política} (\textit{policy}) es la función que guía la selección de acciones en función del estado actual del entorno. Existen dos variantes principales:
+
+\begin{itemize}
+    \item \textbf{Política determinista:} Representada como $\pi(s)$, esta política asigna una acción específica $a$ a cada estado $s$. Formalmente, $\pi(s) = a$, donde $a$ es la acción elegida para el estado $s$.
+
+    \item \textbf{Política estocástica:} Denotada como $\pi(a|s)$, esta política define una distribución de probabilidad sobre las acciones posibles. Es decir, $\pi(a|s) = \mathbb{P}(A = a \mid S = s)$, donde $a$ es seleccionada según la probabilidad correspondiente en el estado $s$.
+\end{itemize}
+
+La política determinista es útil en entornos estables, mientras que la estocástica es preferible en situaciones con alta incertidumbre o donde la exploración es necesaria.
+
 
 \subsubsection{Exploración vs. Explotación}
 
@@ -910,6 +945,107 @@ una probabilidad \(1-\epsilon\), explota la mejor acción conocida. El valor de 
 generalmente disminuye a medida que el agente gana más confianza en su política, lo que permite 
 una mayor explotación con el tiempo.
 
+
+\subsection{El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}
+
+
+En el contexto del aprendizaje por refuerzo, uno de los problemas fundamentales es 
+\textbf{cómo un agente puede tomar decisiones óptimas en situaciones donde las consecuencias de 
+sus acciones no son inmediatas, sino que se extienden en el tiempo}. Las decisiones actuales no 
+solo influyen en la recompensa inmediata, sino también en las recompensas futuras. 
+
+Algunas decisiones pueden ofrecer beneficios inmediatos pero desviar al agente de un objetivo 
+más valioso en el futuro, mientras que otras pueden tener un alto coste presente, pero ser 
+cruciales para un éxito posterior.
+
+Este desafío, conocido como el problema de la maximización del retorno total esperado, 
+requiere una estrategia que considere tanto las recompensas inmediatas como las futuras, 
+ponderadas para reflejar su importancia relativa. La ecuación de Bellman se introduce como 
+una herramienta esencial para descomponer este problema global en subproblemas más manejables, 
+\textbf{permitiendo al agente evaluar el impacto a largo plazo de sus decisiones actuales de 
+manera eficiente y sistemática}.
+
+La ecuación de Bellman descompone el problema global de maximización del retorno total 
+esperado en subproblemas más manejables. 
+
+El valor de un estado \(V^\pi(s)\) bajo una política \(\pi\) se define como el valor esperado 
+del retorno total que se puede obtener comenzando desde ese estado \(s\) y siguiendo la política 
+\(\pi\). Matemáticamente, se expresa como:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid s_t = s \right]
+\end{equation}
+
+Esta ecuación describe el valor esperado del retorno acumulado desde el estado \(s\). 
+Para hacerla más práctica, es posible descomponer esta expresión en dos partes: la 
+recompensa inmediata y el valor de los estados futuros. Separando el primer término de 
+la suma, se obtiene:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma \sum_{k=1}^{\infty} \gamma^{k-1} R_{t+k+1} \mid s_t = s \right]
+\end{equation}
+
+Aquí, \(R_{t+1}\) es la recompensa inmediata obtenida al tomar una acción en el estado \(s\), 
+y el resto de la suma representa el valor descontado de las recompensas futuras, que 
+corresponde al valor de \(V^\pi(s_{t+1})\). De esta forma, es posible reescribir la ecuación como:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma V^\pi(s_{t+1}) \mid s_t = s \right]
+\end{equation}
+
+Para expandir esta expectativa, se consideran todas las posibles acciones \(a\) que el agente 
+puede tomar en el estado \(s\), y todas las posibles transiciones a estados futuros \(s'\) 
+después de tomar la acción \(a\). Esto lleva a la forma completa de la ecuación de Bellman:
+
+\begin{equation}
+V^\pi(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V^\pi(s') \right]
+\end{equation}
+
+Aquí:
+\begin{itemize}
+    \item \(\pi(a|s)\) es la probabilidad de tomar la acción \(a\) dado el estado \(s\).
+    \item \(P(s'|s,a)\) es la probabilidad de transición al estado \(s'\) dado el estado \(s\) y la acción \(a\).
+    \item \(R(s,a,s')\) es la recompensa inmediata por la transición de \(s\) a \(s'\) mediante la acción \(a\).
+    \item \(\gamma\) es el factor de descuento, que pondera la importancia relativa de las recompensas futuras.
+\end{itemize}
+
+Esta ecuación establece que el valor de un estado es la suma de la recompensa inmediata 
+y el valor futuro esperado, ponderado por las probabilidades de las acciones y las 
+transiciones de estado. Así, la ecuación de Bellman permite calcular los valores de 
+los estados de manera recursiva, evaluando tanto el impacto inmediato como el impacto a 
+largo plazo de las decisiones actuales.
+
+\subsubsection{Cálculo Numérico: Iteración de Valores}
+
+Para calcular los valores \(V^\pi(s)\) numéricamente, se suele utilizar un método iterativo. 
+Inicialmente, se asigna un valor arbitrario a cada estado, por ejemplo, \(V_0(s) = 0\) para 
+todos los \(s\). Luego, estos valores se actualizan iterativamente utilizando la ecuación de 
+Bellman:
+
+\begin{equation}
+V_{k+1}(s) = \max_{a} \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V_k(s') \right]
+\end{equation}
+
+El proceso comienza con los estados finales, cuyos valores se pueden calcular directamente. 
+Para un estado final \(s_f\), donde no hay más decisiones ni transiciones posibles, el 
+valor \(V^\pi(s_f)\) se define como:
+
+\begin{equation}
+V^\pi(s_f) = 0 \quad \text{(sin recompensas futuras)} 
+\end{equation}
+
+o, si hay una recompensa final al alcanzar \(s_f\):
+
+\begin{equation}
+V^\pi(s_f) = R_f
+\end{equation}
+
+A partir de estos valores finales, se propaga hacia atrás a través del tiempo, actualizando 
+los valores de los estados anteriores en función de los valores ya calculados de los estados 
+futuros. Este proceso se repite hasta que los valores convergen, es decir, cuando \(V_{k+1}(s) 
+\approx V_k(s)\) para todos los estados \(s\).
+
+
 \subsection{Métodos Clásicos de Aprendizaje por Refuerzo}
 
 Existen varios algoritmos clásicos de RL que permiten a los agentes aprender políticas óptimas. Los 
@@ -925,7 +1061,6 @@ es quel en el que la política que se intenta optimizar es diferente de la polí
 las experiencias. Esto permite optimizar una política mientras se sigue otra.
 
 Un ejemplo de algoritmos representativos de cada una de estas categorías son los siguientes:
-
 
 \begin{itemize}
     \item \textbf{Q-learning}: Un algoritmo \textit{off-policy} que aprende la función de valor de 
@@ -950,6 +1085,7 @@ Un ejemplo de algoritmos representativos de cada una de estas categorías son lo
 
 \end{itemize}
 
+
 Los algoritmos \textit{on-policy}, como SARSA, tienen la ventaja de ser coherentes con la política 
 actual, lo que puede resultar en un aprendizaje más seguro y estable en entornos dinámicos. Sin embargo, 
 pueden ser menos eficientes, ya que dependen exclusivamente de las experiencias generadas por la misma 
@@ -964,240 +1100,345 @@ Estos métodos son fundamentales para entender cómo los agentes pueden aprender
 como el \textit{Deep Reinforcement Learning} (DRL).
 
 
-\section{Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}
-
-\subsection{Definición y Contexto General}
-
-El \textit{Aprendizaje por Refuerzo} (Reinforcement Learning, RL) es una rama de la inteligencia 
-artificial que se centra en cómo un agente aprende a tomar decisiones secuenciales optimizadas 
-mediante la interacción con un entorno dinámico. A diferencia de otros tipos de aprendizaje, como 
-el \textit{aprendizaje supervisado}, donde el modelo aprende patrones extraídos a partir de ejemplos 
-previamente etiquetados, o el \textit{aprendizaje no supervisado}, donde el modelo busca patrones 
-en datos sin etiquetas, el RL implica un aprendizaje activo donde el agente recibe retroalimentación 
-en forma de recompensas o penalizaciones por las acciones que toma. Este proceso permite al 
-agente aprender sin ejemplos de comportamiento óptimo, optimizando en su lugar una señal de recompensa.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{./figures/Reinforcement-Learning-schema.png}
-    \caption{Esquema Reiforcement Learning}
-    \label{fig:RF-schema}
-\end{figure}
-
-En cada paso de tiempo \(t\), el agente recibe una una observación \(O_t\) y una recompensa \(R_t\).
-La observación recibida le permite ejecutar una acción \(A_t\), la cual provocará que el entorno cambie
-y emita una nueva observación \(O_{t+1}\) y una nueva recompensa \(R_{t+1}\).
-
-\subsubsection{Hipótesis de la Recompensa}
-
-Una recompensa \(R_t\) es una señal de retroalimentación escalar que indica cómo de buena ha sido la accion 
-tomada por el agente en el paso \(t\). 
-
-A partir de esta señal de recopensa se formula
-la \textit{hipótesis de la recompensa}, que afirma que en un esquema de aprendizaje por refuerzo, cualquier 
-objetivo puede ser formalizado como el resultado de maximizar una recompensa acumulativa. Es decir, el objetivo del agente puede ser expresado como la maximización de una función de recompensa a lo 
-largo del tiempo.
-
-Esta función de recompensa se conoce como \textit{retorno} (\(G_t\)), y se define matemáticamente como el sumatorio
-de las recompensas futuras, descontadas por un factor de descuento  \(\gamma\):
-
-\[
-G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
-\]
-El retorno \(G_t\) es lo que el agente intenta maximizar, y es la base sobre la cual se definen otros elementos como la función de valor.
-
-
-Esto proporciona un marco ampliamente aplicable en situaciones donde 
-las decisiones se toman en una serie de pasos, lo que incluye problemas de control robótico, juegos, 
-y \textit{trading} financiero.
-
-En el contexto particular del trading financiero, debido a la naturaleza secuencial y dinámica de 
-los mercados, los agentes deben tomar decisiones basadas en información incompleta y en constante 
-cambio, buscando maximizar una recompensa a largo plazo, como la rentabilidad de una cartera.
-
-%\subsection{Conceptos Fundamentales de RL}
-
-% \subsubsection{Funciones de Valor}
-
-% La función de valor de un estado \(s\) es el valor esperado del retorno, dado que el agente empieza en ese estado y sigue una política \(\pi\):
-% \[
-% v(s) = \mathbb{E}[G_t | S_t = s] = \mathbb{E}[R_{t+1} + R_{t+2} + R_{t+3} + \ldots | S_t = s]
-% \]
-% El objetivo del agente es maximizar esta función de valor, seleccionando acciones que maximicen el valor esperado a largo plazo.
-
-% \subsubsection{Maximización del Valor a través de Acciones}
-
-% El objetivo en RL es seleccionar acciones que maximicen el valor esperado. Esto es crucial porque las acciones pueden tener consecuencias a largo plazo, y la recompensa puede estar retrasada. Es decir, puede ser necesario sacrificar una recompensa inmediata para obtener una mayor recompensa en el futuro.
-
-\subsection{Componentes Básicos del Aprendizaje por Refuerzo}
-
-El aprendizaje por refuerzo se formaliza mediante un \textit{Proceso de Decisión de Markov} (MDP), 
-que se define por un cuarteto \(\langle S, A, P, R \rangle\) el cual describe el problema de decisión.
-
-Un MDP se representa por un conjunto de estados \(S\), 
-un conjunto de acciones \(A\), una función de transición de estados \(P(s'|s, a)\), y una función de 
-recompensa \(R(s, a)\). El objetivo del agente es aprender una política \(\pi(a|s)\) que maximice la 
-recompensa acumulada a lo largo del tiempo.
-
-Un proceso de decisión se dice que es Markov si la probabilidad de transición depende únicamente
-del estado y acción actuales, no de la historia completa:
-
-\[
-p(r, s' | S_t, A_t) = p(r, s' | H_t, A_t)
-\]
-
-Esto significa que el estado contiene toda la información relevante de la historia, siendo la historia 
-la secuencia completa de observaciones, acciones y recompensas. No quiere decir que la historia contenga
-toda la información, sino más bien que el añadir cualquier información adicional no afectará la decisión.
-
-\subsubsection{Estados (\(S\))}
-    Representan todas las posibles situaciones en las que se puede encontrar el agente dentro del entorno.
-\subsubsection{Política}
-
-Una \textit{política} define el comportamiento del agente, es decir, es un mapeo de estados a acciones. Las políticas pueden ser:
-\begin{itemize}
-    \item \textbf{Determinísticas}: \(A = \pi(S)\).
-    \item \textbf{Estocásticas}: \(\pi(A|S) = p(A|S)\), donde \(A\) es elegido probabilísticamente dado el estado \(S\).
-\end{itemize}
-
-\subsubsection{Función de Valor}
-
-En el contexto del RL, las funciones de valor son fundamentales para evaluar qué tan "bueno" es estar en un estado o tomar una acción específica en un estado, bajo una política dada \(\pi\). Existen dos tipos principales de funciones de valor:
-
-\begin{itemize}
-    \item \textbf{Función de Valor de Estado (\(V^{\pi}(s)\))}: 
-    \[
-    V^{\pi}(s) = \mathbb{E}[G_t | S_t = s, \pi] = \mathbb{E}[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \ldots | S_t = s, \pi]
-    \]
-    Esta función estima el valor esperado del retorno futuro comenzando desde el estado \(s\) y siguiendo la política \(\pi\).
-    
-    \item \textbf{Función de Valor de Acción (\(Q^{\pi}(s, a)\))}: 
-    \[
-    Q^{\pi}(s, a) = \mathbb{E}[G_t | S_t = s, A_t = a, \pi] = \mathbb{E}[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \ldots | S_t = s, A_t = a, \pi]
-    \]
-    Esta función estima el valor esperado del retorno futuro al tomar la acción \(a\) en el estado \(s\) y seguir la política \(\pi\) a partir de entonces.
-\end{itemize}
-
-El agente usa estas funciones de valor para seleccionar acciones que maximicen el retorno esperado a largo plazo.
-
-\subsubsection{Ecuación de Bellman}
-
-La ecuación de Bellman proporciona una forma recursiva de calcular las funciones de valor, aprovechando la estructura de las recompensas futuras. Para la función de valor de estado, la ecuación de Bellman es:
-\[
-V^{\pi}(s) = \mathbb{E}[R_{t+1} + \gamma V^{\pi}(S_{t+1}) | S_t = s, \pi]
-\]
-De manera similar, para la función de valor de acción:
-\[
-Q^{\pi}(s, a) = \mathbb{E}[R_{t+1} + \gamma Q^{\pi}(S_{t+1}, A_{t+1}) | S_t = s, A_t = a, \pi]
-\]
-Estas ecuaciones son fundamentales para el desarrollo de algoritmos de RL, ya que permiten descomponer el problema de optimización en subproblemas más manejables.
-
-\subsection{Métodos Clásicos de Aprendizaje por Refuerzo}
-
-Existen varios algoritmos clásicos de RL que permiten a los agentes aprender políticas óptimas, siendo los más conocidos \textit{Q-learning} y \textit{SARSA}.
-
-\begin{itemize}
-    \item \textbf{Q-learning}: Un algoritmo \textit{off-policy} que aprende la función de valor de acción \(Q(s, a)\) actualizando iterativamente las estimaciones en función de las recompensas recibidas:
-    \[
-    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)\right]
-    \]
-    donde \(\alpha\) es la tasa de aprendizaje. Como algoritmo \textit{off-policy}, Q-learning aprende la política óptima independientemente de la política que el agente sigue durante la exploración. Esto significa que la política utilizada para seleccionar acciones (\textit{behavior policy}) puede ser diferente de la política que se está optimizando (\textit{target policy}).
-
-    \item \textbf{SARSA}: Un algoritmo \textit{on-policy} que, a diferencia de Q-learning, sigue la política actual para actualizar la función \(Q(s, a)\). La actualización en SARSA se realiza utilizando la acción que el agente realmente toma, lo que significa que la política utilizada para seleccionar acciones es la misma que se está optimizando:
-    \[
-    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)\right]
-    \]
-    Como resultado, SARSA tiende a ser más conservador en su aprendizaje, ya que la política sigue siendo consistente entre el aprendizaje y la ejecución.
-\end{itemize}
-
-\subsection{Trade-off Exploración-Explotación}
-
-En el Aprendizaje por Refuerzo, un desafío clave es el equilibrio entre \textit{exploración} y \textit{explotación}. Este balance es fundamental para el aprendizaje efectivo del agente:
-
-\begin{itemize}
-    \item \textbf{Exploración}: El agente intenta nuevas acciones para descubrir si existen mejores recompensas disponibles. La exploración es crucial cuando el agente no tiene suficiente conocimiento del entorno y necesita recolectar más información.
-    \item \textbf{Explotación}: El agente selecciona la mejor acción conocida basada en su política actual para maximizar la recompensa inmediata. La explotación se basa en la información acumulada y tiene como objetivo maximizar la recompensa a corto plazo.
-\end{itemize}
-
-El \textit{trade-off} entre exploración y explotación es crucial porque un agente que explora demasiado podría no aprovechar las recompensas conocidas, mientras que un agente que explota demasiado podría perder oportunidades para descubrir estrategias más efectivas. Existen diversas estrategias para manejar este trade-off, como la \textit{política epsilon-greedy}, donde con una probabilidad \(\epsilon\), el agente explora una acción al azar, y con una probabilidad \(1-\epsilon\), explota la mejor acción conocida. El valor de \(\epsilon\) generalmente disminuye a medida que el agente gana más confianza en su política, lo que permite una mayor explotación con el tiempo.
-
----
-
-
 \section{Evolución del Deep Reinforcement Learning (DRL)}
 
 \subsection{Combinación con Redes Neuronales}
 
-El \textit{Deep Reinforcement Learning} (DRL) surge como una evolución natural del \textit{Aprendizaje por Refuerzo} (RL) tradicional, combinando sus principios con la potencia de las redes neuronales profundas (\textit{Deep Learning}). Mientras que los métodos clásicos de RL, como el \textit{Q-learning}, son eficaces en problemas con espacios de estados discretos y de baja dimensionalidad, presentan limitaciones significativas cuando se aplican a entornos complejos y continuos. 
+El \textit{Deep Reinforcement Learning} (DRL) surge como una evolución natural del 
+\textit{Aprendizaje por Refuerzo} (RL) tradicional, combinando sus principios con la potencia 
+de las redes neuronales profundas (\textit{Deep Learning}). Mientras que los métodos clásicos 
+de RL, como el \textit{Q-learning}, son eficaces en problemas con espacios de estados discretos 
+y de baja dimensionalidad, presentan limitaciones significativas cuando se aplican a entornos 
+complejos y continuos.
 
-El uso de redes neuronales como aproximadores de funciones en RL permitió superar estas limitaciones. Las redes neuronales profundas son capaces de procesar entradas de alta dimensionalidad y de extraer características complejas directamente de los datos sin la necesidad de diseñar manualmente las características relevantes. Esta capacidad ha sido particularmente útil en problemas de RL donde el espacio de estados es continuo o extremadamente grande, como es común en el trading financiero, la robótica y los videojuegos.
+El uso de redes neuronales como aproximadores de funciones en RL permitió superar estas 
+limitaciones. Las redes neuronales profundas son capaces de procesar entradas de alta 
+dimensionalidad y de extraer características complejas directamente de los datos sin la necesidad 
+de diseñar manualmente las características relevantes. 
 
-\subsection{Principales Algoritmos de DRL}
+\subsection{Principales Enfoques y Algoritmos de DRL}
 
-El desarrollo de DRL ha dado lugar a una serie de algoritmos innovadores que han transformado la forma en que se aborda el aprendizaje por refuerzo en entornos complejos. A continuación, se presentan algunos de los algoritmos más importantes en este campo:
+El desarrollo de DRL ha dado lugar a diversos enfoques que combinan RL y Deep Learning, dando 
+lugar a algoritmos innovadores que han transformado la forma en que se aborda el aprendizaje 
+por refuerzo en entornos complejos. A continuación, se presentan los enfoques principales en 
+DRL, junto con ejemplos representativos de cada uno.
 
-\subsubsection{Deep Q-Networks (DQN)}
+\subsubsection{Métodos Basados en Funciones de Valor}
 
-El \textit{Deep Q-Network} (DQN) es uno de los algoritmos más representativos de la combinación entre RL y Deep Learning. DQN fue introducido por \textit{DeepMind} y marcó un hito en la historia del RL al aplicar redes neuronales profundas para aproximar la función \(Q(s, a)\), lo que permitió manejar entornos con espacios de estados grandes y continuos.
+Los métodos basados en funciones de valor son aquellos en los que el objetivo es aprender 
+una función que prediga el valor de tomar una acción en un estado dado. El ejemplo más 
+destacado de este enfoque es el \textit{Deep Q-Network} (DQN). DQN, introducido por 
+\textit{DeepMind}, utiliza redes neuronales profundas para aproximar la función \(Q(s, a)\), 
+lo que permitió manejar entornos con espacios de estados grandes y continuos.
 
-En DQN, una red neuronal recibe como entrada el estado del entorno y produce una estimación de los valores \(Q(s, a)\) para cada acción posible. La red se entrena utilizando el algoritmo de \textit{Q-learning} tradicional, pero con varias modificaciones clave para estabilizar el aprendizaje, como el uso de un \textit{buffer} de \textit{replay} para almacenar transiciones de experiencias pasadas y el uso de una red objetivo (\textit{target network}) que se actualiza periódicamente para reducir la inestabilidad en la actualización de los valores \(Q\).
+En DQN, una red neuronal recibe como entrada el estado del entorno y produce una estimación 
+de los valores \(Q(s, a)\) para cada acción posible. La red se entrena utilizando el 
+algoritmo de \textit{Q-learning} tradicional, pero con varias modificaciones clave para 
+estabilizar el aprendizaje, como el uso de un \textit{buffer} de \textit{replay} para 
+almacenar transiciones de experiencias pasadas y el uso de una red objetivo 
+(\textit{target network}) que se actualiza periódicamente para reducir la inestabilidad 
+en la actualización de los valores \(Q\).
 
-\subsubsection{Policy Gradient Methods}
+\subsubsection{Métodos de Gradiente de Política}
 
-Los \textit{Policy Gradient Methods} son un enfoque alternativo en DRL, en el cual en lugar de aprender una función de valor, el agente aprende directamente una política parametrizada \(\pi_{\theta}(a|s)\) que maximiza la recompensa esperada. La principal ventaja de los métodos de gradiente de política es su capacidad para manejar espacios de acción continuos y para aprender políticas estocásticas.
+Los métodos de gradiente de política representan un enfoque alternativo en DRL, en el cual, 
+en lugar de aprender una función de valor, el agente aprende directamente una política 
+parametrizada \(\pi_{\theta}(a|s)\) que maximiza la recompensa esperada. La principal 
+ventaja de estos métodos es su capacidad para manejar espacios de acción continuos y 
+para aprender políticas estocásticas.
 
-Un algoritmo básico dentro de esta categoría es \textit{REINFORCE}, que utiliza el gradiente de la recompensa esperada para actualizar los parámetros de la política. Aunque REINFORCE es sencillo y conceptualmente atractivo, su principal limitación es la alta varianza en las estimaciones del gradiente, lo que puede llevar a un aprendizaje lento y inestable.
+Un algoritmo básico dentro de esta categoría es \textit{REINFORCE}, que utiliza el gradiente 
+de la recompensa esperada para actualizar los parámetros de la política. Aunque REINFORCE es 
+sencillo y conceptualmente atractivo, su principal limitación es la alta varianza en las 
+estimaciones del gradiente, lo que puede llevar a un aprendizaje lento y poco estable.
 
-\subsubsection{Actor-Critic Methods}
+\subsubsection{Métodos Actor-Critic}
 
-Los métodos \textit{Actor-Critic} combinan lo mejor de ambos mundos al utilizar tanto una función de valor como una política parametrizada. En este enfoque, el \textit{actor} es responsable de seleccionar las acciones basadas en la política \(\pi_{\theta}(a|s)\), mientras que el \textit{crítico} estima el valor de la política actual utilizando una función de valor \(V^{\pi}(s)\) o \(Q^{\pi}(s, a)\). 
+Los métodos \textit{Actor-Critic} combinan lo mejor de ambos mundos al utilizar tanto una 
+función de valor como una política parametrizada. En este enfoque, el \textit{actor} es 
+responsable de seleccionar las acciones basadas en la política \(\pi_{\theta}(a|s)\), mientras 
+que el \textit{crítico} estima el valor de la política actual utilizando una función de valor 
+\(V^{\pi}(s)\) o \(Q^{\pi}(s, a)\).
 
-Un ejemplo notable es el \textit{Asynchronous Advantage Actor-Critic} (A3C), que introduce el concepto de ventaja (\textit{advantage}), definida como la diferencia entre el valor de la acción y el valor esperado del estado (\(A(s, a) = Q(s, a) - V(s)\)). A3C mejora la estabilidad del aprendizaje al usar múltiples actores que interactúan con copias del entorno en paralelo, lo que también mejora la eficiencia computacional.
+Un ejemplo notable es el \textit{Asynchronous Advantage Actor-Critic} (A3C), que introduce 
+el concepto de ventaja (\textit{advantage}), definida como la diferencia entre el valor de 
+la acción y el valor esperado del estado (\(A(s, a) = Q(s, a) - V(s)\)). A3C mejora la 
+estabilidad del aprendizaje al usar múltiples actores que interactúan con copias del entorno 
+en paralelo, lo que también mejora la eficiencia computacional.
 
-\subsection{Avances y Limitaciones}
+\section{Proximal Policy Optimization (PPO) y su Implementación}
 
-El desarrollo del DRL ha permitido avances significativos en la capacidad de los agentes para aprender en entornos complejos y de alta dimensionalidad. Algunos de los avances más destacados incluyen:
+\subsection{Introducción a Proximal Policy Optimization (PPO)}
+
+Proximal Policy Optimization (PPO) es un algoritmo de \textit{Deep Reinforcement Learning} 
+(DRL) desarrollado por \textit{OpenAI}, que ha demostrado ser exitoso en una amplia variedad 
+de tareas, desde el control robótico hasta videojuegos complejos como \textit{Dota 2}. 
+PPO es un método de gradiente de política (\textit{Policy Gradient}), lo que significa 
+que aprende directamente de la experiencia en tiempo real generada por el agente en su 
+interacción con el entorno, a diferencia de los métodos basados en \textit{Q-learning}, 
+que pueden aprender de datos almacenados.
+
+PPO fue diseñado para encontrar un equilibrio entre la eficiencia de la muestra, la facilidad 
+de implementación y la estabilidad en el entrenamiento. Esto lo convierte en una herramienta 
+potente y versátil para abordar problemas de aprendizaje por refuerzo en entornos continuos y 
+de alta dimensionalidad.
+
+En este trabajo, PPO se utilizará para la generación de estrategias de trading, aprovechando 
+su capacidad para manejar entornos complejos y dinámicos como los mercados financieros. Este 
+algoritmo ha sido seleccionado debido a su robustez y simplicidad en la implementación, 
+características que lo hacen ideal para desarrollar una estrategia de trading que pueda 
+adaptarse a las condiciones cambiantes del mercado.
+
+PPO fue presentado por primera vez en el paper de \textit{Schulman et al.} titulado 
+"\textit{Proximal Policy Optimization Algorithms}" \cite{Schulman2017}, que ha sido ampliamente 
+citado en la literatura de aprendizaje por refuerzo debido a su enfoque innovador y eficaz.
+
+\subsection{Descripción Técnica de PPO}
+
+PPO introduce varias mejoras clave en la optimización de políticas para garantizar un 
+aprendizaje más estable. A diferencia de otros métodos que pueden permitir grandes cambios 
+en la política, PPO limita estos cambios para evitar desestabilizar el proceso de entrenamiento.
+
+\subsubsection{Problemas en el Aprendizaje por Refuerzo}
+
+A diferencia del aprendizaje supervisado, donde se trabaja con un conjunto de datos estático, 
+en el aprendizaje por refuerzo el conjunto de datos cambia constantemente porque el agente 
+genera sus propios datos a medida que interactúa con el entorno. Esto provoca que las 
+distribuciones de las observaciones y las recompensas varíen durante el entrenamiento, 
+lo que puede causar inestabilidad.
+
+Además, el aprendizaje por refuerzo es altamente sensible a la configuración de hiperparámetros 
+y la inicialización. Por ejemplo, una tasa de aprendizaje demasiado alta puede llevar a que 
+las actualizaciones de la política desvíen al agente hacia regiones del espacio de parámetros 
+donde su desempeño se deteriora drásticamente, sin posibilidad de recuperación.
+
+\subsubsection{Función de Objetivo en PPO}
+
+PPO aborda estos problemas proponiendo una función de objetivo que maximiza la recompensa 
+esperada mientras limita las actualizaciones de la política para evitar cambios excesivos. 
+La función de objetivo en PPO se expresa como:
+
+\[
+L^{PPO}(\theta) = \mathbb{E}_t \left[ \min\left(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t \right) \right]
+\]
+
+Aquí, \( r_t(\theta) \) es la razón de probabilidad entre la nueva política \(\pi_\theta(a|s)\) 
+y la política antigua \(\pi_{\theta_{\text{old}}}(a|s)\):
+
+\[
+r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{\text{old}}}(a_t|s_t)}
+\]
+
+El término \(\hat{A}_t\) es la estimación de la ventaja, que mide cuánto mejor o peor fue la 
+acción tomada en comparación con lo esperado. El operador \textit{clip} limita el valor de 
+\(r_t(\theta)\) dentro del rango \([1 - \epsilon, 1 + \epsilon]\), con \(\epsilon\) típicamente 
+igual a 0.2, para prevenir que las actualizaciones de la política sean demasiado agresivas,
+manteniendo así la estabilidad del entrenamiento.
+
+\subsubsection{Ventaja y Estimación del Valor}
+
+Para calcular la ventaja \(\hat{A}_t\), PPO utiliza dos componentes:
 
 \begin{itemize}
-    \item \textbf{Escalabilidad}: El uso de redes neuronales profundas ha permitido que los algoritmos de RL escalen a problemas que antes eran inabordables, como juegos complejos y mercados financieros.
-    \item \textbf{Capacidad de Generalización}: DRL ha mostrado una notable capacidad para generalizar el conocimiento adquirido en un entorno a otros entornos similares, lo que es crucial en aplicaciones como el trading, donde las condiciones del mercado cambian constantemente.
-    \item \textbf{Desempeño en Tareas Complejas}: DRL ha superado a los humanos en varias tareas complejas, como juegos de Atari, y ha logrado una eficiencia sin precedentes en aplicaciones como la optimización de portafolios.
+    \item \textbf{Retorno descontado}: Es la suma de las recompensas acumuladas, descontadas 
+    por un factor \(\gamma\) que valora más las recompensas inmediatas.
+    \item \textbf{Función de valor}: Estima el valor esperado de estar en un estado dado, 
+    calculando la recompensa total esperada desde ese estado en adelante.
 \end{itemize}
 
-Sin embargo, el DRL también presenta limitaciones que deben ser abordadas:
+La ventaja se calcula restando la función de valor del retorno descontado, proporcionando 
+una medida de si la acción tomada fue mejor o peor que el promedio esperado.
+
+\subsubsection{Procedimiento de Entrenamiento}
+
+PPO recolecta nuevas trayectorias de interacciones con el entorno en cada iteración, 
+utilizando estas trayectorias para actualizar la política. A diferencia de otros métodos, 
+no utiliza un \textit{replay buffer}, lo que significa que las experiencias se utilizan 
+una sola vez para hacer la actualización, y luego se descartan.
+
+Este proceso iterativo continúa hasta que las mejoras en la política se estabilizan, 
+lo que indica que el algoritmo ha convergido. PPO equilibra la simplicidad y la robustez, 
+permitiendo un entrenamiento estable incluso en entornos complejos y dinámicos.
+
+\section{Implementación del Entorno de Entrenamiento con Gymnasium}
+
+\subsection{Introducción a Gymnasium}
+
+Gymnasium es una biblioteca de Python ampliamente utilizada en el campo del 
+\textit{Reinforcement Learning} (RL) para crear, gestionar y probar entornos 
+de simulación. Esta biblioteca es una evolución de OpenAI Gym, diseñada para 
+facilitar la construcción de entornos personalizados y la evaluación de algoritmos 
+de RL en una variedad de dominios, desde juegos sencillos hasta tareas más complejas 
+como la robótica y el trading financiero.
+
+La popularidad de Gymnasium se debe a su simplicidad y flexibilidad. Proporciona una 
+interfaz estándar que permite a los desarrolladores de algoritmos de RL interactuar 
+fácilmente con los entornos. Esta estandarización es clave para comparar el rendimiento 
+de diferentes algoritmos en condiciones controladas.
+
+\subsection{Creación del Entorno de Trading}
+
+Aunque ya existen entornos predefinidos en Gymnasium para el entrenamiento de algoritmos 
+de trading, como \textit{Gym Trading Env} o \textit{FinRL}, la mayoría de estos están 
+diseñados para operar con múltiples activos financieros simultáneamente o introducen variables adicionales
+como la compra a crédito de activos. 
+
+Sin embargo, dado que este trabajo se enfoca en la operación con un solo activo, dichos 
+entornos no se ajustaban a las necesidades específicas de este proyecto. Adicionalmente, desarrollar 
+un entorno desde cero facilita una mejor comprensión del problema y permite personalizar mejor los 
+aspectos del entorno de acuerdo con los requisitos del algoritmo y los objetivos del trabajo.
+
+Para implementar el entorno de trading en Gymnasium, se desarrollaron los siguientes scripts:
+
+\subsubsection{Scripts del Entorno de Trading}
 
 \begin{itemize}
-    \item \textbf{Complejidad Computacional}: Entrenar modelos de DRL requiere un poder computacional significativo y grandes volúmenes de datos, lo que puede ser un obstáculo para su aplicación en tiempo real.
-    \item \textbf{Estabilidad y Convergencia}: Los algoritmos de DRL pueden ser inestables y propensos a la divergencia durante el entrenamiento, especialmente en entornos con recompensas escasas o en problemas altamente no lineales.
-    \item \textbf{Sensibilidad a la Parametrización}: El desempeño de los algoritmos de DRL es altamente sensible a la elección de hiperparámetros, lo que requiere una considerable experimentación y ajuste fino.
+    \item \textbf{\texttt{history.py}}: Este script se encarga de guardar la historia del agente durante el episodio de entrenamiento. Registra información clave como el índice de la posición actual, el paso temporal, la fecha, la posición actual y real del portafolio, los datos asociados al estado actual, la valoración del portafolio, la distribución del portafolio y la recompensa obtenida en cada paso. Esta información se utiliza para analizar y evaluar el comportamiento del agente a lo largo del tiempo, pero no maneja los datos de la serie temporal en sí.
+
+    \item \textbf{\texttt{reward\_functions.py}}: Aquí se definen varias funciones de recompensa que pueden utilizarse para evaluar el rendimiento del agente. Para los resultados de este trabajo, se ha utilizado una función de recompensa básica que calcula el retorno logarítmico del portafolio en cada paso temporal (\textit{step}). Esta elección se debe a que los retornos logarítmicos pueden sumarse a lo largo del tiempo, a diferencia de los retornos simples, lo que facilita el análisis acumulativo del rendimiento del agente.
+
+    \item \textbf{\texttt{simple\_portfolio.py}}: Se define el portfolio que maneja la simulación del portafolio del agente. Se encarga de actualizar el estado del portafolio según las acciones de compra o venta tomadas por el agente, teniendo en cuenta los costos de transacción. En cada operación de compra o venta, el agente compra o vende todo lo disponible, lo que simplifica la gestión del portafolio. Además, el script calcula el valor total del portafolio en cada paso del tiempo, proporcionando una representación precisa del rendimiento del agente en el entorno de trading.
+
+    \item \textbf{\texttt{trading\_env.py}}: Este es el núcleo del entorno de trading, integrando todos los componentes anteriores. Define el entorno siguiendo la estructura estándar de Gymnasium, implementando los métodos necesarios como \texttt{reset()}, \texttt{step()}, y \texttt{render()}:
+
+    \begin{itemize}
+        \item \textbf{\texttt{reset()}}: Este método reinicia el entorno al estado inicial, devolviendo la primera observación. Se llama al inicio de cada episodio de entrenamiento para preparar al agente para un nuevo intento de maximizar su recompensa.
+        
+        \item \textbf{\texttt{step(action)}}: Este método aplica la acción seleccionada por el agente y actualiza el estado del entorno. Devuelve cinco elementos clave:
+        \begin{enumerate}
+            \item \textbf{\texttt{observation}}: La nueva observación que refleja el estado actualizado del entorno.
+            \item \textbf{\texttt{reward}}: El retorno de la función de recompensa.
+            \item \textbf{\texttt{done}}: Un valor booleano que indica si el episodio ha terminado.
+            \item \textbf{\texttt{truncated}}: Un valor booleano que indica si hubo problemas en el episodio.
+            \item \textbf{\texttt{info}}: Información extra, como la valoración del portafolio, que puede ser útil para análisis adicionales.
+        \end{enumerate}
+
+        \item \textbf{\texttt{render()}}: Aunque es un método necesario en la estructura de un entorno Gymnasium, en esta implementación no se utiliza. Este método opcional se emplea generalmente para visualizar el entorno, permitiendo la representación gráfica del desempeño del agente, pero en este caso, no se ha requerido su uso.
+    \end{itemize}
 \end{itemize}
 
-En conclusión, el DRL ha ampliado significativamente el alcance de las aplicaciones de RL, permitiendo a los agentes abordar problemas más complejos y realistas. No obstante, sigue siendo un área de investigación activa con desafíos técnicos y prácticos que deben ser resueltos para su adopción generalizada.
+\subsubsection{Definición del espacio de observaciones}
 
 
-PUNTOS A INTRODUCIIIIIIIIIIIIIIR
+El espacio de observaciones del entorno de trading se ha construido utilizando una 
+combinación de series temporales originales, indicadores técnicos calculados sobre 
+estas series, y variables dinámicas adicionales que reflejan el estado y las acciones 
+previas del agente. 
+
+A continuación, se detalla el proceso seguido para definir este espacio:
+
+En primer lugar, se han utilizado las series originales de precios del SPY y del BTC, 
+así como las series de desequilibrio de volumen y de dólares obtenidas en \ref{sec:resultado-imbalance}.
+
+A partir de estas series, se han calculado diversos indicadores técnicos que proporcionan información clave sobre la tendencia, la volatilidad y el impulso del mercado. Los indicadores utilizados son:
+
 \begin{itemize}
-   \item Explicación de las ecuaciones y metodos ( bellman, metodos de diferencias temporales vs monte carlo, )
-   \item Algoritmos utilizados
-   \item Implementación del entorno en gimnasium
-   \item obtención del espacio de observaciones (indicadores...)
-   \item funciones de recompensa
-   \item resultados
-   \item conclusiones
+    \item \textbf{Medias Móviles (MA 20 y MA 50)}: Se calculan medias móviles simples de 20 y 50 periodos, que suavizan las fluctuaciones de los precios y ayudan a identificar la dirección de la tendencia. La MA 20 se considera una media de corto plazo, mientras que la MA 50 es una media de medio plazo.
+    
+    \item \textbf{Media Móvil Exponencial (EMA)}: A diferencia de las medias móviles simples, la EMA otorga mayor peso a los precios recientes, lo que permite reaccionar más rápidamente a los cambios en la dirección del mercado.
+
+    \item \textbf{Bandas de Bollinger}: Este indicador consiste en una media móvil rodeada por dos bandas a una distancia de dos desviaciones estándar. Las Bandas de Bollinger ayudan a identificar periodos de alta y baja volatilidad, así como posibles puntos de reversión de la tendencia.
+
+    \item \textbf{MACD (Moving Average Convergence Divergence)}: El MACD es un oscilador que muestra la relación entre dos medias móviles (usualmente 12 y 26 periodos). Es útil para identificar el impulso del mercado y posibles señales de compra o venta cuando la línea MACD cruza la línea de señal.
+
+    \item \textbf{RSI (Relative Strength Index)}: El RSI es un indicador de momentum que mide la velocidad y el cambio de los movimientos de precios. Se mueve en un rango de 0 a 100, y valores extremos (por encima de 70 o por debajo de 30) indican que un activo puede estar sobrecomprado o sobrevendido.
+
+    \item \textbf{ATR (Average True Range)}: El ATR mide la volatilidad del mercado calculando el rango medio verdadero durante un periodo de tiempo. Es útil para evaluar el riesgo y establecer niveles de stop-loss.
+
+    \item \textbf{CCI (Commodity Channel Index)}: El CCI mide la variación del precio de un activo en relación con su media estadística. Valores altos o bajos extremos indican condiciones de sobrecompra o sobreventa.
 \end{itemize}
+
+Estos indicadores, junto con los datos originales de precios (OHLC) se han normalizado para 
+garantizar que todas las características tengan una escala comparable, lo que facilita el 
+entrenamiento del agente y mejora la estabilidad del aprendizaje.
+
+Además, se han añadido indicadores dinámicos que proporcionan información adicional sobre 
+el estado actual y las acciones previas del agente. Estos indicadores son:
+
+\begin{itemize}
+    \item \textbf{Última Acción Tomada (Last Action Taken)}: Refleja la última acción ejecutada 
+    por el agente en el paso temporal anterior.
+    
+    \item \textbf{Cantidad de Activo en el Portafolio (Asset Quantity)}: Indica la cantidad actual 
+    del activo que posee el portafolio del agente.
+
+    \item \textbf{Acción Real Tomada (Real Action Taken)}: Muestra la acción real que se llevó a cabo, 
+    teniendo en cuenta las posibles restricciones o ajustes automáticos realizados por el entorno.
+\end{itemize}
+
+Finalmente, para capturar la dinámica temporal de estos datos, se define una ventana de observación 
+de 10 periodos. Esto significa que en cada paso temporal, el agente recibe como observación una 
+matriz que incluye los valores normalizados de los indicadores técnicos, los datos de precios (OHLC) 
+y los indicadores dinámicos correspondientes a los últimos 10 periodos. 
+
+Esta configuración proporciona al agente una visión comprensiva del estado actual del mercado y 
+su propio comportamiento reciente, lo que le permite tomar decisiones más informadas.
+
+
+
 
 \chapter{Meta-labeling}
 
-Consiste en la utilización de un modelo secundario para afinar las predicciones del primario.
+\section{Etiquetado de Datos Financieros}
+
+El método del horizonte de tiempo fijo es una técnica común en el análisis financiero para etiquetar datos en modelos de aprendizaje automático supervisado. En este método, cada observación en la matriz de características \(X\) se etiqueta en función del cambio en el precio del activo durante un período futuro específico, conocido como el horizonte de tiempo \(h\).
+
+Para etiquetar una observación \(X_i\) correspondiente al momento \(t_{i,0}\), se calcula el retorno del precio desde \(t_{i,0}\) hasta \(t_{i,0 + h}\). El retorno se define como:
+
+\[
+r_{t_{i,0}, t_{i,0 + h}} = \frac{p_{t_{i,0 + h}}}{p_{t_{i,0}}} - 1
+\]
+
+donde \(p_{t_{i,0}}\) es el precio en \(t_{i,0}\) y \(p_{t_{i,0 + h}}\) es el precio en \(t_{i,0 + h}\). Con este retorno calculado, se asigna una etiqueta a la observación \(X_i\) en función de un umbral \(\tau\):
 
 \begin{itemize}
-   \item \textbf{Generación de señales}: El modelo primario genera señales
-   \item \textbf{Asignación de labeles}: Cada señal generada por el modelo primario se etiqueta como correcta o incorrecta en base al rendimiento observado.
-   \item El libro propone varias maneras de hacerlo.
-   \item \textbf{Entrenamiento del meta-modelo}: El meta-modelo se entrena utilizando estas etiquetas y otras features adicionales que puedan influir en la precision de la señla.
-   \item \textbf{Prediccion de la calidad de la señales}: Una vez entrenado, el meta-modelo se utiliza para predecir la probabilidad de que las 
-   futuras señales del modelo primario sean correctas.
+    \item Si el retorno \(r\) es mayor que el umbral \(\tau\), la etiqueta es 1.
+    \item Si el retorno \(r\) es menor que \(-\tau\), la etiqueta es -1.
+    \item Si el retorno \(r\) está dentro del intervalo \([- \tau, \tau]\), la etiqueta es 0.
 \end{itemize}
+
+La elección del horizonte de tiempo \(h\) y del umbral \(\tau\) depende de los objetivos del análisis y de la naturaleza de los datos. Por ejemplo, un horizonte de tiempo corto puede ser adecuado para análisis a corto plazo, mientras que un horizonte largo puede ser más útil para tendencias a largo plazo. El umbral \(\tau\) se selecciona para definir el nivel de cambio en el precio que se considera significativo para la clasificación de las observaciones.
+
+\section{Limitaciones del Método del Horizonte de Tiempo Fijo}
+
+El método del horizonte de tiempo fijo es ampliamente utilizado en el análisis financiero y en la implementación de modelos de aprendizaje automático. Sin embargo, presenta varias limitaciones importantes que deben ser consideradas.
+
+\subsection{Problemas del Umbral Fijo}
+
+Uno de los principales problemas del método del horizonte de tiempo fijo es la aplicación uniforme del umbral \(\tau\) para etiquetar las observaciones. Este umbral se aplica sin ajustar por la volatilidad variable de los datos. Por ejemplo, si el umbral es \(\tau = 0.01\) (1\%), y la volatilidad del mercado varía, el mismo umbral se utiliza independientemente de la volatilidad actual. Esto puede llevar a problemas significativos:
+
+\begin{itemize}
+    \item Durante períodos de baja volatilidad (\(\sigma = 0.0001\)), el umbral puede ser relativamente alto en comparación con el retorno observado. Esto puede resultar en una clasificación incorrecta de observaciones que podrían ser estadísticamente significativas.
+    \item En períodos de alta volatilidad (\(\sigma = 0.01\)), el umbral puede parecer bajo en comparación con el rango de retornos observados, dificultando la clasificación de observaciones como significativas.
+\end{itemize}
+
+Como resultado, la mayoría de las etiquetas pueden ser clasificadas como neutras (etiqueta 0), incluso si el retorno es predecible y estadísticamente relevante.
+
+\subsection{Alternativas Mejoradas}
+
+Para abordar estas limitaciones, se pueden considerar las siguientes alternativas:
+
+\begin{itemize}
+    \item \textbf{Umbral Variable}: En lugar de usar un umbral fijo, se puede ajustar el umbral de etiquetado en función de la volatilidad observada. Esto se puede hacer estimando una desviación estándar exponencialmente ponderada de los retornos, adaptando el umbral a las condiciones del mercado en tiempo real.
+    \item \textbf{Barras de Volumen o en Dólares}: Utilizar barras de volumen o en dólares en lugar de barras de tiempo. Estas barras tienden a tener una volatilidad más constante (homoscedasticidad), lo que puede hacer que el umbral sea más relevante y preciso para el etiquetado.
+\end{itemize}
+
+\subsection{Consideración del Camino de Precios}
+
+Incluso con estas mejoras, el método del horizonte de tiempo fijo no aborda una falla crítica: el camino seguido por los precios. Las estrategias de inversión a menudo incluyen límites de stop-loss, que pueden ser autoimpuestos por el gestor del portafolio, impuestos por el departamento de riesgos, o activados por llamadas de margen. Un enfoque que no considera estos límites puede ser irrealista, ya que no refleja las posiciones que habrían sido cerradas antes de alcanzar el horizonte de tiempo fijado. La falta de consideración de este aspecto en la mayoría de la literatura indica una limitación significativa en el enfoque actual de etiquetado de observaciones.
+
+
+
+% Consiste en la utilización de un modelo secundario para afinar las predicciones del primario.
+
+% \begin{itemize}
+%    \item \textbf{Generación de señales}: El modelo primario genera señales
+%    \item \textbf{Asignación de labeles}: Cada señal generada por el modelo primario se etiqueta como correcta o incorrecta en base al rendimiento observado.
+%    \item El libro propone varias maneras de hacerlo.
+%    \item \textbf{Entrenamiento del meta-modelo}: El meta-modelo se entrena utilizando estas etiquetas y otras features adicionales que puedan influir en la precision de la señla.
+%    \item \textbf{Prediccion de la calidad de la señales}: Una vez entrenado, el meta-modelo se utiliza para predecir la probabilidad de que las 
+%    futuras señales del modelo primario sean correctas.
+% \end{itemize}
 
 \chapter{Conclusiones}
 

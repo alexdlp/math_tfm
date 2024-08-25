@@ -9,11 +9,12 @@ class SimplePortfolio:
         :param cash: Amount of cash held in the portfolio.
         :param trading_fees: Trading fees as a fraction of the trade amount.
         """
+        self.exposition = 0
         self.asset = 0
         self.max_asset = max_asset
-        self.cash = initial_cash
-        self.initial_cash = initial_cash
-        self.trading_fees = trading_fees
+        self.cash = initial_cash # current cash
+        self.initial_cash = initial_cash # cash inicial
+        self.trading_fees = 0 #trading_fees
         self.portfolio_value_history = []
         self.pnl_history = []
 
@@ -24,10 +25,10 @@ class SimplePortfolio:
         :param price: Current price of the asset.
         :return: Total value of the portfolio.
         """
+        # cuanto valen mis activos + mi liquidez
         return self.asset * price + self.cash
-    
+      
     def _update_portfolio(self, price):
-
         # update portfolio valuation
         portfolio_value = self.get_portfolio_valuation(price)
         self.portfolio_value_history.append(portfolio_value)
@@ -36,7 +37,7 @@ class SimplePortfolio:
         current_pnl = portfolio_value - self.initial_cash
         self.pnl_history.append(current_pnl)
         
-        # Calcular el retorno del portafolio para este paso
+        # Calcular el retorno del portafolio para este paso (STRATEGY_RETURN. NO ES EL REWARD)
         if len(self.portfolio_value_history) > 1:
             step_return = (self.portfolio_value_history[-1] - self.portfolio_value_history[-2]) / self.portfolio_value_history[-2]
             log_step_return = np.log(step_return+1)
@@ -44,6 +45,7 @@ class SimplePortfolio:
             step_return = 0.0
 
         return step_return
+    
     def trade(self, action: int, price: float) -> float:
         #print('PRICE',price)
         """
@@ -55,36 +57,61 @@ class SimplePortfolio:
         """
         print_buy = False
         print_sell = False
+
         # no se toma ninguna accion
         real_action_taken = 0
+
         # a menos que se cumplan estas historias.
-        if action == 1 and self.asset < self.max_asset:  # Buy one unit
+        # si la prediccion es compra y no tengo activo -> compro
+        # de momento, voy a eliminar el max_asset
+        #if action == 1 and self.asset < self.max_asset:  # Buy one unit
+
+        # si la prediccion es compra y no tengo activo
+        if action ==1 and self.asset == 0:
             
-            cost = price * (1 + self.trading_fees)
+            shares_to_buy = int(self.cash * action / price)
+            cost_before_fees = shares_to_buy*price
+
+            # me cuesta el precio + los fees
+            cost = cost_before_fees * (1 + self.trading_fees)
+
+            # si tengo pasta, compro
             if self.cash >= cost:
-                
-                self.asset += 1
-                self.cash -= cost
-                real_action_taken = 1
-                print_buy = True
-                
-        elif action == -1:  # Sell one unit
-            if self.asset >= 1:
-                
-                revenue = price * (1 - self.trading_fees)
-                self.asset -= 1
-                self.cash += revenue
-                real_action_taken = -1
-                print_sell = True               
+                self._buy(shares_to_buy, cost)
+            else:
+                shares_to_buy = shares_to_buy-1
+                # recalculo
+                cost_before_fees = shares_to_buy*price
+                cost = cost_before_fees * (1 + self.trading_fees)
+                self._buy(shares_to_buy, cost)
+
+            real_action_taken = 1
+            print_buy = True
+        # si la prediccion es venta y tengo activo
+        elif action == -1 and self.asset >= 1:  # Sell one unit
+            
+            # el profit es el precio de venta + los fees
+            profit = self.asset*price * (1 - self.trading_fees)
+            # me quedo sin asset
+            self.asset = 0
+            # añado el profit al cash
+            self.cash += profit
+            # y la accion real que tomo es vender
+            real_action_taken = -1
+            print_sell = True               
         
         step_return = self._update_portfolio(price)
 
-        if print_buy:
-            print(f'BUYING --> \tprice:{price} | \tcost: {cost} | port: {self.portfolio_value_history[-1]} | port-1: {self.portfolio_value_history[-2]} | asset : {self.asset}')
-        if print_sell:
-            print(f'SELLING --> \tprice:{price} | \tprofit: {revenue} | port: {self.portfolio_value_history[-1]} | port-1: {self.portfolio_value_history[-2]} | asset : {self.asset}')
+        if print_buy and len(self.portfolio_value_history)>2:
+            print(f'BUYING --> \tprice:{price:.2f} | \tcost: {cost:.2f} | port: {self.portfolio_value_history[-1]:.2f} | port-1: {self.portfolio_value_history[-2]:.2f}')
+        if print_sell and len(self.portfolio_value_history)>2:
+            print(f'SELLING --> \tprice:{price:.2f} | \tprofit: {profit:.2f} | port: {self.portfolio_value_history[-1]:.2f} | port-1: {self.portfolio_value_history[-2]:.2f}')
         
-        return step_return, real_action_taken, self.asset
+        return step_return, real_action_taken
+    
+    def _buy(self, shares_to_buy, cost):
+        self.asset += shares_to_buy
+        self.cash -= cost
 
 
     def __str__(self) -> str:
@@ -114,7 +141,7 @@ class SimplePortfolio:
             "cash": self.cash
         }
     
-    def get_portfolio_position(self, price: float) -> float:
+    def get_portfolio_exposition(self, price: float) -> float:
         """
         Calculate the position of the portfolio.
 

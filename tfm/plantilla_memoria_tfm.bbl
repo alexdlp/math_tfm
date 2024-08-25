@@ -21,4 +21,9 @@ David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
 Quantitative Finance~Stack Exchange.
 \newblock Tick imbalance bars - advances in financial machine learning, 2019.
 
+\bibitem{Schulman2017}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
+
 \end{thebibliography}

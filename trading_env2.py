@@ -176,6 +176,7 @@ class TradingEnv(gym.Env):
                 low = self._idx, 
                 high = len(self.df) - self.max_episode_duration - self._idx
             )
+        print(f'reset desde la posicion{self._idx}')
         
         self._portfolio  = TargetPortfolio(
             position = self._position,

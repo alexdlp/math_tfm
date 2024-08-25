@@ -2,9 +2,9 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces ola}}{5}{figure.3.1}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Relación entre retornos simples y logarítmicos}}{5}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Serie Temporal de Precios de Bitcoin}}{8}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Serie Temporal de Precios del SPY}}{9}{figure.3.3}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Serie Temporal de Precios del SPY}}{8}{figure.3.3}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Número de barras obtenido en datos de BTC}}{14}{figure.4.1}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Número de barras obtenido en datos del SPY}}{14}{figure.4.2}%
@@ -13,7 +13,7 @@
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Comparativa de histogramas de los retornos del SPY (arriba) y BTC (abajo)}}{17}{figure.4.5}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Comparativa de QQ-plots de los retornos del SPY (arriba) y BTC (abajo)}}{18}{figure.4.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema Reiforcement Learning}}{23}{figure.5.1}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema Reiforcement Learning}}{19}{figure.5.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

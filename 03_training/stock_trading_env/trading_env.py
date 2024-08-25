@@ -5,18 +5,16 @@ import numpy as np
 
 from .history import History
 from .simple_portfolio import SimplePortfolio
+from .reward_functions import basic_reward_function
 
 import warnings
 warnings.filterwarnings("error")
 
-def basic_reward_function(history : History):
-    return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2])
-
 def dynamic_feature_last_action_taken(history):
     return history['agent_action', -1]
 
-def dynamic_feature_asset_quantity(history):
-    return history['portfolio_asset_quantity', -1]
+def dynamic_feature_exposition(history):
+    return history['portfolio_exposition', -1]
 
 def dynamic_feature_real_action_taken(history):
     return history['real_action_taken', -1]
@@ -83,7 +81,7 @@ class TradingEnv(gym.Env):
                 # las posiciones no se si son lo mismo que las acctiones. ental caso, habra que modificar esto.
                 positions : list = [0, 1],
                 # funciones dinámicas, cogen el objeto historia y computan algo con el 
-                dynamic_feature_functions = [dynamic_feature_last_action_taken, dynamic_feature_real_action_taken, dynamic_feature_asset_quantity],
+                dynamic_feature_functions = [dynamic_feature_last_action_taken, dynamic_feature_real_action_taken, dynamic_feature_exposition],
                 # funcion de recompensa. lo mismo pero para el reward
                 reward_function = basic_reward_function,
                 # window, cada step devolvera un array de window x col_length
@@ -213,12 +211,14 @@ class TradingEnv(gym.Env):
         # Adjust the index randomly if max_episode_duration is not 'max'
         if self.max_episode_duration != 'max':
             # Calculate the high limit for the random index to avoid exceeding DataFrame bounds
+        
             max_index = len(self.df) - self.max_episode_duration
             if max_index > self._idx:
                 self._idx = np.random.randint(
                     low=self._idx, 
                     high=max_index
                 )
+                print(f'Env reset. New start point: {self._idx}.  Max episode duration: {self.max_episode_duration}')
             else:
                 # Handle the case where the max_index is not greater than _idx
                 raise ValueError("max_episode_duration is too large for the DataFrame length.")
@@ -244,12 +244,13 @@ class TradingEnv(gym.Env):
             date = self.df.index.values[self._idx],
             agent_action = self._agent_action,
             real_action_taken = self._agent_action,
-            portfolio_asset_quantity = 0,
+            portfolio_exposition = 0,
             data =  dict(zip(self._info_columns, self._info_array[self._idx])),
             portfolio_valuation = self.portfolio_initial_value,
             portfolio_distribution = self._portfolio.get_portfolio_distribution(),
             reward = 0,
             strategy_returns = 0.0,
+            stock_price = self._get_price()
         )
 
 
@@ -260,10 +261,14 @@ class TradingEnv(gym.Env):
 
     def _trade(self, action, price = None):
 
-        step_return, real_action_taken, asset = self._portfolio.trade(
+        price = self._get_price() if price is None else price
+
+        step_return, real_action_taken = self._portfolio.trade(
             action = action, 
-            price = self._get_price() if price is None else price, 
+            price = price, 
         )
+
+   
 
         # actualizo la accion del agente y la accion real tomada.
         self._agent_action = action
@@ -271,7 +276,7 @@ class TradingEnv(gym.Env):
 
         # actualizamos step return y el asset
         self._step_return = step_return
-        self._portfolio_asset_quantity = asset
+        self._portfolio_exposition = self._portfolio.get_portfolio_exposition(price)
         
 
     # def _take_action(self, action):
@@ -286,7 +291,6 @@ class TradingEnv(gym.Env):
     def step(self, position_index = None):
 
         # vale esto está pensado para que, en caso de que la posicion no sea 0, el entorno haga algo.
-        
         if position_index is not None: 
             self._trade(self.positions[position_index])
 
@@ -299,7 +303,8 @@ class TradingEnv(gym.Env):
 
         done, truncated = False, False
 
-        if portfolio_value <= 0:
+        # si el valor del portfolio es menor que el de la accion, paro. porque no puedo operar.
+        if portfolio_value <= stock_price:
             done = True
         if self._idx >= len(self.df) - 1:
             truncated = True
@@ -312,13 +317,14 @@ class TradingEnv(gym.Env):
             date = self.df.index.values[self._idx],
             agent_action = self._agent_action,
             real_action_taken = self._real_action_taken,
-            portfolio_asset_quantity = self._portfolio_asset_quantity,
+            portfolio_exposition = self._portfolio_exposition,
             #real_position = self._portfolio.get_portfolio_position(stock_price),
             data =  dict(zip(self._info_columns, self._info_array[self._idx])),
             portfolio_valuation = portfolio_value,
             portfolio_distribution = portfolio_distribution, 
             reward = 0, # se actualiza después
-            strategy_returns = self._step_return
+            strategy_returns = self._step_return,
+            stock_price = self._get_price()
         )
 
         if not done:

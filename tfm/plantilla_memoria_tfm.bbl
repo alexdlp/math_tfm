@@ -1,10 +1,22 @@
 \begin{thebibliography}{1}
 
+\bibitem{does_meta_labeling_add}
+J.~Joubert A.~Singh.
+\newblock Does meta-labeling add to signal efficacy?
+\newblock {\em Journal Name}, 2019.
+
 \bibitem{Cont2001}
 Rama Cont.
 \newblock Empirical properties of asset returns: stylized facts and statistical
   issues.
 \newblock {\em Quantitative Finance}, 1(2):223--236, 2001.
+
+\bibitem{Dantas2018}
+Stefano~Giacomazzi Dantas and Daniel Guerreiro~e Silva.
+\newblock Equity trading at the brazilian stock market using a q-learning based
+  system.
+\newblock In {\em 2018 7th Brazilian Conference on Intelligent Systems
+  (BRACIS)}, pages 133--138. IEEE, oct 2018.
 
 \bibitem{DindosPipherRule2016}
 Martin Dindos, Jill Pipher, and David Rule.

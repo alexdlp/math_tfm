@@ -6,14 +6,16 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Serie Temporal de Precios de Bitcoin}}{8}{figure.3.2}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Serie Temporal de Precios del SPY}}{8}{figure.3.3}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Número de barras obtenido en datos de BTC}}{14}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Número de barras obtenido en datos del SPY}}{14}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Explosión del umbral de desequilibrio en SPY}}{15}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Datos BTC originales y de Desequilibrio de Volumen}}{16}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparativa de histogramas de los retornos del SPY (arriba) y BTC (abajo)}}{17}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparativa de QQ-plots de los retornos del SPY (arriba) y BTC (abajo)}}{18}{figure.4.6}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Número de barras obtenido en datos de BTC}}{13}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Número de barras obtenido en datos del SPY}}{13}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Explosión del umbral de desequilibrio en SPY}}{14}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Datos BTC originales y de Desequilibrio de Volumen}}{15}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Comparativa de histogramas de los retornos del SPY (arriba) y BTC (abajo)}}{16}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparativa de QQ-plots de los retornos del SPY (arriba) y BTC (abajo)}}{17}{figure.4.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema Reiforcement Learning}}{19}{figure.5.1}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema Reiforcement Learning}}{18}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Comparativa de retornos acumulados de la estrategia PPO sobre SPY}}{33}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Comparativa de retornos acumulados de la estrategia PPO sobre BTC}}{34}{figure.5.3}%
 \addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Diagrama Meta-Labeling (Adaptación de \textit {Hudson and Thames})}}{42}{figure.6.1}%
 \addvspace {10\p@ }

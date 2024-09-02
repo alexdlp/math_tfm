@@ -3,83 +3,84 @@
 \contentsline {chapter}{Índice de tablas}{IV}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Contextualización del problema}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Relación con el contenido del máster}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Estructura del documento}{1}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Estado del arte ???}{3}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Planteamiento del problema y formulación}{4}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Descripción de los Datos Financieros}{4}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Introducción a la Serie Temporal}{4}{subsection.3.1.1}%
+\contentsline {section}{\numberline {1.2}Estructura del Documento}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Fundamentos de los datos Financieros}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Descripción de los Datos Financieros}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Introducción a la Serie Temporal}{4}{subsection.2.1.1}%
 \contentsline {subsubsection}{Frecuencia}{4}{section*.4}%
-\contentsline {subsection}{\numberline {3.1.2}Retornos de Activos}{4}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Hechos Estilizados}{5}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Propiedades Estadísticas}{6}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Datos de Alta Frecuencia}{6}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Datos Utilizados}{7}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {2.1.2}Retornos de Activos}{4}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Hechos Estilizados}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Datos de Alta Frecuencia}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Datos Utilizados}{7}{subsection.2.2.2}%
 \contentsline {subsubsection}{Datos de Bitcoin}{7}{section*.5}%
 \contentsline {subsubsection}{Datos del SPY}{8}{section*.6}%
-\contentsline {subsubsection}{Propiedades Estadísticas de los Datos}{8}{section*.7}%
-\contentsline {chapter}{\numberline {4}Imbalance bars}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Barras Basadas en Información}{9}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Barras de Desequilibrio}{10}{subsection.4.1.1}%
-\contentsline {subsubsection}{La Regla del Tick}{10}{section*.8}%
-\contentsline {subsubsection}{Tipos de Barras de Desequilibrio}{10}{section*.9}%
-\contentsline {paragraph}{Barras de Desequilibrio de Tick (TIB)}{10}{section*.10}%
-\contentsline {paragraph}{Barras de Desequilibrio de Volumen y Dólares (VIB y DIB)}{11}{section*.11}%
-\contentsline {subsection}{\numberline {4.1.2}Adaptación de la Metodología con Datos de Minuto}{11}{subsection.4.1.2}%
-\contentsline {subsubsection}{Implementación}{12}{section*.12}%
-\contentsline {subsection}{\numberline {4.1.3}Resultados}{14}{subsection.4.1.3}%
-\contentsline {chapter}{\numberline {5}Deep Reinforcement Learning}{18}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}{18}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Definición y Contexto General}{18}{subsection.5.1.1}%
-\contentsline {subsubsection}{Hipótesis de la Recompensa}{18}{section*.13}%
-\contentsline {subsection}{\numberline {5.1.2}Componentes Básicos del Aprendizaje por Refuerzo}{19}{subsection.5.1.2}%
-\contentsline {subsubsection}{Política}{20}{section*.14}%
-\contentsline {subsubsection}{Exploración vs. Explotación}{21}{section*.15}%
-\contentsline {subsection}{\numberline {5.1.3}El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}{21}{subsection.5.1.3}%
-\contentsline {subsubsection}{Cálculo Numérico: Iteración de Valores}{22}{section*.16}%
-\contentsline {subsection}{\numberline {5.1.4}Métodos Clásicos de Aprendizaje por Refuerzo}{23}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Evolución del Deep Reinforcement Learning (DRL)}{24}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Combinación con Redes Neuronales}{24}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Principales Enfoques y Algoritmos de DRL}{24}{subsection.5.2.2}%
-\contentsline {subsubsection}{Métodos Basados en Funciones de Valor}{24}{section*.17}%
-\contentsline {subsubsection}{Métodos de Gradiente de Política}{25}{section*.18}%
-\contentsline {subsubsection}{Métodos Actor-Critic}{25}{section*.19}%
-\contentsline {section}{\numberline {5.3}Proximal Policy Optimization (PPO) y su Implementación}{25}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Introducción a Proximal Policy Optimization (PPO)}{25}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Descripción Técnica de PPO}{26}{subsection.5.3.2}%
-\contentsline {subsubsection}{Problemas en el Aprendizaje por Refuerzo}{26}{section*.20}%
-\contentsline {subsubsection}{Función de Objetivo en PPO}{26}{section*.21}%
-\contentsline {subsubsection}{Ventaja y Estimación del Valor}{27}{section*.22}%
-\contentsline {subsubsection}{Procedimiento de Entrenamiento}{27}{section*.23}%
-\contentsline {section}{\numberline {5.4}Implementación del Entorno de Entrenamiento con Gymnasium}{27}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Introducción a Gymnasium}{27}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Creación del Entorno de Trading}{28}{subsection.5.4.2}%
-\contentsline {subsubsection}{Scripts del Entorno de Trading}{28}{section*.24}%
-\contentsline {subsubsection}{Definición del espacio de observaciones}{29}{section*.25}%
-\contentsline {subsection}{\numberline {5.4.3}Función de Recompensa}{31}{subsection.5.4.3}%
-\contentsline {section}{\numberline {5.5}Entrenamiento y resultados}{31}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Introducción: Meta-Labeling como Técnica Avanzada en Trading}{35}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Concepto y Definición de Meta-Labeling}{35}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Mejora de un Predictor Mediocre}{35}{subsection.5.6.2}%
-\contentsline {subsubsection}{Explicación Matemática}{35}{section*.26}%
-\contentsline {subsection}{\numberline {5.6.3}Beneficios del F1-Score y del Control de Tamaño de las Apuestas}{36}{subsection.5.6.3}%
-\contentsline {subsection}{\numberline {5.6.4}Etiquetado de Datos en Trading}{37}{subsection.5.6.4}%
-\contentsline {subsection}{\numberline {5.6.5}Optimización del Ratio de Sharpe a través del Meta-Labeling}{37}{subsection.5.6.5}%
-\contentsline {subsubsection}{Impacto del Meta-Labeling en el Ratio de Sharpe}{37}{section*.27}%
-\contentsline {subsection}{\numberline {5.6.6}Optimización del Ratio de Sharpe mediante Meta-Labeling}{38}{subsection.5.6.6}%
-\contentsline {subsubsection}{Interpretación del Ratio de Sharpe Binario}{39}{section*.28}%
-\contentsline {subsubsection}{Papel del Meta-Labeling en la Mejora del Ratio de Sharpe}{39}{section*.29}%
-\contentsline {chapter}{\numberline {6}Meta-labeling}{40}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Concepto y Definición de Meta-Labeling}{40}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Mejora de un Predictor Mediocre}{40}{subsection.6.1.1}%
-\contentsline {subsubsection}{Explicación Matemática}{41}{section*.30}%
-\contentsline {section}{\numberline {6.2}Concepto y Definición de Meta-Labeling}{41}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Etiquetado de Datos en Trading}{42}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Limitaciones del Etiquetado Tradicional}{42}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Beneficios del Three-Barrier Method}{42}{subsection.6.2.3}%
-\contentsline {section}{\numberline {6.3}Etiquetado de Datos Financieros}{43}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Limitaciones del Método del Horizonte de Tiempo Fijo}{44}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Problemas del Umbral Fijo}{44}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Alternativas Mejoradas}{44}{subsection.6.4.2}%
-\contentsline {chapter}{\numberline {7}Conclusiones}{45}{chapter.7}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{46}{chapter*.31}%
+\contentsline {section}{\numberline {2.3}Métricas Financieras}{8}{section.2.3}%
+\contentsline {subsubsection}{Cumulative Returns}{9}{section*.7}%
+\contentsline {subsubsection}{Annualized Return}{9}{section*.8}%
+\contentsline {subsubsection}{Sharpe Ratio}{9}{section*.9}%
+\contentsline {subsubsection}{Sortino Ratio}{9}{section*.10}%
+\contentsline {subsubsection}{Maximum Drawdown}{9}{section*.11}%
+\contentsline {subsubsection}{Calmar Ratio}{10}{section*.12}%
+\contentsline {subsubsection}{Value at Risk (VaR)}{10}{section*.13}%
+\contentsline {subsubsection}{Alpha}{10}{section*.14}%
+\contentsline {subsubsection}{Beta}{10}{section*.15}%
+\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{10}{section.2.4}%
+\contentsline {subsubsection}{Precision}{11}{section*.16}%
+\contentsline {subsubsection}{Recall}{11}{section*.17}%
+\contentsline {subsubsection}{F1-Score}{11}{section*.18}%
+\contentsline {chapter}{\numberline {3}Barras de desequilibrio}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Barras Basadas en Información}{12}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Barras de Desequilibrio}{13}{subsection.3.1.1}%
+\contentsline {subsubsection}{La Regla del Tick}{13}{section*.19}%
+\contentsline {subsubsection}{Tipos de Barras de Desequilibrio}{13}{section*.20}%
+\contentsline {paragraph}{Barras de Desequilibrio de Tick (TIB)}{13}{section*.21}%
+\contentsline {paragraph}{Barras de Desequilibrio de Volumen y Dólares (VIB y DIB)}{14}{section*.22}%
+\contentsline {subsection}{\numberline {3.1.2}Adaptación de la Metodología con Datos de Minuto}{14}{subsection.3.1.2}%
+\contentsline {subsubsection}{Implementación}{15}{section*.23}%
+\contentsline {subsection}{\numberline {3.1.3}Resultados}{17}{subsection.3.1.3}%
+\contentsline {chapter}{\numberline {4}Deep Reinforcement Learning}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}{21}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Definición y Contexto General}{21}{subsection.4.1.1}%
+\contentsline {subsubsection}{Hipótesis de la Recompensa}{21}{section*.24}%
+\contentsline {subsection}{\numberline {4.1.2}Componentes Básicos del Aprendizaje por Refuerzo}{22}{subsection.4.1.2}%
+\contentsline {subsubsection}{Política}{23}{section*.25}%
+\contentsline {subsubsection}{Exploración vs. Explotación}{24}{section*.26}%
+\contentsline {subsection}{\numberline {4.1.3}El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}{24}{subsection.4.1.3}%
+\contentsline {subsubsection}{Cálculo Numérico: Iteración de Valores}{25}{section*.27}%
+\contentsline {subsection}{\numberline {4.1.4}Métodos Clásicos de Aprendizaje por Refuerzo}{26}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Evolución del Deep Reinforcement Learning (DRL)}{27}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Combinación con Redes Neuronales}{27}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Principales Enfoques y Algoritmos de DRL}{27}{subsection.4.2.2}%
+\contentsline {subsubsection}{Métodos Basados en Funciones de Valor}{27}{section*.28}%
+\contentsline {subsubsection}{Métodos de Gradiente de Política}{28}{section*.29}%
+\contentsline {subsubsection}{Métodos Actor-Critic}{28}{section*.30}%
+\contentsline {section}{\numberline {4.3}Proximal Policy Optimization (PPO) y su Implementación}{28}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Introducción a Proximal Policy Optimization (PPO)}{28}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Descripción Técnica de PPO}{29}{subsection.4.3.2}%
+\contentsline {subsubsection}{Problemas en el Aprendizaje por Refuerzo}{29}{section*.31}%
+\contentsline {subsubsection}{Función de Objetivo en PPO}{29}{section*.32}%
+\contentsline {subsubsection}{Ventaja y Estimación del Valor}{30}{section*.33}%
+\contentsline {subsubsection}{Procedimiento de Entrenamiento}{30}{section*.34}%
+\contentsline {section}{\numberline {4.4}Implementación del Entorno de Entrenamiento con Gymnasium}{30}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Introducción a Gymnasium}{30}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Creación del Entorno de Trading}{31}{subsection.4.4.2}%
+\contentsline {subsubsection}{Scripts del Entorno de Trading}{31}{section*.35}%
+\contentsline {subsubsection}{Definición del espacio de observaciones}{32}{section*.36}%
+\contentsline {subsection}{\numberline {4.4.3}Función de Recompensa}{34}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Entrenamiento y resultados}{34}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Meta-labeling}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Concepto y Definición de Meta-Labeling}{38}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Optimización del Ratio de Sharpe mediante Meta-Labeling}{40}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Impacto del Meta-Labeling en el Ratio de Sharpe}{41}{subsection.5.1.2}%
+\contentsline {subsubsection}{Beneficios del F1-Score y del Control de Tamaño de las Apuestas}{42}{section*.37}%
+\contentsline {section}{\numberline {5.2}Etiquetado de Datos Financieros}{42}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Método del Horizonte Temporal Fijo}{42}{subsection.5.2.1}%
+\contentsline {subsubsection}{Descripción del Método}{42}{section*.38}%
+\contentsline {subsection}{\numberline {5.2.2}Método de las Tres Barreras}{44}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Conclusiones}{45}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Resumen de Hallazgos Principales}{45}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Cumplimiento de los Objetivos}{46}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Limitaciones del Estudio}{46}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Implicaciones Prácticas}{46}{subsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.3.5}Líneas Futuras de Investigación}{47}{subsection.5.3.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{48}{chapter*.39}%

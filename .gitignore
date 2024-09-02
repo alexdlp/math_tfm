@@ -173,3 +173,5 @@ cython_debug/
 
 02_training_data/SPY_dollar_processed_in_sample_sin_ohlc.parquet
 02_training_data/BTC_dollar_processed_in_sample_sin_ohlc.parquet
+
+05_meta_labeling/btc_with_labels.parquet 

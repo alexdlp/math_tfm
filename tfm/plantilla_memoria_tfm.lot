@@ -2,12 +2,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Umbrales utilizados y numero de muestras obtenido}}{17}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Resultados de pruebas estadísticas de normalidad para SPY y BTC}}{19}{table.3.2}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Umbrales utilizados y numero de muestras obtenido}}{14}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Resultados de pruebas estadísticas de normalidad para SPY y BTC}}{16}{table.4.2}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Parámetros de entrenamiento del agente DRL.}}{32}{table.5.1}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{33}{table.5.2}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{34}{table.5.3}%
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Parámetros de entrenamiento del agente DRL.}}{35}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{36}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{37}{table.4.3}%
 \addvspace {10\p@ }

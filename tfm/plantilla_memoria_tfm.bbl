@@ -18,12 +18,6 @@ Stefano~Giacomazzi Dantas and Daniel Guerreiro~e Silva.
 \newblock In {\em 2018 7th Brazilian Conference on Intelligent Systems
   (BRACIS)}, pages 133--138. IEEE, oct 2018.
 
-\bibitem{DindosPipherRule2016}
-Martin Dindos, Jill Pipher, and David Rule.
-\newblock Boundary value problems for second-order elliptic operators
-  satisfying a carleson condition.
-\newblock {\em Commun Pure Appl Math}, 70(7):1316--1365, 2017.
-
 \bibitem{easley2012volume}
 David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
 \newblock The volume clock: Insights into the high frequency paradigm.
@@ -32,6 +26,11 @@ David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
 \bibitem{quant_finance_stack_exchange}
 Quantitative Finance~Stack Exchange.
 \newblock Tick imbalance bars - advances in financial machine learning, 2019.
+
+\bibitem{lopezdeprado2018afml}
+Marcos López~de Prado.
+\newblock {\em Advances in Financial Machine Learning}.
+\newblock John Wiley \& Sons, Hoboken, NJ, 2018.
 
 \bibitem{Schulman2017}
 John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.

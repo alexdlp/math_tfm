@@ -385,6 +385,14 @@ INPUT .\figures\meta_labeling.png
 INPUT .\figures\meta_labeling.png
 INPUT .\figures\meta_labeling.png
 INPUT .\figures\meta_labeling.png
+INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbxti10.tfm
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
+INPUT .\figures\three_barried_method.png
 INPUT .\plantilla_memoria_tfm.bbl
 INPUT .\plantilla_memoria_tfm.bbl
 INPUT plantilla_memoria_tfm.bbl
@@ -395,6 +403,8 @@ INPUT C:\Users\adelapuente\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi6
 INPUT C:\Users\adelapuente\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbxti10.pfb
+INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbxti10.pfb
 INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\adelapuente\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb

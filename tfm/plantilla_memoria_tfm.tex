@@ -159,24 +159,77 @@ Lugar y fecha de presentación prevista\\
 
 \chapter{Introducción}
 
-\begin{itemize}
+El trading financiero es un campo en constante evolución, impulsado por los avances tecnológicos 
+y el creciente uso de técnicas de \textit{machine learning} y \textit{deep learning}. Entre estas, 
+el \textit{deep reinforcement learning} se ha destacado como una metodología prometedora para 
+desarrollar estrategias de trading que pueden adaptarse dinámicamente a las condiciones cambiantes 
+del mercado. Este proyecto surge de una motivación personal y académica de explorar y aprender a 
+desarrollar estrategias de trading utilizando técnicas avanzadas de \textit{machine learning}.
 
-\item Contextualización del problema.
+Una de las principales motivaciones de este trabajo es aprender a implementar un agente de 
+\textit{deep reinforcement learning} para la creación de estrategias de trading. Con el auge 
+de las librerías gratuitas como \textit{Gymnasium} y \textit{Stable Baselines}, se abre una 
+oportunidad única para aprender y aplicar estas herramientas en el diseño, entrenamiento y evaluación 
+de agentes de aprendizaje por refuerzo. Además, este proyecto busca profundizar en las metodologías 
+propuestas en el libro \textit{Advances in Financial Machine Learning} de Marcos López de Prado, 
+un referente en la aplicación de técnicas de \textit{machine learning} al análisis financiero. 
+La implementación y evaluación de estas metodologías permitirán no solo entender mejor cómo 
+funcionan, sino también cómo pueden ayudar en la creación de estrategias de trading más robustas 
+y efectivas.
 
-\item Antecedentes y citas a trabajos (libros, artículos o manuscritos) que sirven de referencia, como por ejemplo \cite{DindosPipherRule2016}
+Otro aspecto clave de esta investigación es evaluar la accesibilidad y aplicabilidad de estas 
+técnicas para personas que no provienen del ámbito financiero. A medida que el trading algorítmico 
+y las técnicas de \textit{machine learning} se vuelven más comunes, es crucial entender cómo alguien 
+con un trasfondo técnico, pero sin experiencia directa en finanzas, puede acercarse a esta disciplina. 
+El objetivo es identificar las barreras de entrada, los desafíos y las oportunidades que presenta 
+este campo, así como evaluar qué tan cerca o lejos está esta disciplina de ser accesible para un 
+público más amplio.
 
-\item Relación con el contenido de alguna/s asignatura/s del máster y técnicas o tería utilizadas en el planteamiento o resolución del problema.
+En resumen, este trabajo tiene como objetivo aprender y aplicar técnicas avanzadas de 
+\textit{machine learning}, específicamente \textit{deep reinforcement learning}, en el desarrollo 
+de estrategias de trading, utilizando herramientas accesibles y metodologías de vanguardia. A través 
+de este proceso, se pretende obtener una comprensión más profunda del potencial y las limitaciones 
+de estas técnicas en un contexto financiero, contribuyendo así al conocimiento en esta intersección 
+entre tecnología y finanzas.
 
-\item Comentario sobre los capítulos o secciones que componen la memoria.
-
-\end{itemize}
 
 \section{Contextualización del problema}
 
-En los últimos años, el uso de estrategias de trading automatizadas ha cobrado una gran relevancia en el mundo financiero. La incorporación de 
-técnicas de aprendizaje profundo y métodos avanzados de análisis financiero ha permitido el desarrollo de estrategias más sofisticadas y eficientes. 
-En este contexto, la aplicación de Reinforcement Learning (RL) y metodologías avanzadas, como las propuestas por Marcos López de Prado, ofrecen un 
-enfoque novedoso para abordar los desafíos del trading financiero.
+El desarrollo de estrategias de trading efectivas en un entorno financiero altamente dinámico 
+requiere la implementación de técnicas avanzadas que puedan adaptarse a las complejidades y 
+variabilidades del mercado. En este trabajo, se plantea una estrategia integral que combina 
+varias metodologías innovadoras con el objetivo de evaluar su utilidad en la generación de 
+estrategias de trading robustas y efectivas.
+
+El primer componente clave de esta estrategia es la implementación de barras de desequilibrio 
+de volumen y dólares, una técnica que ofrece una representación más precisa de la actividad 
+del mercado en comparación con las barras de tiempo tradicionales. Estas barras se 
+construyen basándose en la actividad real del mercado, en lugar de intervalos de tiempo fijos, 
+lo que permite capturar mejor la dinámica subyacente de la oferta y la demanda. Este enfoque 
+se evaluará en conjunto con las barras de tiempo convencionales para determinar si proporcionan 
+una ventaja en la formación de estrategias de trading.
+
+El segundo componente es el entrenamiento de un algoritmo de \textit{deep reinforcement learning} 
+(DRL) sobre estas barras construidas y sobre las barras originales. El objetivo aquí es explorar 
+cómo las diferentes representaciones del mercado afectan el rendimiento del algoritmo de DRL 
+en la identificación de oportunidades de trading. Este enfoque permitirá no solo evaluar la 
+efectividad del aprendizaje por refuerzo en estos distintos contextos, sino también determinar 
+si la precisión y la estabilidad del agente de trading pueden mejorar al cambiar la base de 
+datos sobre la que se entrena.
+
+Finalmente, se aplicará la técnica de \textit{Meta-Labeling} sobre las señales generadas 
+por el algoritmo de \textit{deep reinforcement learning}. El \textit{Meta-Labeling} actúa 
+como una capa adicional de análisis, refinando las señales emitidas y potenciando la capacidad 
+del modelo para filtrar las señales más prometedoras. La efectividad de esta técnica se evaluará 
+comparando su rendimiento con el de las señales originales, así como con otros enfoques sin 
+\textit{Meta-Labeling}.
+
+El planteamiento de esta estrategia no solo busca implementar y analizar cada una de estas 
+técnicas de manera individual, sino también explorar cómo funcionan en conjunto. Se realizará 
+una comparativa exhaustiva entre las diferentes configuraciones para determinar cuáles ofrecen 
+los mejores resultados en términos de precisión, estabilidad y rentabilidad en las estrategias 
+de trading. Este enfoque permitirá obtener una visión más completa de cómo estas técnicas 
+pueden contribuir al desarrollo de modelos de trading más eficaces y adaptativos.
 
 
 % \section{Antecedentes}
@@ -186,29 +239,31 @@ enfoque novedoso para abordar los desafíos del trading financiero.
 % "Advances in Financial Machine Learning" proporciona una guía exhaustiva sobre técnicas avanzadas de machine learning aplicadas a finanzas, 
 % que sirven como base para este trabajo.
 
-\section{Relación con el contenido del máster}
 
-Este trabajo se relaciona estrechamente con varias asignaturas del máster, como la teoría de machine learning, optimización y finanzas 
-cuantitativas. Las técnicas de deep RL, así como las metodologías avanzadas de análisis financiero, son fundamentales para la formulación 
-y resolución del problema planteado.
+\section{Estructura del Documento}
 
-\section{Estructura del documento}
-
-El presente trabajo se estructura en los siguientes capítulos:
+Este documento se organiza en siete capítulos, cada uno de los cuales aborda un aspecto clave del desarrollo de estrategias de trading utilizando técnicas avanzadas de \textit{machine learning}:
 
 \begin{itemize}
-    \item \textbf{Capítulo 1: Introducción} - Se presenta el contexto del problema, los antecedentes relevantes y la relación con los 
-    contenidos del máster.
-    \item \textbf{Capítulo 2: Planteamiento del problema y formulación} - Se detalla el problema a resolver, incluyendo la formulación 
-    matemática y los objetivos específicos.
-    \item \textbf{Capítulo 3: Caso de estudio y simulaciones} - Se presenta un caso de estudio concreto, junto con las simulaciones y 
-    resultados obtenidos.
-    \item \textbf{Capítulo 4: Conclusiones} - Se resumen los hallazgos principales y se discuten posibles trabajos futuros.
+    \item \textbf{Capítulo 1: Introducción.} Se presenta la motivación, los objetivos del trabajo y una contextualización inicial del planteamiento de la estrategia.
+
+    \item \textbf{Capítulo 2: Fundamentos de los Datos Financieros.} En este capítulo se introducen los conceptos financieros relevantes que son fundamentales para comprender los datos utilizados en las estrategias de trading. Se abordan temas como la naturaleza de los datos financieros, tipos de barras, y la importancia de la estructura de los datos en el análisis y la toma de decisiones.
+
+    \item \textbf{Capítulo 3: Barras de Desequilibrio.} Este capítulo explora la implementación de barras de desequilibrio de volumen y dólares como una alternativa a las barras de tiempo tradicionales. Se discuten sus ventajas, su construcción y su impacto en la precisión del análisis de mercado.
+
+    \item \textbf{Capítulo 4: Aprendizaje por Refuerzo.} Aquí se detalla el uso del \textit{deep reinforcement learning} para entrenar agentes de trading sobre las barras de desequilibrio y las barras de tiempo originales. Se analizan las técnicas y algoritmos utilizados, así como los resultados esperados de estos enfoques.
+
+    \item \textbf{Capítulo 5: Meta-Labeling.} En este capítulo se profundiza en la técnica de \textit{Meta-Labeling}, su implementación sobre las señales generadas por los modelos de aprendizaje por refuerzo, y cómo esta técnica puede mejorar la precisión y la gestión del riesgo en las estrategias de trading.
+
+    \item \textbf{Capítulo 6: Resultados.} Se presentan los resultados obtenidos de las implementaciones y evaluaciones realizadas en los capítulos anteriores. Se comparan las diferentes técnicas utilizadas y se discuten sus ventajas y limitaciones.
+
+    \item \textbf{Capítulo 7: Conclusiones.} En el capítulo final se resumen los hallazgos clave del trabajo, se destacan las principales contribuciones, y se proponen posibles líneas de investigación futura para continuar explorando y mejorando las estrategias de trading basadas en \textit{machine learning}.
 \end{itemize}
 
-\chapter{Estado del arte ???}
+Esta estructura proporciona una visión clara y coherente del flujo del trabajo, desde la introducción de conceptos fundamentales hasta la implementación y evaluación de técnicas avanzadas, culminando en las conclusiones sobre su efectividad y aplicabilidad.
 
-\chapter{Planteamiento del problema y formulación}
+
+\chapter{Fundamentos de los datos Financieros}
 \section{Descripción de los Datos Financieros}
 
 Aunque los datos financieros vienen en muchas formas, este trabajo se centrará en aquellos provenientes de acciones o índices 
@@ -248,11 +303,6 @@ los retornos lineales y logarítmicos.
     \item \textbf{Logarítmicos}: $r_t := \log\left(\frac{p_t}{p_{t-1}}\right) = \log(p_t) - \log(p_{t-1}) = y_t - y_{t-1}$
 \end{itemize}
 
-
-
-
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/simple_and_log_ret_relation.png}
@@ -260,22 +310,9 @@ los retornos lineales y logarítmicos.
     \label{fig:log-returns}
 \end{figure}
 
-
-% Para mostrar lo que se ha definido, se presentan en las figuras \ref{fig:log-returns} y \ref{fig:log-prices} los log-retornos y log-precios del índice S&P500 para el periodo que abarca del 01-01-2015 al 01-10-2018.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{log-returns.png}
-%     \caption{Log-Returns del S&P500}
-%     \label{fig:log-returns}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{log-prices.png}
-%     \caption{Log-Prices del S&P500}
-%     \label{fig:log-prices}
-% \end{figure}
+La figura \ref{fig:log-returns} muestra la relación existente entre los retornos logarítmicos y los retornos simples.
+Ambos serán utilizados a lo largo de este trabajo tanto para el entrenamiento del agente de aprendizaje por refuerzo en
+como para el cálculo del los rendimientos generados por las estratégias construídas.
 
 \section{Hechos Estilizados}
 
@@ -315,43 +352,6 @@ Estos hechos estilizados proporcionan una base empírica sobre la cual se pueden
 y comprensión de estos patrones ayudan a mejorar la precisión de los modelos de riesgo, a desarrollar estrategias de trading más robustas 
 y a diseñar mejores políticas de regulación financiera.
 
-
-\subsection{Propiedades Estadísticas}
-
-La autocorrelación de los log-retornos diarios se define como:
-
-\[
-\rho_k = \frac{\text{Cov}(r_t, r_{t+k})}{\sqrt{\text{Var}(r_t) \text{Var}(r_{t+k})}}
-\]
-
-donde $\text{Cov}(r_t, r_{t+k})$ es la covarianza de $r_t$ y $r_{t+k}$, y $\text{Var}(r_t)$ la varianza de $r_t$.
-
-% En la figura \ref{fig:autocorrelations} se pueden observar las autocorrelaciones de los log-retornos diarios del S&P500. Por definición, $\rho_0 = 1$. Aparte de eso, el resto de lags son insignificantes o apenas superan el umbral significativo.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{autocorrelations.png}
-%     \caption{Autocorrelaciones de los log-retornos diarios del S&P500}
-%     \label{fig:autocorrelations}
-% \end{figure}
-
-% La figura \ref{fig:pdf-log-returns} muestra el histograma de los log-retornos diarios, semanales y mensuales del S&P500. Esto ilustra los hechos estilizados 2 y 4, mostrando claramente las colas pesadas y cómo evoluciona hacia una distribución normal a medida que aumenta la escala temporal de los retornos.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{pdf-log-returns.png}
-%     \caption{Pdf ajustada a los log-retornos del S&P500}
-%     \label{fig:pdf-log-returns}
-% \end{figure}
-
-% Finalmente, la figura \ref{fig:qq-plot} ilustra, a través de gráficos QQ (Quantile-Quantile), que los log-retornos no siguen una distribución normal. La curvatura en los extremos es un claro signo de una distribución de colas pesadas.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{qq-plot.png}
-%     \caption{QQ Plots de los log-retornos del S&P500}
-%     \label{fig:qq-plot}
-% \end{figure}
 
 \subsection{Datos de Alta Frecuencia}
 
@@ -425,10 +425,10 @@ por minuto. A continuación se muestra la serie temporal de precios del SPY:
     \label{fig:spy-prices}
 \end{figure}
 
-\subsubsection{Propiedades Estadísticas de los Datos}
+% \subsubsection{Propiedades Estadísticas de los Datos}
 
-Para verificar si los datos de Bitcoin y del SPY cumplen con los hechos estilizados, analizaremos sus propiedades estadísticas. 
-A continuación se presentan los resultados del análisis:
+% Para verificar si los datos de Bitcoin y del SPY cumplen con los hechos estilizados, analizaremos sus propiedades estadísticas. 
+% A continuación se presentan los resultados del análisis:
 
 % \begin{enumerate}
 %     \item \textbf{Ausencia de Autocorrelaciones}: Calcularemos la autocorrelación de los retornos de los precios para ambas series temporales y verificaremos si son insignificantes en frecuencias diarias y superiores.
@@ -491,7 +491,133 @@ Este análisis permitirá verificar si los datos de Bitcoin y del SPY cumplen co
 descritos por Cont (2001) \cite{Cont2001}, proporcionando una base sólida para el modelado y la estrategia 
 de trading propuesta en este trabajo.
 
-\chapter{Imbalance bars}
+
+\section{Métricas Financieras}
+
+Para evaluar el rendimiento de una estrategia de trading, es crucial utilizar métricas financieras adecuadas que permitan comparar y analizar los resultados obtenidos. A continuación, se describen algunas de las métricas financieras más utilizadas junto con sus expresiones matemáticas.
+
+\subsubsection{Cumulative Returns}
+
+Los \textit{Cumulative Returns} (\textit{Retornos Acumulados}) representan el total de los retornos obtenidos por una inversión desde el inicio hasta un punto en el tiempo. Se calculan como el producto de los rendimientos individuales de cada período.
+
+\begin{equation}
+\text{Cumulative Returns} = \prod_{i=1}^{n} (1 + r_i) - 1,
+\end{equation}
+
+donde $r_i$ es el retorno en el período $i$.
+
+\subsubsection{Annualized Return}
+
+El \textit{Annualized Return} (\textit{Retorno Anualizado}) mide el rendimiento medio anual de una inversión, ajustando el rendimiento acumulado para que se exprese en una base anual.
+
+\begin{equation}
+\text{Annualized Return} = \left(1 + \text{Cumulative Returns}\right)^{\frac{1}{T}} - 1,
+\end{equation}
+
+donde $T$ es el número de años.
+
+\subsubsection{Sharpe Ratio}
+
+El \textit{Sharpe Ratio} mide el rendimiento ajustado al riesgo de una inversión, comparando el exceso de retorno de la inversión sobre la tasa libre de riesgo con la volatilidad de los retornos.
+
+\begin{equation}
+\text{Sharpe Ratio} = \frac{E[R_p - R_f]}{\sigma_p},
+\end{equation}
+
+donde $R_p$ es el retorno de la cartera, $R_f$ es la tasa libre de riesgo, y $\sigma_p$ es la desviación estándar de los retornos de la cartera.
+
+\subsubsection{Sortino Ratio}
+
+El \textit{Sortino Ratio} es una variación del Sharpe Ratio que solo considera la volatilidad de los retornos negativos (downside risk), proporcionando una medida del rendimiento ajustado al riesgo que penaliza solo los retornos por debajo de un umbral.
+
+\begin{equation}
+\text{Sortino Ratio} = \frac{E[R_p - R_f]}{\sigma_{d}},
+\end{equation}
+
+donde $\sigma_{d}$ es la desviación estándar de los retornos negativos.
+
+\subsubsection{Maximum Drawdown}
+
+El \textit{Maximum Drawdown} (\textit{Máxima Pérdida}) mide la mayor caída en el valor de una cartera desde un máximo anterior hasta un mínimo posterior, lo que indica el peor comportamiento de la estrategia en términos de pérdida de valor.
+
+\begin{equation}
+\text{Maximum Drawdown} = \min_{t \in [0,T]} \left(\frac{V_t - V_{\text{max}, t}}{V_{\text{max}, t}}\right),
+\end{equation}
+
+donde $V_t$ es el valor de la cartera en el tiempo $t$, y $V_{\text{max}, t}$ es el valor máximo de la cartera hasta el tiempo $t$.
+
+\subsubsection{Calmar Ratio}
+
+El \textit{Calmar Ratio} mide el rendimiento ajustado al riesgo de una inversión, similar al Sharpe Ratio, pero utilizando el \textit{Maximum Drawdown} como medida del riesgo.
+
+\begin{equation}
+\text{Calmar Ratio} = \frac{\text{Annualized Return}}{\text{Maximum Drawdown}}.
+\end{equation}
+
+\subsubsection{Value at Risk (VaR)}
+
+El \textit{Value at Risk} (\textit{VaR}) mide la pérdida máxima esperada de una inversión en un período determinado, con un nivel de confianza específico. Es una medida de riesgo que indica el valor en riesgo.
+
+\begin{equation}
+\text{VaR}_{\alpha} = -\text{Quantile}_\alpha (R_p),
+\end{equation}
+
+donde $\alpha$ es el nivel de confianza y $R_p$ es la distribución de retornos de la cartera.
+
+\subsubsection{Alpha}
+
+El \textit{Alpha} mide el rendimiento adicional que una inversión genera en comparación con su benchmark, ajustado por el riesgo. Es un indicador de la habilidad del gestor de la cartera para generar rendimientos superiores.
+
+\begin{equation}
+\alpha = R_p - \left(R_f + \beta (R_m - R_f)\right),
+\end{equation}
+
+donde $R_m$ es el retorno del mercado, y $\beta$ es la sensibilidad de la cartera al mercado.
+
+\subsubsection{Beta}
+
+El \textit{Beta} mide la sensibilidad de los retornos de una cartera en relación con los movimientos del mercado. Un $\beta$ mayor que 1 indica que la cartera es más volátil que el mercado.
+
+\begin{equation}
+\beta = \frac{\text{Cov}(R_p, R_m)}{\sigma^2_m},
+\end{equation}
+
+donde $\text{Cov}(R_p, R_m)$ es la covarianza entre los retornos de la cartera y los del mercado, y $\sigma^2_m$ es la varianza de los retornos del mercado.
+
+\section{Métricas de Machine Learning}
+
+Las métricas de evaluación son fundamentales para medir el rendimiento de los modelos de \textit{Machine Learning}, especialmente en el contexto de clasificación. A continuación, se describen algunas de las métricas más utilizadas en la evaluación de modelos de clasificación.
+
+\subsubsection{Precision}
+
+La \textit{Precision} (Precisión) mide la proporción de verdaderos positivos (TP) entre todas las predicciones positivas realizadas por el modelo. Es una medida de la exactitud del modelo cuando predice la clase positiva.
+
+\begin{equation}
+\text{Precision} = \frac{TP}{TP + FP},
+\end{equation}
+
+donde $TP$ son los verdaderos positivos y $FP$ son los falsos positivos.
+
+\subsubsection{Recall}
+
+El \textit{Recall} (Cobertura o Sensibilidad) mide la proporción de verdaderos positivos (TP) entre todos los ejemplos que realmente son positivos. Es una medida de la capacidad del modelo para identificar correctamente las instancias positivas.
+
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN},
+\end{equation}
+
+donde $FN$ son los falsos negativos.
+
+\subsubsection{F1-Score}
+
+El \textit{F1-Score} es la media armónica de la \textit{Precision} y el \textit{Recall}, proporcionando un balance entre ambas métricas. Es especialmente útil cuando se desea tener un equilibrio entre la precisión y la cobertura.
+
+\begin{equation}
+\text{F1-Score} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}.
+\end{equation}
+
+
+\chapter{Barras de desequilibrio}
 
 \section{Barras Basadas en Información}
 
@@ -644,7 +770,6 @@ Para implementar la metodología de barras de desequilibrio con estos datos, se 
 como proxy del precio de transacción. Este enfoque simplifica la aplicación de la metodología, permitiendo su adaptación a 
 los datos disponibles, mientras se mantiene la integridad del análisis basado en la llegada de nueva información relevante 
 al mercado.
-
 \subsubsection{Implementación}
 La implementación de las barras de desequilibrio requiere una cuidadosa consideración de los parámetros iniciales, 
 ya que estos son fundamentales para el cálculo del primer valor esperado de ticks en una barra (\(E_0[T]\)). Al inicio 
@@ -1413,7 +1538,6 @@ y los indicadores dinámicos correspondientes a los últimos 10 periodos.
 Esta configuración proporciona al agente una visión comprensiva del estado actual del mercado y 
 su propio comportamiento reciente, lo que le permite tomar decisiones más informadas.
 
-
 \subsection{Función de Recompensa}
 
 En los sistemas de aprendizaje por refuerzo, la función de recompensa es un componente fundamental 
@@ -1561,184 +1685,68 @@ combinaciones que permitan mejorar los resultados obtenidos.
 \end{uselscape}
 
 
-\section{Introducción: Meta-Labeling como Técnica Avanzada en Trading}
-
-El \textit{Meta-Labeling} es una técnica avanzada que ha demostrado ser particularmente útil en la creación de estrategias de trading robustas, especialmente en el contexto del aprendizaje automático y la gestión de riesgos. Desarrollado y popularizado por Marcos López de Prado, el Meta-Labeling se utiliza para superponer una capa adicional de análisis sobre una decisión de trading ya existente, evaluando la probabilidad de éxito de las señales generadas por un modelo base. Este enfoque permite mitigar riesgos y aumentar la robustez de las estrategias de trading, incluso cuando los modelos base son mediocres.
-
-\subsection{Concepto y Definición de Meta-Labeling}
-
-El Meta-Labeling se basa en la idea de que, en lugar de confiar únicamente en una señal binaria generada por un modelo primario (por ejemplo, decidir si comprar o no un activo), es posible construir un segundo modelo que determine si esa señal tiene una alta probabilidad de éxito. Este proceso implica etiquetar las señales de trading según su rendimiento y utilizar un meta-modelo para predecir la validez de dichas señales.
-
-Formalmente, dado un modelo primario $\mathcal{M}_1$, que genera una predicción binaria $\hat{y}_i \in \{0, 1\}$ para una observación $i$, se entrena un meta-modelo $\mathcal{M}_2$ para predecir si la señal original $\hat{y}_i = 1$ resultará en un resultado positivo real, es decir, si $y_i = 1$. El meta-label $z_i \in \{0, 1\}$ se define de la siguiente manera:
-\[
-z_i = \begin{cases} 
-1 & \text{si } \mathcal{M}_1(\mathbf{x}_i) = 1 \text{ y } y_i = 1, \\
-0 & \text{si } \mathcal{M}_1(\mathbf{x}_i) = 1 \text{ y } y_i = 0.
-\end{cases}
-\]
-Aquí, $\mathbf{x}_i$ representa las características de la observación $i$. El meta-modelo $\mathcal{M}_2$ se entrena para predecir $z_i$ usando $\mathbf{x}_i$ y potencialmente otras características adicionales.
-
-\subsection{Mejora de un Predictor Mediocre}
-
-Uno de los principales beneficios del Meta-Labeling es su capacidad para mejorar el rendimiento de un predictor que, por sí solo, puede no ser suficientemente robusto. Supongamos que $\mathcal{M}_1$ es un modelo primario con una precisión moderada y un \textit{recall} bajo, lo que significa que emite muchas señales incorrectas (falsos positivos). Al aplicar Meta-Labeling, se puede ajustar el \textit{recall} y la precisión, ya que $\mathcal{M}_2$ filtra las señales generadas por $\mathcal{M}_1$, reduciendo el número de falsos positivos.
-
-\subsubsection{Explicación Matemática}
-
-El rendimiento de un modelo de clasificación se evalúa comúnmente mediante métricas como la precisión y el \textit{recall}. Para un modelo primario $\mathcal{M}_1$, estas métricas se definen como:
-\[
-\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}},
-\]
-donde TP, FP y FN son verdaderos positivos, falsos positivos y falsos negativos, respectivamente. Si $\mathcal{M}_1$ genera muchas señales falsas (altos FP), la precisión disminuye, lo que puede llevar a decisiones de trading no óptimas.
-
-El Meta-Labeling se propone como una solución a este problema. Al entrenar $\mathcal{M}_2$ para predecir la probabilidad de éxito de las señales de $\mathcal{M}_1$, es posible aumentar la precisión del sistema general. Esto se debe a que $\mathcal{M}_2$ actúa como un filtro adicional que reduce los FP, manteniendo o incluso mejorando el \textit{recall}:
-\[
-\text{Precisión}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FP}_{\text{Meta}}}, \quad \text{Recall}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FN}_{\text{Meta}}},
-\]
-donde $\text{TP}_{\text{Meta}}$, $\text{FP}_{\text{Meta}}$, y $\text{FN}_{\text{Meta}}$ son los valores ajustados después de aplicar el Meta-Labeling.
-
-Un aspecto clave es que el Meta-Labeling permite ajustar el ratio de Sharpe de una estrategia. El ratio de Sharpe asociado a un resultado binario se puede derivar como sigue \cite{lopezdeprado_afml}:
-\[
-\theta(p, n, \pi^{-}, \pi^{+}) = \frac{\pi^{+} - \pi^{-}}{\sqrt{p \cdot (1 - p) \cdot n}}
-\]
-donde $\pi^{-}$ y $\pi^{+}$ determinan el retorno de los resultados negativos y positivos, $p$ es la probabilidad de un resultado positivo, y $n$ es el número de resultados por año.
-
-Cuando $\pi^{+} \ll -\pi^{-}$, es posible aumentar $\theta$ incrementando $p$ a costa de reducir $n$. El modelo primario determina $\pi^{-}$ y $\pi^{+}$, mientras que el modelo secundario ajusta el umbral de aceptación para regular $p$ y $n$. Esto significa que el Meta-Labeling no solo mejora las métricas de precisión y \textit{recall}, sino que también puede optimizar el ratio de Sharpe de la estrategia general, evitando las mayores pérdidas y mejorando así el rendimiento ajustado al riesgo \cite{does_meta_labeling_add}.
-
-\subsection{Beneficios del F1-Score y del Control de Tamaño de las Apuestas}
-
-El Meta-Labeling es particularmente útil para lograr mayores \textit{F1-scores}. Primero, se construye un modelo que logre un alto \textit{recall}, incluso si la precisión no es particularmente alta. Luego, se corrige la baja precisión aplicando Meta-Labeling a los positivos identificados por el modelo primario. Esto permite obtener un \textit{F1-score} más equilibrado y un modelo más robusto en la identificación de oportunidades de trading.
-
-Además, el Meta-Labeling permite desarrollar un sistema de ML que, en lugar de ser una caja negra, actúa como una caja blanca, en la que se puede entender y ajustar la lógica detrás de las decisiones tomadas. Esto es crucial para limitar los efectos del sobreajuste, ya que el ML no decide el lado de la apuesta, sino solo el tamaño de la misma. En este sentido, el Meta-Labeling permite gestionar adecuadamente el tamaño de las apuestas, evitando situaciones en las que se logre alta precisión en pequeñas apuestas, pero baja precisión en apuestas grandes, lo que podría llevar a la ruina \cite{lopezdeprado_afml}.
-
-\subsection{Etiquetado de Datos en Trading}
-
-En el Meta-Labeling, el etiquetado de datos se realiza considerando el rendimiento posterior de las operaciones. Tradicionalmente, en un entorno de trading, una operación se etiqueta como positiva ($y_i = 1$) si el precio alcanza un nivel de toma de ganancias (\textit{take profit}) antes de tocar el nivel de stop-loss. Si el precio toca el stop-loss primero, la operación se etiqueta como negativa ($y_i = 0$).
-
-Este enfoque básico, aunque intuitivo, es limitado. No captura la incertidumbre temporal ni la volatilidad intradía, lo que puede llevar a etiquetados inexactos en mercados volátiles. Aquí es donde entra en juego el \textit{Three-Barrier Method} propuesto por López de Prado.
 
 
-\subsection{Optimización del Ratio de Sharpe a través del Meta-Labeling}
-
-El ratio de Sharpe es una métrica fundamental en la evaluación de estrategias de trading, ya que mide el rendimiento ajustado al riesgo. En su forma más general, el ratio de Sharpe se define como la razón entre el exceso de retorno de una inversión sobre la tasa libre de riesgo y la desviación estándar de esos retornos. Sin embargo, en el contexto de resultados binarios, como en las estrategias de trading donde las decisiones se reducen a "ganar" o "perder", el ratio de Sharpe puede expresarse de la siguiente manera:
-
-\[
-\theta(p, n, \pi^-, \pi^+) = \frac{\pi^+ - \pi^-}{\sqrt{p \cdot (1 - p) \cdot n}}
-\]
-
-Donde:
-\begin{itemize}
-    \item $\pi^+$ representa el retorno promedio de los resultados positivos (por ejemplo, las ganancias obtenidas en operaciones exitosas).
-    \item $\pi^-$ es el retorno promedio de los resultados negativos (por ejemplo, las pérdidas incurridas en operaciones fallidas).
-    \item $p$ es la probabilidad de obtener un resultado positivo (es decir, la probabilidad de que una operación sea exitosa).
-    \item $n$ es el número de resultados o decisiones (por ejemplo, el número de operaciones realizadas en un año).
-\end{itemize}
-
-En esta fórmula, $\theta$ nos da una medida del rendimiento ajustado al riesgo de una estrategia en un contexto binario. Un valor alto de $\theta$ indica que la estrategia tiene un buen rendimiento relativo al riesgo asumido.
-
-\subsubsection{Impacto del Meta-Labeling en el Ratio de Sharpe}
-
-El Meta-Labeling puede jugar un papel crucial en la optimización de $\theta$. Cuando las ganancias ($\pi^+$) son significativamente menores que las pérdidas ($\pi^- \ll -\pi^+$), el ratio de Sharpe tiende a ser bajo, lo que refleja una estrategia riesgosa con un rendimiento ajustado al riesgo desfavorable. En este caso, una forma efectiva de mejorar $\theta$ es aumentando la probabilidad de éxito $p$, aunque a costa de reducir el número de operaciones $n$. Aquí es donde entra en juego el Meta-Labeling.
-
-\begin{itemize}
-    \item **Modelo Primario**: El modelo primario es responsable de identificar las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en consecuencia, el ratio de Sharpe.
-    
-    \item **Modelo Secundario (Meta-Labeling)**: El modelo secundario se encarga de ajustar el umbral de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
-\end{itemize}
-
-Por ejemplo, si el modelo primario genera muchas señales, pero con un alto riesgo de pérdidas (\(\pi^-\) elevado), el Meta-Labeling puede ser utilizado para seleccionar solo aquellas señales con una alta probabilidad de éxito (\(p\) elevado), ignorando las señales más débiles. Esto no solo mejora la precisión de la estrategia (reduciendo los falsos positivos), sino que también optimiza el ratio de Sharpe al evitar grandes pérdidas.
-
-Además, el Meta-Labeling ayuda a evitar las mayores pérdidas al ajustar de manera dinámica el umbral de aceptación de señales, permitiendo que la estrategia sea más selectiva y que realice menos operaciones, pero con un mayor rendimiento ajustado al riesgo. Este enfoque no solo mejora las métricas de precisión y \textit{recall}, sino que también aumenta el ratio de Sharpe de la estrategia general, haciendo que la estrategia sea más robusta y menos propensa a sufrir grandes pérdidas.
-
-\begin{quote}
-\textit{“Cuando las ganancias esperadas (\(\pi^+\)) son significativamente menores que las pérdidas (\(\pi^-\)), el Meta-Labeling permite aumentar el ratio de Sharpe (\(\theta\)) incrementando la probabilidad de éxito (\(p\)), aunque a costa de reducir el número de operaciones (\(n\)). Esto resulta en una estrategia de trading más eficiente y con un mejor rendimiento ajustado al riesgo.”} \cite{lopezdeprado_afml}.
-\end{quote}
 
 
-\subsection{Optimización del Ratio de Sharpe mediante Meta-Labeling}
 
-Uno de los aspectos más destacados del Meta-Labeling es su capacidad para optimizar el ratio de Sharpe de una estrategia de trading, mejorando el rendimiento ajustado al riesgo. El ratio de Sharpe mide la eficiencia de una estrategia de inversión al comparar su rendimiento con la volatilidad (o riesgo) que conlleva, y se calcula comúnmente como la diferencia entre el retorno de la estrategia y la tasa libre de riesgo, dividido por la desviación estándar de los retornos. En el caso de estrategias binarias (como las estrategias de trading que generan ganancias o pérdidas), el ratio de Sharpe puede calcularse utilizando la siguiente fórmula:
-
-\[
-\theta(p, n, \pi^-, \pi^+) = \frac{\pi^+ - \pi^-}{\sqrt{p \cdot (1 - p) \cdot n}},
-\]
-donde:
-\begin{itemize}
-    \item $\pi^+$ es el retorno esperado en caso de un resultado positivo (ganancia),
-    \item $\pi^-$ es el retorno esperado en caso de un resultado negativo (pérdida),
-    \item $p$ es la probabilidad de un resultado positivo, y
-    \item $n$ es el número de operaciones (o resultados) por año.
-\end{itemize}
-
-Esta fórmula captura el rendimiento ajustado al riesgo en situaciones donde las decisiones de trading producen resultados binarios (ganancia/pérdida). La diferencia $\pi^+ - \pi^-$ representa el diferencial entre el retorno positivo y el negativo, que se ajusta por la volatilidad de los resultados, medida como $\sqrt{p \cdot (1 - p) \cdot n}$. Esto refleja la incertidumbre inherente al sistema, basada en la probabilidad de un resultado positivo y la frecuencia de las operaciones.
-
-\subsubsection{Interpretación del Ratio de Sharpe Binario}
-
-La fórmula del ratio de Sharpe revela varias propiedades importantes en el contexto de trading. Cuando $\pi^+$ es significativamente menor que $-\pi^-$ (es decir, cuando las pérdidas son mucho mayores que las ganancias), el ratio de Sharpe se puede mejorar incrementando la probabilidad de éxito $p$, aunque a costa de reducir el número de operaciones $n$. Esta observación es crucial en situaciones donde las operaciones tienen grandes fluctuaciones de retorno. En lugar de ejecutar muchas operaciones con un bajo porcentaje de éxito, es preferible seleccionar aquellas con mayor probabilidad de éxito, incluso si esto implica realizar menos operaciones al año.
-
-\subsubsection{Papel del Meta-Labeling en la Mejora del Ratio de Sharpe}
-
-Aquí es donde el Meta-Labeling se vuelve especialmente útil. El **modelo primario** en una estrategia de trading determina los valores de $\pi^-$ y $\pi^+$, es decir, las pérdidas y ganancias esperadas de las operaciones. Sin embargo, el **modelo secundario** (el meta-modelo) ajusta el umbral de aceptación de las señales para regular $p$ y $n$. Es decir, el meta-modelo filtra las señales emitidas por el modelo primario, seleccionando solo aquellas que tienen una alta probabilidad de éxito (\(p\)), lo que permite reducir el número de operaciones (\(n\)) sin comprometer la calidad de las mismas.
-
-Por ejemplo, si el modelo primario genera muchas señales, algunas de las cuales son erróneas, el Meta-Labeling puede seleccionar solo las señales más prometedoras, evitando las operaciones con baja probabilidad de éxito. Esto tiene dos efectos positivos:
-\begin{itemize}
-    \item **Aumento del ratio de Sharpe**: Al reducir las pérdidas evitadas y aumentar la precisión de las operaciones seleccionadas, el Meta-Labeling mejora el ratio de Sharpe de la estrategia.
-    \item **Reducción de la exposición a pérdidas significativas**: Al seleccionar solo operaciones de alta probabilidad, el Meta-Labeling también ayuda a evitar las pérdidas más grandes, lo que disminuye la volatilidad de los retornos y, en consecuencia, mejora el rendimiento ajustado al riesgo.
-\end{itemize}
-
-De este modo, el Meta-Labeling no solo contribuye a mejorar las métricas de precisión y \textit{recall} de las estrategias de trading, sino que también tiene un impacto directo en la optimización del ratio de Sharpe, lo que convierte a esta técnica en una herramienta poderosa para gestionar el riesgo en portafolios y estrategias de trading \cite{does_meta_labeling_add}. En resumen, al permitir que el modelo secundario filtre las señales y ajuste los umbrales de aceptación, se pueden evitar las mayores pérdidas, mejorando así el rendimiento ajustado al riesgo.
 
 
 \chapter{Meta-labeling}
 
-El \textit{Meta-Labeling} es una técnica avanzada en la creación de estrategias de trading 
-que ha ganado relevancia en los últimos años, especialmente en el contexto del aprendizaje 
-automático y la gestión de riesgos. Introducido y desarrollado en gran medida por Marcos 
-López de Prado, el Meta-Labeling se destaca por su capacidad de mejorar las predicciones 
-generadas por modelos de clasificación tradicionales, centrándose no solo en la identificación 
-de señales de trading, sino también en la evaluación de la calidad de dichas señales.
-
 \section{Concepto y Definición de Meta-Labeling}
 
-El Meta-Labeling se basa en la idea de que, en lugar de confiar únicamente en una señal binaria generada por un modelo primario (por ejemplo, decidir si comprar o no un activo), es posible construir un segundo modelo que determine si esa señal tiene una alta probabilidad de éxito. Este proceso implica etiquetar las señales de trading según su rendimiento y utilizar un meta-modelo para predecir la validez de dichas señales.
 
-Formalmente, dado un modelo primario $\mathcal{M}_1$, que genera una predicción binaria $\hat{y}_i \in \{0, 1\}$ para una observación $i$, se entrena un meta-modelo $\mathcal{M}_2$ para predecir si la señal original $\hat{y}_i = 1$ resultará en un resultado positivo real, es decir, si $y_i = 1$. El meta-label $z_i \in \{0, 1\}$ se define de la siguiente manera:
-\[
-z_i = \begin{cases} 
-1 & \text{si } \mathcal{M}_1(\mathbf{x}_i) = 1 \text{ y } y_i = 1, \\
-0 & \text{si } \mathcal{M}_1(\mathbf{x}_i) = 1 \text{ y } y_i = 0.
-\end{cases}
-\]
-Aquí, $\mathbf{x}_i$ representa las características de la observación $i$. El meta-modelo $\mathcal{M}_2$ se entrena para predecir $z_i$ usando $\mathbf{x}_i$ y potencialmente otras características adicionales.
+El \textit{Meta-Labeling} es una técnica avanzada que ha demostrado ser particularmente útil
+en la creación de estrategias de trading robustas, especialmente en el contexto del aprendizaje
+automático y la gestión de riesgos. 
 
-\subsection{Mejora de un Predictor Mediocre}
-
-Uno de los principales beneficios del Meta-Labeling es su capacidad para mejorar el rendimiento de un predictor que, por sí solo, puede no ser suficientemente robusto \cite{does_meta_labeling_add}. Supongamos que $\mathcal{M}_1$ es un modelo primario con una precisión moderada y un \textit{recall} bajo, lo que significa que emite muchas señales incorrectas (falsos positivos). Al aplicar Meta-Labeling, se puede ajustar el \textit{recall} y la precisión, ya que $\mathcal{M}_2$ filtra las señales generadas por $\mathcal{M}_1$, reduciendo el número de falsos positivos.
-
-\subsubsection{Explicación Matemática}
-
-El rendimiento de un modelo de clasificación se evalúa comúnmente mediante métricas como la precisión y el \textit{recall}. Para un modelo primario $\mathcal{M}_1$, estas métricas se definen como:
-\[
-\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}},
-\]
-donde TP, FP y FN son verdaderos positivos, falsos positivos y falsos negativos, respectivamente. Si $\mathcal{M}_1$ genera muchas señales falsas (altos FP), la precisión disminuye, lo que puede llevar a decisiones de trading no óptimas.
-
-El Meta-Labeling se propone como una solución a este problema. Al entrenar $\mathcal{M}_2$ para predecir la probabilidad de éxito de las señales de $\mathcal{M}_1$, es posible aumentar la precisión del sistema general. Esto se debe a que $\mathcal{M}_2$ actúa como un filtro adicional que reduce los FP, manteniendo o incluso mejorando el \textit{recall}:
-\[
-\text{Precisión}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FP}_{\text{Meta}}}, \quad \text{Recall}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FN}_{\text{Meta}}},
-\]
-donde $\text{TP}_{\text{Meta}}$, $\text{FP}_{\text{Meta}}$, y $\text{FN}_{\text{Meta}}$ son los valores ajustados después de aplicar el Meta-Labeling.
-
-El Meta-Labeling ajusta estas métricas al identificar y filtrar las señales del modelo base que son más propensas a fallar. En consecuencia, se mejora la robustez y la fiabilidad de las señales de trading, lo que permite que un predictor mediocre se convierta en un componente útil dentro de una estrategia de trading más compleja.
-
-\section{Concepto y Definición de Meta-Labeling}
-
-El Meta-Labeling se puede entender como un método que superpone una capa adicional de análisis sobre una decisión de trading ya existente. En lugar de limitarse a una sola predicción binaria (por ejemplo, comprar o no comprar un activo), el Meta-Labeling aplica una segunda etapa de modelado para determinar si la señal inicial tiene una alta probabilidad de ser correcta. Este enfoque permite refinar la decisión final, mitigando riesgos y mejorando el rendimiento general del modelo de trading.
+Este método consiste en la superposición de una capa
+adicional de análisis sobre una decisión de trading ya existente, evaluando la probabilidad 
+de éxito de las señales generadas por un modelo base. En lugar de limitarse
+a una sola predicción binaria (por ejemplo, comprar o no comprar un activo), el Meta-
+Labeling aplica una segunda etapa de modelado para determinar si la señal inicial tiene
+una alta probabilidad de ser correcta. Este enfoque permite refinar la decisión final,
+mitigando riesgos y mejorando el rendimiento general del modelo de trading.
 
 El proceso típico de Meta-Labeling involucra dos modelos:
 \begin{enumerate}
-    \item \textbf{Modelo Primario}: Este modelo genera la señal de trading básica, indicando si se debe tomar una posición larga o corta en un activo.
-    \item \textbf{Meta-Modelo}: Este modelo se entrena para predecir si la señal del modelo primario resultará en una operación exitosa. Aquí, el objetivo es etiquetar cada señal primaria con un meta-label que indica la probabilidad de éxito.
+    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: Este modelo genera la señal de 
+    trading.
+    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El meta-modelo se entrena para 
+    predecir la fiabilidad de las señales generadas por el modelo primario. A cada 
+    señal generada por $\mathcal{M}_1$ se le asigna un \textit{meta-label}, que 
+    indica si dicha señal resultó en una operación exitosa o fallida.
 \end{enumerate}
+
+Formalmente, para una observación $i$, el modelo primario $\mathcal{M}_1$ genera 
+una predicción $\hat{y}_i \in \{-1, 0, 1\}$. El meta-label $z_i \in \{0, 1\}$ se 
+define de la siguiente manera:
+
+\[
+z_i = \begin{cases} 
+1 & \text{si la operación resultante de la señal } \hat{y}_i \text{ fue exitosa}, \\
+0 & \text{si la operación resultante de la señal } \hat{y}_i \text{ falló}.
+\end{cases}
+\]
+
+Aquí, $z_i = 1$ indica que la señal emitida por $\mathcal{M}_1$ fue confiable y 
+resultó en una operación exitosa (por ejemplo, una ganancia), mientras que $z_i = 0$ 
+indica que la señal no fue confiable y resultó en una operación fallida (por ejemplo, 
+una pérdida).
+
+El meta-modelo $\mathcal{M}_2$ se entrena utilizando las mismas características 
+$\mathbf{x}_i$ que alimentan al modelo primario, así como la señal generada por 
+$\mathcal{M}_1$, y otros indicadores adicionales que no fueron utilizados en el
+modelo primario. Estos indicadores adicionales pueden incluir variables exógenas 
+o nuevas características que ayuden a mejorar la capacidad del meta-modelo para 
+evaluar la fiabilidad de las señales originales.
+
+Esta estructura de dos niveles ofrece una ventaja significativa, ya que permite 
+refinar las decisiones de trading al evaluar de manera más precisa la 
+probabilidad de éxito de las señales iniciales. El Meta-Labeling, por tanto, 
+no solo añade una capa de seguridad al proceso de toma de decisiones, sino 
+que también mejora la precisión y el rendimiento general de la estrategia de trading.
 
 \begin{figure}[H]
     \centering
@@ -1747,78 +1755,276 @@ El proceso típico de Meta-Labeling involucra dos modelos:
     \label{fig:meta_labeling_diagram}
 \end{figure}
 
+Uno de los principales beneficios del Meta-Labeling es su capacidad para mejorar 
+el rendimiento de un predictor que, por sí solo, puede no ser suficientemente 
+robusto \cite{does_meta_labeling_add}. Supongamos que $\mathcal{M}_1$ es un modelo 
+primario con una precisión moderada y un \textit{recall} bajo, lo que significa que 
+emite muchas señales incorrectas (falsos positivos). Al aplicar Meta-Labeling, se 
+puede ajustar el \textit{recall} y la precisión, ya que $\mathcal{M}_2$ filtra las 
+señales generadas por $\mathcal{M}_1$, reduciendo el número de falsos positivos.
+
+El rendimiento de un modelo de clasificación se evalúa comúnmente mediante métricas 
+como la precisión y el \textit{recall}. Para un modelo primario $\mathcal{M}_1$, 
+estas métricas se definen como:
+\[
+\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}},
+\]
+donde TP, FP y FN son verdaderos positivos, falsos positivos y falsos negativos, 
+respectivamente. Si $\mathcal{M}_1$ genera muchas señales falsas (altos FP), 
+la precisión disminuye, lo que puede llevar a decisiones de trading no óptimas.
+
+El Meta-Labeling se propone como una solución a este problema. Al entrenar 
+$\mathcal{M}_2$ para predecir la probabilidad de éxito de las señales de 
+$\mathcal{M}_1$, es posible aumentar la precisión del sistema general. Esto 
+se debe a que $\mathcal{M}_2$ actúa como un filtro adicional que reduce los 
+FP, manteniendo o incluso mejorando el \textit{recall}:
+\[
+\text{Precisión}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FP}_{\text{Meta}}}, \quad \text{Recall}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FN}_{\text{Meta}}},
+\]
+donde $\text{TP}_{\text{Meta}}$, $\text{FP}_{\text{Meta}}$, y $\text{FN}_{\text{Meta}}$ 
+son los valores ajustados después de aplicar el Meta-Labeling.
 
 
-\subsection{Etiquetado de Datos en Trading}
+\subsection{Optimización del Ratio de Sharpe mediante Meta-Labeling}
 
-En el contexto del Meta-Labeling, el etiquetado de datos es crucial para determinar la precisión del modelo. Tradicionalmente, el etiquetado en trading se realiza en función de los movimientos de precios después de que se emite una señal. Si el precio alcanza un objetivo de ganancias antes de tocar un nivel de stop-loss, la operación se considera exitosa y se etiqueta como positiva (1); de lo contrario, se etiqueta como negativa (0). Este enfoque básico, sin embargo, puede ser limitado en mercados volátiles, donde las señales a menudo resultan en falsos positivos.
+Uno de los aspectos más destacados del Meta-Labeling es su capacidad para optimizar el 
+ratio de Sharpe de una estrategia de trading, mejorando el rendimiento ajustado al riesgo. 
 
-\subsection{Limitaciones del Etiquetado Tradicional}
 
-El etiquetado tradicional en trading presenta varias limitaciones. Una de las principales es que no captura la complejidad inherente de los mercados financieros, donde los movimientos de precios no siempre siguen patrones predecibles. Además, el simple etiquetado binario no tiene en cuenta la magnitud del movimiento del precio ni la incertidumbre asociada a la señal inicial. Esto puede llevar a sobreoptimización, donde un modelo funciona bien en datos históricos pero falla en situaciones de mercado reales.
+En su forma más general, el ratio de Sharpe se define como la razón entre el exceso 
+de retorno de una inversión sobre la tasa libre de riesgo y la desviación estándar 
+de esos retornos. Sin embargo, en el contexto de resultados binarios, como en las 
+estrategias de trading donde las decisiones se reducen a "ganar" o "perder", el ratio 
+de Sharpe puede adaptarse utilizando la siguiente fórmula, tal como se describe en 
+\textit{Advances in Financial Machine Learning} 
+de Marcos López de Prado:
 
-\subsection{Beneficios del Three-Barrier Method}
+\[
+\theta(p, n, \pi^-, \pi^+) = \frac{(\pi^+ - \pi^-) p + \pi^-}{(\pi^+ - \pi^-) \sqrt{p \cdot (1 - p)}} \cdot \sqrt{n}
+\]
 
-Para abordar estas limitaciones, López de Prado propone el uso del \textit{Three-Barrier Method}. Este método introduce una tercera barrera, además de las tradicionales de toma de ganancias y stop-loss, que ayuda a medir la calidad de las señales con mayor precisión. Las tres barreras son:
-\begin{enumerate}
-    \item \textbf{Barrera Superior (Take Profit)}: Nivel de precio que, si es alcanzado, indica que la operación fue exitosa.
-    \item \textbf{Barrera Inferior (Stop-Loss)}: Nivel de precio que, si es alcanzado, indica que la operación fracasó.
-    \item \textbf{Barrera Temporal}: Limita la duración de la operación, forzando un cierre si el precio no ha alcanzado ni la barrera superior ni la inferior en un tiempo predefinido.
-\end{enumerate}
+Donde:
+\begin{itemize}
+    \item $\pi^+$ es el retorno asociado a un resultado positivo.
+    \item $\pi^-$ es el retorno asociado a un resultado negativo.
+    \item $p$ es la probabilidad de obtener un resultado positivo, es decir, la 
+    probabilidad de que una operación sea exitosa.
+    \item $n$ es el número de resultados o decisiones (como el número de 
+    operaciones realizadas en un año).
+\end{itemize}
 
-Este método no solo permite etiquetar las operaciones con mayor precisión, sino que también ayuda a identificar aquellas señales que tienen una alta probabilidad de ser rentables dentro de un marco temporal específico. El uso de esta tercera barrera temporal es especialmente beneficioso en mercados volátiles, donde los precios pueden fluctuar significativamente en cortos períodos de tiempo, afectando la viabilidad de las señales de trading.
+Esta fórmula captura el rendimiento ajustado al riesgo en situaciones donde las 
+decisiones de trading producen resultados binarios. La diferencia $\pi^+ - \pi^-$ 
+representa el diferencial entre el retorno positivo y el negativo, que se ajusta 
+por la volatilidad de los resultados, medida como $\sqrt{p \cdot (1 - p)}$. Esto 
+refleja la incertidumbre inherente al sistema, basada en la probabilidad de un 
+resultado positivo y la frecuencia de las operaciones.
+Un valor alto de $\theta$ indica que la estrategia tiene un buen rendimiento 
+relativo al riesgo asumido.
 
-En resumen, el Meta-Labeling, combinado con el Three-Barrier Method, ofrece un enfoque robusto para mejorar la toma de decisiones en trading, reduciendo el riesgo de falsas señales y optimizando las oportunidades de rentabilidad.
+
+
+\subsection{Impacto del Meta-Labeling en el Ratio de Sharpe}
+
+El Meta-Labeling puede jugar un papel crucial en la optimización de $\theta$. Cuando 
+las ganancias ($\pi^+$) son significativamente menores que las pérdidas ($\pi^- \ll -\pi^+$), 
+el ratio de Sharpe tiende a ser bajo, lo que refleja una estrategia con un rendimiento 
+ajustado al riesgo desfavorable. En este caso, una forma efectiva de 
+mejorar $\theta$ es aumentando la probabilidad de éxito $p$, aunque a costa de 
+reducir el número de operaciones $n$. Aquí es donde entra en juego el Meta-Labeling.
+
+\begin{itemize}
+    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: El modelo primario es responsable de identificar las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en consecuencia, el ratio de Sharpe.
+    
+    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El modelo secundario se encarga de ajustar el umbral de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
+\end{itemize}
+
+Por lo tanto, el Meta-Labeling puede mejorar \(\theta\) de las siguientes maneras:
+
+\begin{itemize}
+    \item \textbf{Mejora de la Probabilidad de Éxito ($p$)}: Al aplicar Meta-Labeling, 
+    se ajusta el umbral de aceptación de las señales generadas por el modelo primario. 
+    Al filtrar las señales para seleccionar solo aquellas con una mayor probabilidad 
+    de éxito, el Meta-Labeling aumenta $p$, mejorando así el retorno ponderado promedio en el numerador de la fórmula.
+    
+    \item \textbf{Reducción del Riesgo (\(\sqrt{p \cdot (1 - p)}\))}: Al incrementar \(p\), se reduce la variabilidad de los resultados, lo que disminuye el riesgo relativo (representado por el denominador de la fórmula). Esto significa que las operaciones seleccionadas son menos propensas a ser erráticas, lo que estabiliza el rendimiento de la estrategia.
+    
+    \item \textbf{Ajuste del Número de Operaciones ($n$)}: Aunque el número de operaciones puede disminuir (menor $n$), las que se realizan tienen una mayor calidad y probabilidad de éxito. Como \(n\) aparece fuera de la raíz cuadrada en la fórmula, un menor número de operaciones de alta calidad puede tener un impacto significativo en la mejora del ratio de Sharpe.
+\end{itemize}
+
+
+Por ejemplo, si una estrategia inicialmente genera muchas señales de trading, 
+pero con un alto riesgo de pérdidas, el Meta-Labeling puede reducir estas señales 
+seleccionando solo aquellas con alta probabilidad de éxito, lo que resulta en menos 
+operaciones, pero más seguras. Esto no solo mejora la precisión y el \textit{recall} 
+de la estrategia, sino que también optimiza el ratio de Sharpe al evitar grandes 
+pérdidas y mejorar el rendimiento ajustado al riesgo.
+
+En resumen, el Meta-Labeling permite que una estrategia de trading mejore tanto en 
+términos de rendimiento como de estabilidad, maximizando las ganancias relativas al 
+riesgo asumido. Esta técnica es especialmente valiosa en contextos donde es crucial 
+evitar grandes pérdidas y maximizar la probabilidad de éxito de las 
+operaciones \cite{lopezdeprado2018afml}.
+
+
+\subsubsection{Beneficios del F1-Score y del Control de Tamaño de las Apuestas}
+
+El Meta-Labeling es particularmente útil para lograr mayores \textit{F1-scores}. 
+Primero, se construye un modelo que logre un alto \textit{recall}, incluso si la 
+precisión no es particularmente alta. Luego, se corrige la baja precisión aplicando 
+Meta-Labeling a los positivos identificados por el modelo primario. Esto permite 
+obtener un \textit{F1-score} más equilibrado y un modelo más robusto en la 
+identificación de oportunidades de trading.
+
+Además, el Meta-Labeling permite desarrollar un sistema de ML que, en lugar de 
+ser una caja negra, actúa como una caja blanca, en la que se puede entender y 
+ajustar la lógica detrás de las decisiones tomadas. Esto es crucial para limitar 
+los efectos del sobreajuste, ya que el ML no decide el lado de la apuesta, sino 
+solo el tamaño de la misma. En este sentido, el Meta-Labeling permite gestionar 
+adecuadamente el tamaño de las apuestas, evitando situaciones en las que se 
+logre alta precisión en pequeñas apuestas, pero baja precisión en apuestas 
+grandes, lo que podría llevar a la ruina \cite{lopezdeprado2018afml}.
 
 
 \section{Etiquetado de Datos Financieros}
 
-El método del horizonte de tiempo fijo es una técnica común en el análisis financiero para etiquetar datos en modelos de aprendizaje automático supervisado. En este método, cada observación en la matriz de características \(X\) se etiqueta en función del cambio en el precio del activo durante un período futuro específico, conocido como el horizonte de tiempo \(h\).
+Para aplicar Meta-Labeling de manera efectiva, es imprescindible etiquetar correctamente 
+los datos financieros. El etiquetado de datos consiste en asignar una etiqueta a cada 
+señal de trading que indique si la operación resultante fue exitosa o fallida. 
 
-Para etiquetar una observación \(X_i\) correspondiente al momento \(t_{i,0}\), se calcula el retorno del precio desde \(t_{i,0}\) hasta \(t_{i,0 + h}\). El retorno se define como:
+Este proceso es crucial, ya que el etiquetado correcto de las señales es lo que 
+permitirá al meta-modelo aprender y predecir la fiabilidad de futuras señales 
+emitidas por el modelo primario.
 
-\[
-r_{t_{i,0}, t_{i,0 + h}} = \frac{p_{t_{i,0 + h}}}{p_{t_{i,0}}} - 1
-\]
+\subsection{Método del Horizonte Temporal Fijo}
 
-donde \(p_{t_{i,0}}\) es el precio en \(t_{i,0}\) y \(p_{t_{i,0 + h}}\) es el precio en \(t_{i,0 + h}\). Con este retorno calculado, se asigna una etiqueta a la observación \(X_i\) en función de un umbral \(\tau\):
+El \textit{método del horizonte temporal fijo} es una técnica ampliamente utilizada en la literatura financiera para etiquetar datos. Este método asigna etiquetas a las observaciones basándose en el retorno del activo durante un período de tiempo predefinido después de que se genera una señal de trading.
 
-\begin{itemize}
-    \item Si el retorno \(r\) es mayor que el umbral \(\tau\), la etiqueta es 1.
-    \item Si el retorno \(r\) es menor que \(-\tau\), la etiqueta es -1.
-    \item Si el retorno \(r\) está dentro del intervalo \([- \tau, \tau]\), la etiqueta es 0.
-\end{itemize}
+\subsubsection{Descripción del Método}
 
-La elección del horizonte de tiempo \(h\) y del umbral \(\tau\) depende de los objetivos del análisis y de la naturaleza de los datos. Por ejemplo, un horizonte de tiempo corto puede ser adecuado para análisis a corto plazo, mientras que un horizonte largo puede ser más útil para tendencias a largo plazo. El umbral \(\tau\) se selecciona para definir el nivel de cambio en el precio que se considera significativo para la clasificación de las observaciones.
-
-\section{Limitaciones del Método del Horizonte de Tiempo Fijo}
-
-El método del horizonte de tiempo fijo es ampliamente utilizado en el análisis financiero y en la implementación de modelos de aprendizaje automático. Sin embargo, presenta varias limitaciones importantes que deben ser consideradas.
-
-\subsection{Problemas del Umbral Fijo}
-
-Uno de los principales problemas del método del horizonte de tiempo fijo es la aplicación uniforme del umbral \(\tau\) para etiquetar las observaciones. Este umbral se aplica sin ajustar por la volatilidad variable de los datos. Por ejemplo, si el umbral es \(\tau = 0.01\) (1\%), y la volatilidad del mercado varía, el mismo umbral se utiliza independientemente de la volatilidad actual. Esto puede llevar a problemas significativos:
+Consideremos:
 
 \begin{itemize}
-    \item Durante períodos de baja volatilidad (\(\sigma = 0.0001\)), el umbral puede ser relativamente alto en comparación con el retorno observado. Esto puede resultar en una clasificación incorrecta de observaciones que podrían ser estadísticamente significativas.
-    \item En períodos de alta volatilidad (\(\sigma = 0.01\)), el umbral puede parecer bajo en comparación con el rango de retornos observados, dificultando la clasificación de observaciones como significativas.
+    \item Una matriz de características $\mathbf{X}$ con $I$ filas, donde cada fila representa una observación $\mathbf{X}_i$ correspondiente a un instante temporal $t$.
+    \item Un umbral fijo $\tau$ que define la magnitud mínima del retorno necesaria para considerar una operación como exitosa o fallida.
+    \item Un horizonte temporal fijo $h$, que representa el número de barras de tiempo que se observan después de la generación de la señal.
 \end{itemize}
 
-Como resultado, la mayoría de las etiquetas pueden ser clasificadas como neutras (etiqueta 0), incluso si el retorno es predecible y estadísticamente relevante.
+El procedimiento de etiquetado se define de la siguiente manera:
 
-\subsection{Alternativas Mejoradas}
+\begin{enumerate}
+    \item \textbf{Generación de la Señal}: En el tiempo $t_{i,0}$, inmediatamente después de observar $\mathbf{X}_i$, se genera una señal de trading.
+    \item \textbf{Cálculo del Retorno}: Se calcula el retorno del precio del activo desde $t_{i,0}$ hasta $t_{i,0} + h$ mediante la siguiente expresión:
+    \begin{equation}
+        r_{t_{i,0}, t_{i,0}+h} = \frac{P_{t_{i,0}+h}}{P_{t_{i,0}}} - 1,
+    \end{equation}
+    donde $P_t$ representa el precio del activo en el tiempo $t$.
+    \item \textbf{Asignación de Etiquetas}: La etiqueta $y_i$ se asigna según el valor de $r_{t_{i,0}, t_{i,0}+h}$ comparado con el umbral $\tau$:
+    \begin{equation}
+        y_i = 
+        \begin{cases} 
+            1 & \text{si } r_{t_{i,0}, t_{i,0}+h} > \tau, \\
+            -1 & \text{si } r_{t_{i,0}, t_{i,0}+h} < -\tau, \\
+            0 & \text{si } |r_{t_{i,0}, t_{i,0}+h}| \leq \tau.
+        \end{cases}
+    \end{equation}
+\end{enumerate}
 
-Para abordar estas limitaciones, se pueden considerar las siguientes alternativas:
+
+A pesar de su simplicidad y amplia adopción, este método presenta varias limitaciones importantes:
+
+\begin{enumerate}
+    \item \textbf{Ignorancia de la Volatilidad Variable}: El uso de un umbral fijo $\tau$ 
+    no considera que la volatilidad del mercado puede variar significativamente en diferentes 
+    momentos. Por ejemplo, durante períodos de alta volatilidad, un umbral $\tau$ puede 
+    ser demasiado bajo, etiquetando muchas observaciones como positivas o negativas de 
+    manera inapropiada. Contrariamente, durante períodos de baja volatilidad, el mismo 
+    umbral puede ser demasiado alto, resultando en la mayoría de las observaciones 
+    etiquetadas como neutrales.
+    
+    \item \textbf{Desconsideración de la Ruta de Precios}: El método solo considera el 
+    precio inicial y final dentro del horizonte temporal, ignorando el camino seguido 
+    por el precio entre estos puntos.Esto es problemático porque en la práctica, las 
+    estrategias de trading están sujetas a niveles de \textit{stop-loss} y 
+    \textit{take-profit} que pueden activarse antes de que finalice el horizonte temporal.
+    Ignorar estos eventos intermedios puede llevar a etiquetados engañosos que no reflejan 
+    las condiciones reales de mercado y gestión de riesgo.
+
+    \item \textbf{Dependencia de Barras de Tiempo}: El método se basa en barras de tiempo 
+    fijas, que pueden no capturar adecuadamente la actividad del mercado, especialmente 
+    en activos con volúmenes de negociación variables. Esto puede resultar en una 
+    representación inconsistente de la información del mercado y afectar negativamente 
+    la calidad del etiquetado.
+
+\end{enumerate}
+
+Estas limitaciones pueden conducir a un etiquetado inexacto y, por lo tanto, afectar 
+la capacidad del modelo para aprender y predecir efectivamente.
+
+\subsection{Método de las Tres Barreras}
+
+El \textit{Método de las Tres Barreras} (\textit{Three-Barrier Method}) es una 
+técnica alternativa de etiquetado que proporciona una mayor precisión que el 
+método del horizonte temporal fijo, especialmente en entornos de trading donde 
+la ruta seguida por el precio, así como los niveles de \textit{stop-loss} y 
+\textit{take-profit}, son fundamentales.
+
+Este método consiste en definir tres barreras que determinan cómo se etiqueta 
+una observación en función de cuál de ellas es alcanzada primero. Las barreras 
+son las siguientes:
 
 \begin{itemize}
-    \item \textbf{Umbral Variable}: En lugar de usar un umbral fijo, se puede ajustar el umbral de etiquetado en función de la volatilidad observada. Esto se puede hacer estimando una desviación estándar exponencialmente ponderada de los retornos, adaptando el umbral a las condiciones del mercado en tiempo real.
-    \item \textbf{Barras de Volumen o en Dólares}: Utilizar barras de volumen o en dólares en lugar de barras de tiempo. Estas barras tienden a tener una volatilidad más constante (homoscedasticidad), lo que puede hacer que el umbral sea más relevante y preciso para el etiquetado.
+    \item \textbf{Barrera Superior (\textit{Take Profit})}: Representa un nivel 
+    de precio predefinido que, si se alcanza, indica que la operación ha sido 
+    exitosa. En este caso, se asigna una etiqueta de $y_i = 1$.
+    \item \textbf{Barrera Inferior (\textit{Stop-Loss})}: Es un nivel de 
+    precio que, si se toca primero, indica que la operación ha fallado, por lo 
+    que se asigna una etiqueta de $y_i = -1$.
+    \item \textbf{Barrera Temporal (\textit{Expiration Limit})}: Define el número 
+    máximo de barras de tiempo después de las cuales se fuerza el cierre de la
+    operación, independientemente de si se ha alcanzado alguna de las otras dos 
+    barreras. Si se toca esta barrera antes que las otras, se puede asignar 
+    una etiqueta de $y_i = 0$, o bien, según la preferencia, se puede etiquetar 
+    en función del signo del retorno acumulado hasta ese momento.
 \end{itemize}
 
+\textbf{Figura~\ref{fig:three_barrier_method}} ilustra cómo funcionan estas tres 
+barreras. En la imagen, se observa un ejemplo de trayectoria del precio donde las 
+barreras determinan el etiquetado de la señal:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{./figures/three_barried_method.png}
+    \caption{Ilustración del método de las trés barreras}
+    \label{fig:three_barrier_method}
+\end{figure}
 
 
+A diferencia del método del horizonte temporal fijo, el \textit{Three-Barrier Method} 
+es dependiente de la ruta (\textit{path-dependent}), lo que significa que toma en cuenta 
+toda la trayectoria del precio desde el momento en que se genera la señal ($t_{i,0}$) 
+hasta que se toca una de las barreras. 
 
+Este método permite etiquetar de manera más realista las operaciones, ya que considera 
+tanto los límites de toma de ganancias y pérdidas como un límite temporal, proporcionando 
+una visión más completa del comportamiento del precio.
 
+Este enfoque también ofrece varias ventajas clave. En primer lugar, al considerar 
+dinámicamente los niveles de toma de ganancias y stop-loss, que pueden ajustarse en 
+función de la volatilidad, el método reduce la probabilidad de etiquetar incorrectamente 
+las observaciones. Esto es especialmente importante en mercados volátiles, donde los 
+precios pueden fluctuar considerablemente en cortos períodos de tiempo. Además, 
+la inclusión de una barrera temporal introduce una capa adicional de control, 
+permitiendo cerrar una operación si no se alcanzan ni el nivel de toma de ganancias 
+ni el de pérdidas dentro del tiempo estipulado, lo que ayuda a evitar situaciones en 
+las que se mantenga una posición de manera indefinida sin obtener un beneficio claro.
+
+En resumen, el \textit{Método de las Tres Barreras} no solo mejora la precisión del 
+etiquetado al tener en cuenta toda la ruta del precio, sino que también proporciona 
+un mecanismo más flexible y adaptativo para la gestión de operaciones en estrategias 
+de trading. Al combinar estos elementos, este método contribuye significativamente a 
+la creación de estrategias de trading más robustas y efectivas, optimizando el 
+rendimiento ajustado al riesgo en un entorno financiero incierto.
 
 % Consiste en la utilización de un modelo secundario para afinar las predicciones del primario.
 
@@ -1831,7 +2037,51 @@ Para abordar estas limitaciones, se pueden considerar las siguientes alternativa
 %    futuras señales del modelo primario sean correctas.
 % \end{itemize}
 
-\chapter{Conclusiones}
+\section{Conclusiones}
+
+\subsection{Resumen de Hallazgos Principales}
+
+A lo largo de este trabajo, se han implementado y evaluado varias técnicas avanzadas en el contexto de la creación de estrategias de trading, con el objetivo de determinar su efectividad y utilidad en la práctica.
+
+En primer lugar, la implementación de barras de desequilibrio de volumen y dólares ha demostrado ser una alternativa viable a las barras de tiempo tradicionales. Estas barras han ofrecido una representación más precisa de la actividad del mercado, capturando mejor los puntos de desequilibrio entre oferta y demanda. Los resultados muestran que las estrategias basadas en estas barras tienden a ser más sensibles a los cambios en la dinámica del mercado, lo que puede mejorar la identificación de oportunidades de trading.
+
+Por otro lado, el entrenamiento de un algoritmo de \textit{deep reinforcement learning} sobre estas barras de desequilibrio ha producido resultados mixtos. Aunque se observó una mejora en la capacidad del agente para adaptarse a las condiciones del mercado en comparación con las barras de tiempo, la complejidad del modelo y la necesidad de un ajuste fino han presentado desafíos adicionales. Sin embargo, estos resultados sugieren que, con una optimización adecuada, las barras de desequilibrio podrían ofrecer una base sólida para estrategias de trading más adaptativas.
+
+Finalmente, la aplicación de la técnica de \textit{Meta-Labeling} ha mostrado un impacto positivo en la precisión de las señales generadas por el modelo de \textit{deep reinforcement learning}. Al actuar como una capa adicional de validación, el \textit{Meta-Labeling} ha mejorado las métricas de precisión y \textit{recall}, lo que sugiere que esta técnica es especialmente útil para filtrar señales y reducir la incidencia de operaciones fallidas. Este refinamiento ha permitido optimizar el rendimiento ajustado al riesgo, haciendo que la estrategia de trading sea más robusta en entornos volátiles.
+
+\subsection{Cumplimiento de los Objetivos}
+
+Los objetivos planteados al inicio de este trabajo se han cumplido en gran medida. En primer lugar, se ha logrado desarrollar y evaluar una estrategia de trading utilizando técnicas avanzadas como las barras de desequilibrio, el \textit{deep reinforcement learning}, y el \textit{Meta-Labeling}. Estos esfuerzos han resultado en una comprensión más profunda de cómo estas herramientas pueden integrarse para mejorar el rendimiento de las estrategias de trading.
+
+Además, se ha aprendido a implementar y ajustar algoritmos de \textit{deep reinforcement learning}, aprovechando librerías como \textit{Gymnasium} y \textit{Stable Baselines}. A través de la comparación de diferentes enfoques, se ha demostrado que el uso de barras de desequilibrio y \textit{Meta-Labeling} puede proporcionar ventajas significativas en ciertos contextos. Aunque se encontraron desafíos en la implementación, especialmente en términos de ajuste y optimización, el proceso ha sido valioso para adquirir habilidades prácticas en el uso de estas metodologías.
+
+Finalmente, la comparativa entre técnicas ha revelado insights importantes sobre su efectividad y sus limitaciones. Los resultados obtenidos sugieren que, aunque cada técnica tiene sus propios méritos, la combinación de barras de desequilibrio y \textit{Meta-Labeling} ofrece un enfoque prometedor para desarrollar estrategias de trading más adaptativas y precisas.
+
+\subsection{Limitaciones del Estudio}
+
+A pesar de los resultados positivos, este estudio presenta algunas limitaciones que deben tenerse en cuenta. Una de las principales limitaciones es la complejidad técnica asociada con la implementación y ajuste de los algoritmos de \textit{deep reinforcement learning}. La necesidad de un poder computacional significativo y el tiempo requerido para entrenar estos modelos ha sido un desafío constante durante la investigación.
+
+Otra limitación importante es la generalización de los resultados. Los experimentos realizados se basaron en datos específicos y en un conjunto limitado de escenarios de mercado. Por lo tanto, los resultados obtenidos pueden no ser directamente aplicables a otros mercados o condiciones sin una adecuada recalibración de los modelos.
+
+Además, la dependencia de la calidad de los datos también representa una limitación significativa. La efectividad de las barras de desequilibrio y del \textit{Meta-Labeling} está estrechamente ligada a la precisión y la integridad de los datos utilizados. Cualquier anomalía en los datos podría haber afectado los resultados y, en consecuencia, las conclusiones derivadas de este estudio.
+
+\subsection{Implicaciones Prácticas}
+
+Los hallazgos de este trabajo tienen importantes implicaciones prácticas para el desarrollo de estrategias de trading en el entorno financiero actual. En primer lugar, la adopción de barras de desequilibrio como una alternativa a las barras de tiempo tradicionales ofrece a los traders y desarrolladores de algoritmos una herramienta más afinada para capturar la dinámica del mercado. Esto podría mejorar la precisión de las estrategias de trading, especialmente en mercados donde la volatilidad y el volumen juegan un papel crucial.
+
+El uso de \textit{deep reinforcement learning} en conjunto con barras de desequilibrio también muestra un gran potencial para desarrollar estrategias más adaptativas, capaces de ajustarse a las condiciones cambiantes del mercado. Sin embargo, la complejidad de su implementación sugiere que, aunque es prometedora, esta técnica requiere un enfoque cuidadoso y una considerable inversión en recursos computacionales.
+
+Por último, la técnica de \textit{Meta-Labeling} podría ser particularmente valiosa para los gestores de riesgo y desarrolladores de estrategias que buscan mejorar la precisión de sus modelos sin sacrificar la flexibilidad. Al refinar las señales generadas por el modelo primario, el \textit{Meta-Labeling} ayuda a reducir la exposición a operaciones fallidas, lo que podría traducirse en una mejor gestión del riesgo y una optimización del rendimiento ajustado al riesgo.
+
+\subsection{Líneas Futuras de Investigación}
+
+Este trabajo abre varias posibles líneas de investigación futura. Una dirección interesante sería explorar mejoras en las técnicas implementadas, particularmente en la optimización de los algoritmos de \textit{deep reinforcement learning}. Ajustes en los hiperparámetros, la incorporación de técnicas de aprendizaje más avanzadas, o la combinación con otros métodos de \textit{machine learning} podrían resultar en mejoras significativas en la efectividad de las estrategias de trading.
+
+Otra área de investigación futura podría centrarse en la aplicación de estas técnicas en diferentes mercados o activos financieros. Esto permitiría evaluar la robustez y generalización de los resultados obtenidos, así como adaptar las estrategias a distintos contextos financieros.
+
+Además, sería valioso investigar la integración de nuevas fuentes de datos o indicadores en las estrategias de trading, como datos alternativos o indicadores de sentimiento, que podrían complementar los enfoques actuales y proporcionar una visión más completa del mercado.
+
+En resumen, aunque este trabajo ha proporcionado resultados prometedores, la investigación en el campo del \textit{deep reinforcement learning} aplicado al trading está lejos de ser concluyente. Existe un vasto potencial para continuar explorando y refinando estas técnicas, y las contribuciones de este estudio representan solo el comienzo de un camino mucho más amplio y complejo en la intersección entre \textit{machine learning} y finanzas.
 
 
 %\phantomsection

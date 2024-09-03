@@ -14,17 +14,17 @@
 \contentsline {subsection}{\numberline {2.2.2}Datos Utilizados}{7}{subsection.2.2.2}%
 \contentsline {subsubsection}{Datos de Bitcoin}{8}{section*.5}%
 \contentsline {subsubsection}{Datos del SPY}{8}{section*.6}%
-\contentsline {section}{\numberline {2.3}Métricas Financieras}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Métricas Financieras}{8}{section.2.3}%
 \contentsline {subsubsection}{Cumulative Returns}{9}{section*.7}%
 \contentsline {subsubsection}{Annualized Return}{9}{section*.8}%
 \contentsline {subsubsection}{Sharpe Ratio}{9}{section*.9}%
 \contentsline {subsubsection}{Sortino Ratio}{9}{section*.10}%
-\contentsline {subsubsection}{Maximum Drawdown}{10}{section*.11}%
+\contentsline {subsubsection}{Maximum Drawdown}{9}{section*.11}%
 \contentsline {subsubsection}{Calmar Ratio}{10}{section*.12}%
 \contentsline {subsubsection}{Value at Risk (VaR)}{10}{section*.13}%
 \contentsline {subsubsection}{Alpha}{10}{section*.14}%
 \contentsline {subsubsection}{Beta}{10}{section*.15}%
-\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{11}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{10}{section.2.4}%
 \contentsline {subsubsection}{Precision}{11}{section*.16}%
 \contentsline {subsubsection}{Recall}{11}{section*.17}%
 \contentsline {subsubsection}{F1-Score}{11}{section*.18}%

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex plantilla_memoria_tfm"] 1725364294.03759 "plantilla_memoria_tfm.aux" "plantilla_memoria_tfm.bbl" "plantilla_memoria_tfm" 1725364299.20499 0
+["bibtex plantilla_memoria_tfm"] 1725364635.03323 "plantilla_memoria_tfm.aux" "plantilla_memoria_tfm.bbl" "plantilla_memoria_tfm" 1725364861.5788 0
   "./biblioTFM.bib" 1725045110 3505 6f536ba635e487b35b43654795d69c11 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "plantilla_memoria_tfm.aux" 1725364298 22586 05e4f64f4aa869433c5e4fb54c98cb96 "pdflatex"
+  "plantilla_memoria_tfm.aux" 1725364860 22556 55aea133dcb72b0aa1c28ea579af87c9 "pdflatex"
   (generated)
   "plantilla_memoria_tfm.bbl"
   "plantilla_memoria_tfm.blg"
   (rewritten before read)
-["pdflatex"] 1725364294.42861 "c:/Users/adelapuente/Desktop/math_tfm/tfm/plantilla_memoria_tfm.tex" "plantilla_memoria_tfm.pdf" "plantilla_memoria_tfm" 1725364299.20565 0
+["pdflatex"] 1725364856.90494 "c:/Users/adelapuente/Desktop/math_tfm/tfmII/plantilla_memoria_tfm.tex" "plantilla_memoria_tfm.pdf" "plantilla_memoria_tfm" 1725364861.57943 0
   "C:/Users/adelapuente/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1724938189 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/adelapuente/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1721566553 14064 2274f2b69e3d2b56f45a5e7f4f90ddb9 ""
   "C:/Users/adelapuente/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1721565417 24267549 e58742ab22b809d7c0d8466a0c189a35 ""
@@ -149,7 +149,7 @@
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1718356376 7243 e5dac1240636811edb77568b81818372 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/adelapuente/Desktop/math_tfm/tfm/plantilla_memoria_tfm.tex" 1725364290 158041 c9f6108084e2a63b0640550fc585cfc0 ""
+  "c:/Users/adelapuente/Desktop/math_tfm/tfmII/plantilla_memoria_tfm.tex" 1725364853 157976 1259b07b9aaf63d8d8948cecd2e9a66f ""
   "figures/A-brief-schema-of-Reinforcement-Learning-26.png" 1723975887 25144 6c1db6ca674db88ac69789b750f7989b ""
   "figures/BTC_USD_Close_Price_Data_2018-2024.png" 1723488470 74249 19d3ad7320539e76db65140a8d7f4a94 ""
   "figures/BTC_histogram_comparation.png" 1723617733 78673 84439a4e95aed5e3df18cf05f5e8db68 ""
@@ -169,13 +169,13 @@
   "figures/simple_and_log_ret_relation.png" 1721588643 62398 f2f6dc16aa7c4593afc4c9f84f2466a4 ""
   "figures/spy_volume_explo.png" 1723452287 76159 f63c32afd77f261d6a485f1dad1e359f ""
   "figures/three_barried_method.png" 1725091425 54622 4a503460ae8b820f44f63a91ce8ca165 ""
-  "plantilla_memoria_tfm.aux" 1725364298 22586 05e4f64f4aa869433c5e4fb54c98cb96 "pdflatex"
-  "plantilla_memoria_tfm.bbl" 1725364294 1456 56e5f1755343ef137b42c83559773b64 "bibtex plantilla_memoria_tfm"
-  "plantilla_memoria_tfm.lof" 1725364298 2193 f68219caf4bee2823a96d67ac6c988d0 "pdflatex"
-  "plantilla_memoria_tfm.lot" 1725364298 2423 0a518ef20d01112afbda6e2d2d957faf "pdflatex"
-  "plantilla_memoria_tfm.out" 1725364298 12789 33eab64b9ca5829e092b96e2ec6a17fa "pdflatex"
-  "plantilla_memoria_tfm.tex" 1725364290 158041 c9f6108084e2a63b0640550fc585cfc0 ""
-  "plantilla_memoria_tfm.toc" 1725364298 7933 a8446108704731751618ff203a378e60 "pdflatex"
+  "plantilla_memoria_tfm.aux" 1725364860 22556 55aea133dcb72b0aa1c28ea579af87c9 "pdflatex"
+  "plantilla_memoria_tfm.bbl" 1725364635 1456 56e5f1755343ef137b42c83559773b64 "bibtex plantilla_memoria_tfm"
+  "plantilla_memoria_tfm.lof" 1725364860 2161 311180a9661437565a08b63d14b714c3 "pdflatex"
+  "plantilla_memoria_tfm.lot" 1725364860 2391 40ac9bba1d2581a2622f373dafe2efda "pdflatex"
+  "plantilla_memoria_tfm.out" 1725364860 9491 0e00dd8704f6b633e04af5289a9e9980 "pdflatex"
+  "plantilla_memoria_tfm.tex" 1725364853 157976 1259b07b9aaf63d8d8948cecd2e9a66f ""
+  "plantilla_memoria_tfm.toc" 1725364860 7941 52136edaf73ce4995c7e62160a2e19ce "pdflatex"
   (generated)
   "plantilla_memoria_tfm.aux"
   "plantilla_memoria_tfm.lof"

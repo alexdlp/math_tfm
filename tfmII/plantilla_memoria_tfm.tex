@@ -242,35 +242,48 @@ pueden contribuir al desarrollo de modelos de trading más eficaces y adaptativo
 
 \section{Estructura del Documento}
 
-Este documento se organiza en siete capítulos, cada uno de los cuales aborda un aspecto clave del desarrollo de estrategias de trading utilizando técnicas avanzadas de \textit{machine learning}:
+Este documento se organiza en cuatro capítulos, cada uno de los cuales aborda un aspecto 
+clave del desarrollo de estrategias de trading utilizando técnicas avanzadas de \textit{machine learning}:
 
-\begin{itemize}
-    \item \textbf{Capítulo 1: Introducción.} Se presenta la motivación, los objetivos del trabajo y una contextualización inicial del planteamiento de la estrategia.
+El \textbf{Capítulo 1: Introducción} presenta la contextualización del problema abordado y 
+proporciona una visión general de los objetivos del trabajo. En esta sección se justifica la 
+relevancia del estudio y se expone la estructura general del documento.
 
-    \item \textbf{Capítulo 2: Fundamentos de los Datos Financieros.} En este capítulo se introducen los conceptos financieros relevantes que son fundamentales para comprender los datos utilizados en las estrategias de trading. Se abordan temas como la naturaleza de los datos financieros, tipos de barras, y la importancia de la estructura de los datos en el análisis y la toma de decisiones.
+El \textbf{Capítulo 2: Estado del Arte} describe y explica las técnicas y conceptos fundamentales 
+que se utilizan en este estudio. Se incluyen secciones sobre los fundamentos de los datos financieros, 
+los hechos estilizados, las métricas tanto financieras como de \textit{machine learning}. También 
+se exploran en detalle las barras de desequilibrio, las técnicas de \textit{Deep Reinforcement Learning}, 
+y el concepto de \textit{meta-labeling}, destacando su aplicabilidad en el contexto del trading algorítmico.
 
-    \item \textbf{Capítulo 3: Barras de Desequilibrio.} Este capítulo explora la implementación de barras de desequilibrio de volumen y dólares como una alternativa a las barras de tiempo tradicionales. Se discuten sus ventajas, su construcción y su impacto en la precisión del análisis de mercado.
+En el \textbf{Capítulo 3: Metodología y Resultados}, se describe el enfoque metodológico adoptado en este estudio y 
+se presentan los resultados obtenidos. Se detalla el uso de datos financieros, la adaptación de 
+la metodología de barras de desequilibrio con datos de alta frecuencia, y la implementación 
+de un entorno de entrenamiento basado en Gymnasium. Además, se presenta la implementación 
+de \textit{meta-labeling} y se analizan los resultados obtenidos, enfocándose en cómo estos 
+métodos contribuyen al rendimiento de las estrategias de trading desarrolladas.
 
-    \item \textbf{Capítulo 4: Aprendizaje por Refuerzo.} Aquí se detalla el uso del \textit{deep reinforcement learning} para entrenar agentes de trading sobre las barras de desequilibrio y las barras de tiempo originales. Se analizan las técnicas y algoritmos utilizados, así como los resultados esperados de estos enfoques.
+El \textbf{Capítulo 4: Conclusiones} sintetiza los hallazgos más importantes del estudio y evalúa 
+el grado de cumplimiento de los objetivos iniciales. Asimismo, se discuten las limitaciones del estudio, 
+las implicaciones prácticas de los resultados, y se sugieren posibles líneas de investigación futuras 
+que podrían ampliar y profundizar los conocimientos obtenidos en este trabajo.
 
-    \item \textbf{Capítulo 5: Meta-Labeling.} En este capítulo se profundiza en la técnica de \textit{Meta-Labeling}, su implementación sobre las señales generadas por los modelos de aprendizaje por refuerzo, y cómo esta técnica puede mejorar la precisión y la gestión del riesgo en las estrategias de trading.
+Finalmente, se incluye una sección de bibliografía donde se recopilan todas las fuentes y referencias 
+utilizadas a lo largo del documento.
 
-    \item \textbf{Capítulo 6: Resultados.} Se presentan los resultados obtenidos de las implementaciones y evaluaciones realizadas en los capítulos anteriores. Se comparan las diferentes técnicas utilizadas y se discuten sus ventajas y limitaciones.
+Esta estructura proporciona una visión clara y coherente del flujo del trabajo, desde la 
+introducción de conceptos fundamentales hasta la implementación y evaluación de técnicas avanzadas, 
+culminando en las conclusiones sobre su efectividad y aplicabilidad.
 
-    \item \textbf{Capítulo 7: Conclusiones.} En el capítulo final se resumen los hallazgos clave del trabajo, se destacan las principales contribuciones, y se proponen posibles líneas de investigación futura para continuar explorando y mejorando las estrategias de trading basadas en \textit{machine learning}.
-\end{itemize}
+\chapter{Estado del arte}
 
-Esta estructura proporciona una visión clara y coherente del flujo del trabajo, desde la introducción de conceptos fundamentales hasta la implementación y evaluación de técnicas avanzadas, culminando en las conclusiones sobre su efectividad y aplicabilidad.
-
-
-\chapter{Fundamentos de los datos Financieros}
-\section{Descripción de los Datos Financieros}
+\section{Fundamentos de los datos Financieros}
+\subsection{Descripción de los Datos Financieros}
 
 Aunque los datos financieros vienen en muchas formas, este trabajo se centrará en aquellos provenientes de acciones o índices 
 (cestas de instrumentos financieros). Para simplificar, en lugar de pensar en instrumentos financieros individuales, consideraremos 
 la serie temporal subyacente de precios.
 
-\subsection{Introducción a la Serie Temporal}
+\subsubsection{Introducción a la Serie Temporal}
 
 La serie temporal $\{p_t\}$ representa el precio de una acción o índice en el instante de tiempo discreto $t$. Es importante 
 notar que $t$ dependerá de la frecuencia de muestreo utilizada para recopilar los datos.
@@ -292,7 +305,7 @@ y_t = y_{t-1} + \mu + \epsilon_t
 
 donde $\epsilon_t \sim i.i.d. \mathcal{N}(0, \sigma^2)$.
 
-\subsection{Retornos de Activos}
+\subsubsection{Retornos de Activos}
 
 El siguiente concepto a introducir son los retornos, una técnica para normalizar los precios y permitir la comparación 
 entre diferentes series temporales, independientemente del valor del precio. Los dos tipos que se van a utilizar son 
@@ -314,7 +327,7 @@ La figura \ref{fig:log-returns} muestra la relación existente entre los retorno
 Ambos serán utilizados a lo largo de este trabajo tanto para el entrenamiento del agente de aprendizaje por refuerzo en
 como para el cálculo del los rendimientos generados por las estratégias construídas.
 
-\section{Hechos Estilizados}
+\subsection{Hechos Estilizados}
 
 Los hechos estilizados son patrones o regularidades observadas empíricamente en los datos financieros que se 
 presentan de manera consistente en diferentes mercados, periodos de tiempo y condiciones económicas. Estos hechos 
@@ -353,7 +366,7 @@ y comprensión de estos patrones ayudan a mejorar la precisión de los modelos d
 y a diseñar mejores políticas de regulación financiera.
 
 
-\subsection{Datos de Alta Frecuencia}
+\subsubsection{Datos de Alta Frecuencia}
 
 Los datos de alta frecuencia (HF) representan el registro de precios y volúmenes de transacciones de activos financieros en intervalos 
 de tiempo muy cortos, como segundos o milisegundos. Estos datos incluyen información detallada sobre cada transacción, como el precio, 
@@ -395,52 +408,7 @@ sobrecarga de procesamiento asociada con datos de mayor frecuencia.
 % \end{figure}
 
 
-\subsection{Datos Utilizados}
-
-En este trabajo se utilizarán dos conjuntos de datos financieros: los datos de Bitcoin y los 
-datos del SPY (SPDR S\&P 500 ETF Trust). Ambas series temporales cubren el período desde el 
-1 de enero de 2018 hasta el 30 de junio de 2024. La división de los datos se realizará de la 
-siguiente manera: el conjunto de datos in-sample abarcará desde el inicio de la serie hasta 
-el 31 de diciembre de 2022, mientras que el conjunto de datos out-of-sample cubrirá desde el 
-1 de enero de 2023 hasta el final del periodo.
-
-El conjunto in-sample se utiliza para entrenar los modelos de aprendizaje automático, 
-ajustando los parámetros y calibrando el rendimiento del agente de aprendizaje por refuerzo. 
-Por otro lado, el conjunto out-of-sample sirve para evaluar la generalización del modelo a 
-nuevos datos que no fueron utilizados durante el entrenamiento, proporcionando así una 
-estimación más precisa del rendimiento real del modelo en escenarios futuros. Esta separación 
-es fundamental en inteligencia artificial y machine learning para evitar el sobreajuste y 
-asegurar que el modelo sea robusto y capaz de adaptarse a variaciones en los datos.
-
-
-
-\subsubsection{Datos de Bitcoin}
-
-Bitcoin es una criptomoneda y un sistema de pago descentralizado que ha ganado popularidad y relevancia en los mercados financieros. 
-Los datos de Bitcoin que utilizaremos incluyen los precios de cierre por minuto. A continuación se muestra la serie temporal de precios 
-de Bitcoin:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./figures/BTC_USD_Close_Price_Data_2018-2024.png}
-    \caption{Serie Temporal de Precios de Bitcoin}
-    \label{fig:bitcoin-prices}
-\end{figure}
-
-\subsubsection{Datos del SPY}
-
-El SPY es un ETF que sigue el rendimiento del índice S\&P 500. Los datos del SPY que utilizaremos también incluyen los precios de cierre 
-por minuto. A continuación se muestra la serie temporal de precios del SPY:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/SPY_Close_Price_Data_2018-2024.png}
-    \caption{Serie Temporal de Precios del SPY}
-    \label{fig:spy-prices}
-\end{figure}
-
-
-\section{Métricas Financieras}
+\subsection{Métricas Financieras}
 
 Para evaluar el rendimiento de una estrategia de trading, es crucial utilizar métricas financieras adecuadas que permitan comparar y analizar los resultados obtenidos. A continuación, se describen algunas de las métricas financieras más utilizadas junto con sus expresiones matemáticas.
 
@@ -532,7 +500,7 @@ El \textit{Beta} mide la sensibilidad de los retornos de una cartera en relació
 
 donde $\text{Cov}(R_p, R_m)$ es la covarianza entre los retornos de la cartera y los del mercado, y $\sigma^2_m$ es la varianza de los retornos del mercado.
 
-\section{Métricas de Machine Learning}
+\subsection{Métricas de Machine Learning}
 
 Las métricas de evaluación son fundamentales para medir el rendimiento de los modelos de \textit{Machine Learning}, especialmente en el contexto de clasificación. A continuación, se describen algunas de las métricas más utilizadas en la evaluación de modelos de clasificación.
 
@@ -564,10 +532,9 @@ El \textit{F1-Score} es la media armónica de la \textit{Precision} y el \textit
 \text{F1-Score} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}.
 \end{equation}
 
+\section{Barras de desequilibrio}
 
-\chapter{Barras de desequilibrio}
-
-\section{Barras Basadas en Información}
+\subsection{Barras Basadas en Información}
 
 En la industria financiera, es común el uso de barras de tiempo para transformar 
 series de observaciones que llegan a intervalos irregulares en series homogéneas 
@@ -600,7 +567,7 @@ más precisa de las condiciones de mercado.Este enfoque es útil para identifica
 ante la presencia de traders
 informados, quienes pueden provocar desequilibrios en los precios.
 
-\subsection{Barras de Desequilibrio}
+\subsubsection{Barras de Desequilibrio}
 
 Las barras de desequilibrio son un tipo de barra basada en información que ajusta el muestreo 
 según la actividad del mercado en lugar de hacerlo a intervalos de tiempo fijos. Este enfoque 
@@ -690,7 +657,873 @@ T^* = \arg \min_{T} \{|\theta_T| \geq E_0[T]|2v_+ - E_0[v_t]| \}
 Cuando el desequilibrio \(\theta_T\) excede las expectativas, las barras se generan con mayor frecuencia, reflejando la 
 presencia de traders informados y ajustando dinámicamente el tamaño de las barras según la información disponible.
 
-\subsection{Adaptación de la Metodología con Datos de Minuto}
+\section{Deep Reinforcement Learning}
+
+\subsection{Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}
+
+\subsubsection{Definición y Contexto General}
+
+El \textit{Aprendizaje por Refuerzo} (Reinforcement Learning, RL) es una rama de la inteligencia 
+artificial que se centra en cómo un agente aprende a tomar decisiones secuenciales optimizadas 
+mediante la interacción con un entorno dinámico. A diferencia de otros tipos de aprendizaje, como 
+el \textit{aprendizaje supervisado}, donde el modelo aprende patrones extraídos a partir de ejemplos 
+previamente etiquetados, o el \textit{aprendizaje no supervisado}, donde el modelo busca patrones 
+en datos sin etiquetas, el RL implica un aprendizaje activo donde el agente recibe retroalimentación 
+en forma de recompensas o penalizaciones por las acciones que toma. Este proceso permite al 
+agente aprender sin ejemplos de comportamiento óptimo, optimizando en su lugar una señal de recompensa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./figures/A-brief-schema-of-Reinforcement-Learning-26.png}
+    \caption{Esquema Reiforcement Learning}
+    \label{fig:RF-schema}
+\end{figure}
+
+En cada paso de tiempo \(t\), el agente recibe una una observación \(O_t\) y una recompensa \(R_t\).
+La observación recibida le permite ejecutar una acción \(A_t\), la cual provocará que el entorno cambie
+y emita una nueva observación \(O_{t+1}\) y una nueva recompensa \(R_{t+1}\).
+
+\subsubsection{Hipótesis de la Recompensa}
+
+Una recompensa \(R_t\) es una señal de retroalimentación escalar que indica cómo de buena ha sido la accion 
+tomada por el agente en el paso \(t\). 
+
+A partir de esta señal de recopensa se formula
+la \textit{hipótesis de la recompensa}, que afirma que en un esquema de aprendizaje por refuerzo, cualquier 
+objetivo puede ser formalizado como el resultado de maximizar una recompensa acumulativa. Es decir, el objetivo del agente puede ser expresado como la maximización de una función de recompensa a lo 
+largo del tiempo.
+
+Esta función de recompensa se conoce como \textit{retorno} (\(G_t\)), y se define matemáticamente como el sumatorio
+de las recompensas futuras, descontadas por un factor de descuento  \(\gamma\):
+
+\[
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
+\]
+El retorno \(G_t\) es lo que el agente intenta maximizar, y es la base sobre la cual se definen otros elementos como la función de valor.
+
+
+Esto proporciona un marco ampliamente aplicable en situaciones donde 
+las decisiones se toman en una serie de pasos, lo que incluye problemas de control robótico, juegos, 
+y \textit{trading} financiero.
+
+En el contexto particular del trading financiero, debido a la naturaleza secuencial y dinámica de 
+los mercados, los agentes deben tomar decisiones basadas en información incompleta y en constante 
+cambio, buscando maximizar una recompensa a largo plazo, como la rentabilidad de una cartera.
+
+
+\subsubsection{Componentes Básicos del Aprendizaje por Refuerzo}
+
+El aprendizaje por refuerzo se formaliza mediante un \textit{Proceso de Decisión de Markov} (MDP), 
+que se define por un cuarteto \(\langle S, A, P, R \rangle\) el cual describe el problema de decisión.
+
+Un MDP se representa por un conjunto de estados \(S\), 
+un conjunto de acciones \(A\), una función de transición de estados \(P(s'|s, a)\), y una función de 
+recompensa \(R(s, a)\). El objetivo del agente es aprender una política \(\pi(a|s)\) que maximice la 
+recompensa acumulada a lo largo del tiempo.
+
+Un proceso de decisión se dice que es Markov si la probabilidad de transición depende únicamente
+del estado y acción actuales, no de la historia completa:
+
+\[
+p(r, s' | S_t, A_t) = p(r, s' | H_t, A_t)
+\]
+
+Esto significa que el estado contiene toda la información relevante de la historia, siendo la historia 
+la secuencia completa de observaciones, acciones y recompensas. No quiere decir que la historia contenga
+toda la información, sino más bien que el añadir cualquier información adicional no afectará la decisión.
+
+\begin{itemize}
+    \item \textbf{Estados (\(S\))}: Representan todas las posibles situaciones en las que se puede 
+    encontrar el agente dentro del entorno.
+    \item \textbf{Acciones (\(A\))}: Conjunto de todas las decisiones que el agente puede tomar 
+    desde cualquier estado dado.
+    \item \textbf{Función de Transición de Estados (\(P\))}: Describe la probabilidad de transitar 
+    del estado \(s\) al estado \(s'\) como resultado de realizar una acción \(a\), es decir, \(P(s'|s, a)\).
+    \item \textbf{Función de Recompensa (\(R\))}: Proporciona una recompensa \(r\) que el agente 
+    recibe al transitar del estado \(s\) al estado \(s'\) al realizar la acción \(a\), es decir, \(R(s, a, s')\).
+\end{itemize}
+
+El objetivo del agente en RL es aprender una \textit{política} \(\pi(a|s)\) que maximice la recompensa 
+acumulada a lo largo del tiempo. La política puede ser determinista, donde una acción específica es 
+seleccionada para cada estado, o estocástica, donde se asigna una distribución de probabilidad a las
+acciones en cada estado.
+
+Un concepto fundamental en RL es la \textit{función de valor}, que mide cuán favorable es un estado 
+o una acción en términos de la recompensa esperada:
+
+\begin{itemize}
+    \item \textbf{Función de Valor de Estado (\(V^{\pi}(s)\))}: Estima la recompensa total esperada 
+    comenzando desde el estado \(s\) y siguiendo la política \(\pi\). Formalmente, se define como:
+    \[
+    V^{\pi}(s) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, \pi\right]
+    \]
+    donde \(\gamma \in [0, 1]\) es el factor de descuento que determina la importancia de las 
+    recompensas futuras. Esta función refleja el valor a largo plazo de estar en un estado particular 
+    bajo una política dada.
+
+    La función de valor del estado, \(V^{\pi}(s)\), trata de cuantificar \textit{cómo de bueno} es 
+    estar en un estado \(s\) cuando se sigue una política \(\pi\).
+
+    \item \textbf{Función de Valor de Acción (\(Q^{\pi}(s, a)\))}: Extiende la función de valor del 
+    estado para considerar no solo el estado \(s\), sino también la acción \(a\) tomada en ese estado. 
+    Esta función estima la recompensa total esperada al tomar la acción \(a\) en el estado \(s\) y 
+    seguir la política \(\pi\) posteriormente:
+    \[
+    Q^{\pi}(s, a) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, a_0 = a, \pi\right]
+    \]
+    La función de valor de la acción, \(Q^{\pi}(s, a)\), trata de medir \textit{cómo de buena} es una 
+    acción \(a\) específica en un estado \(s\) determinado cuando se sigue la política \(\pi\) después.
+ 
+\end{itemize}
+
+En resumen, la función del valor del estado, \(V^{\pi}(s)\), mide cuán bueno es estar en un estado dado 
+bajo una política \(\pi\), mientras que \(Q^{\pi}(s, a)\) mide cuán buena es una acción específica en 
+ese estado.
+
+\subsubsection{Política}
+
+La \textbf{política} (\textit{policy}) es la función que guía la selección de acciones en función del estado actual del entorno. Existen dos variantes principales:
+
+\begin{itemize}
+    \item \textbf{Política determinista:} Representada como $\pi(s)$, esta política asigna una acción específica $a$ a cada estado $s$. Formalmente, $\pi(s) = a$, donde $a$ es la acción elegida para el estado $s$.
+
+    \item \textbf{Política estocástica:} Denotada como $\pi(a|s)$, esta política define una distribución de probabilidad sobre las acciones posibles. Es decir, $\pi(a|s) = \mathbb{P}(A = a \mid S = s)$, donde $a$ es seleccionada según la probabilidad correspondiente en el estado $s$.
+\end{itemize}
+
+La política determinista es útil en entornos estables, mientras que la estocástica es preferible en situaciones con alta incertidumbre o donde la exploración es necesaria.
+
+
+\subsubsection{Exploración vs. Explotación}
+
+En el Aprendizaje por Refuerzo, un desafío clave es el equilibrio entre \textit{exploración} y 
+\textit{explotación}. Este balance es fundamental para el aprendizaje efectivo del agente:
+
+\begin{itemize}
+    \item \textbf{Exploración}: El agente intenta nuevas acciones para descubrir si existen mejores 
+    recompensas disponibles. La exploración es crucial cuando el agente no tiene suficiente conocimiento 
+    del entorno y necesita recolectar más información.
+    \item \textbf{Explotación}: El agente selecciona la mejor acción conocida basada en su 
+    política actual para maximizar la recompensa inmediata. La explotación se basa en la información 
+    acumulada y tiene como objetivo maximizar la recompensa a corto plazo.
+\end{itemize}
+
+El \textit{trade-off} entre exploración y explotación es crucial porque un agente que explora 
+demasiado podría no aprovechar las recompensas conocidas, mientras que un agente que explota 
+demasiado podría perder oportunidades para descubrir estrategias más efectivas. 
+
+Existen diversas estrategias para manejar este trade-off, como la \textit{política epsilon-greedy}, 
+donde con una probabilidad \(\epsilon\), el agente explora una acción al azar, y con 
+una probabilidad \(1-\epsilon\), explota la mejor acción conocida. El valor de \(\epsilon\) 
+generalmente disminuye a medida que el agente gana más confianza en su política, lo que permite 
+una mayor explotación con el tiempo.
+
+
+\subsubsection{El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}
+
+
+En el contexto del aprendizaje por refuerzo, uno de los problemas fundamentales es 
+\textbf{cómo un agente puede tomar decisiones óptimas en situaciones donde las consecuencias de 
+sus acciones no son inmediatas, sino que se extienden en el tiempo}. Las decisiones actuales no 
+solo influyen en la recompensa inmediata, sino también en las recompensas futuras. 
+
+Algunas decisiones pueden ofrecer beneficios inmediatos pero desviar al agente de un objetivo 
+más valioso en el futuro, mientras que otras pueden tener un alto coste presente, pero ser 
+cruciales para un éxito posterior.
+
+Este desafío, conocido como el problema de la maximización del retorno total esperado, 
+requiere una estrategia que considere tanto las recompensas inmediatas como las futuras, 
+ponderadas para reflejar su importancia relativa. La ecuación de Bellman se introduce como 
+una herramienta esencial para descomponer este problema global en subproblemas más manejables, 
+\textbf{permitiendo al agente evaluar el impacto a largo plazo de sus decisiones actuales de 
+manera eficiente y sistemática}.
+
+La ecuación de Bellman descompone el problema global de maximización del retorno total 
+esperado en subproblemas más manejables. 
+
+El valor de un estado \(V^\pi(s)\) bajo una política \(\pi\) se define como el valor esperado 
+del retorno total que se puede obtener comenzando desde ese estado \(s\) y siguiendo la política 
+\(\pi\). Matemáticamente, se expresa como:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid s_t = s \right]
+\end{equation}
+
+Esta ecuación describe el valor esperado del retorno acumulado desde el estado \(s\). 
+Para hacerla más práctica, es posible descomponer esta expresión en dos partes: la 
+recompensa inmediata y el valor de los estados futuros. Separando el primer término de 
+la suma, se obtiene:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma \sum_{k=1}^{\infty} \gamma^{k-1} R_{t+k+1} \mid s_t = s \right]
+\end{equation}
+
+Aquí, \(R_{t+1}\) es la recompensa inmediata obtenida al tomar una acción en el estado \(s\), 
+y el resto de la suma representa el valor descontado de las recompensas futuras, que 
+corresponde al valor de \(V^\pi(s_{t+1})\). De esta forma, es posible reescribir la ecuación como:
+
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma V^\pi(s_{t+1}) \mid s_t = s \right]
+\end{equation}
+
+Para expandir esta expectativa, se consideran todas las posibles acciones \(a\) que el agente 
+puede tomar en el estado \(s\), y todas las posibles transiciones a estados futuros \(s'\) 
+después de tomar la acción \(a\). Esto lleva a la forma completa de la ecuación de Bellman:
+
+\begin{equation}
+V^\pi(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V^\pi(s') \right]
+\end{equation}
+
+Aquí:
+\begin{itemize}
+    \item \(\pi(a|s)\) es la probabilidad de tomar la acción \(a\) dado el estado \(s\).
+    \item \(P(s'|s,a)\) es la probabilidad de transición al estado \(s'\) dado el estado \(s\) y la acción \(a\).
+    \item \(R(s,a,s')\) es la recompensa inmediata por la transición de \(s\) a \(s'\) mediante la acción \(a\).
+    \item \(\gamma\) es el factor de descuento, que pondera la importancia relativa de las recompensas futuras.
+\end{itemize}
+
+Esta ecuación establece que el valor de un estado es la suma de la recompensa inmediata 
+y el valor futuro esperado, ponderado por las probabilidades de las acciones y las 
+transiciones de estado. Así, la ecuación de Bellman permite calcular los valores de 
+los estados de manera recursiva, evaluando tanto el impacto inmediato como el impacto a 
+largo plazo de las decisiones actuales.
+
+\subsubsection{Cálculo Numérico: Iteración de Valores}
+
+Para calcular los valores \(V^\pi(s)\) numéricamente, se suele utilizar un método iterativo. 
+Inicialmente, se asigna un valor arbitrario a cada estado, por ejemplo, \(V_0(s) = 0\) para 
+todos los \(s\). Luego, estos valores se actualizan iterativamente utilizando la ecuación de 
+Bellman:
+
+\begin{equation}
+V_{k+1}(s) = \max_{a} \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V_k(s') \right]
+\end{equation}
+
+El proceso comienza con los estados finales, cuyos valores se pueden calcular directamente. 
+Para un estado final \(s_f\), donde no hay más decisiones ni transiciones posibles, el 
+valor \(V^\pi(s_f)\) se define como:
+
+\begin{equation}
+V^\pi(s_f) = 0 \quad \text{(sin recompensas futuras)} 
+\end{equation}
+
+o, si hay una recompensa final al alcanzar \(s_f\):
+
+\begin{equation}
+V^\pi(s_f) = R_f
+\end{equation}
+
+A partir de estos valores finales, se propaga hacia atrás a través del tiempo, actualizando 
+los valores de los estados anteriores en función de los valores ya calculados de los estados 
+futuros. Este proceso se repite hasta que los valores convergen, es decir, cuando \(V_{k+1}(s) 
+\approx V_k(s)\) para todos los estados \(s\).
+
+
+\subsubsection{Métodos Clásicos de Aprendizaje por Refuerzo}
+
+Existen varios algoritmos clásicos de RL que permiten a los agentes aprender políticas óptimas. Los 
+algoritmos se clasifican principalmente en dos categorías: \textit{on-policy} y \textit{off-policy}. 
+Estos términos se refieren a la relación entre la política que se está evaluando y mejorando y la 
+política que se está utilizando para generar las acciones y, por lo tanto, las experiencias (es decir, 
+las transiciones estado-acción-recompensa) que se utilizan para actualizar el modelo.
+
+Un algorítmo de tipo \textit{on-policy} es aquel en el que la política que se optimiza es la misma que 
+se utiliza para interactuar con el entorno y generar experiencias.Es decir, se evalúa y mejora la misma
+política que se sigue durante el proceso de aprendizaje. Mientras que un algorítmo del tipo \textit{off-policy}
+es quel en el que la política que se intenta optimizar es diferente de la política utilizada para generar
+las experiencias. Esto permite optimizar una política mientras se sigue otra.
+
+Un ejemplo de algoritmos representativos de cada una de estas categorías son los siguientes:
+
+\begin{itemize}
+    \item \textbf{Q-learning}: Un algoritmo \textit{off-policy} que aprende la función de valor de 
+    acción \(Q(s, a)\) actualizando iterativamente las estimaciones en función de las recompensas recibidas:
+    \[
+    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)\right]
+    \]
+    donde \(\alpha\) es la tasa de aprendizaje. Como algoritmo \textit{off-policy}, Q-learning aprende la 
+    política óptima independientemente de la política que el agente sigue durante la exploración. 
+    Esto significa que la política utilizada para seleccionar acciones (\textit{behavior policy}) 
+    puede ser diferente de la política que se está optimizando (\textit{target policy}).
+
+    \item \textbf{SARSA}: Un algoritmo \textit{on-policy} que, a diferencia de Q-learning, sigue la 
+    política actual para actualizar la función \(Q(s, a)\). La actualización en SARSA se realiza 
+    utilizando la acción que el agente realmente toma, lo que significa que la política utilizada 
+    para seleccionar acciones es la misma que se está optimizando:
+    \[
+    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)\right]
+    \]
+    Como resultado, SARSA tiende a ser más conservador en su aprendizaje, ya que la política sigue 
+    siendo consistente entre el aprendizaje y la ejecución.
+
+\end{itemize}
+
+
+Los algoritmos \textit{on-policy}, como SARSA, tienen la ventaja de ser coherentes con la política 
+actual, lo que puede resultar en un aprendizaje más seguro y estable en entornos dinámicos. Sin embargo, 
+pueden ser menos eficientes, ya que dependen exclusivamente de las experiencias generadas por la misma 
+política que se está optimizando, lo que puede limitar la exploración. Por otro lado, los algoritmos 
+off-policy, como Q-Learning, son más flexibles y permiten un aprendizaje más eficiente al poder optimizar 
+una política óptima mientras se sigue una política diferente, más exploratoria. Sin embargo, esta 
+flexibilidad puede conllevar complejidad adicional y posibles problemas de estabilidad durante el 
+proceso de aprendizaje.
+
+Estos métodos son fundamentales para entender cómo los agentes pueden aprender a tomar decisiones 
+óptimas en entornos inciertos y son la base sobre la cual se construyen los métodos más avanzados 
+como el \textit{Deep Reinforcement Learning} (DRL).
+
+
+\subsection{Evolución del Deep Reinforcement Learning (DRL)}
+
+\subsubsection{Combinación con Redes Neuronales}
+
+El \textit{Deep Reinforcement Learning} (DRL) surge como una evolución natural del 
+\textit{Aprendizaje por Refuerzo} (RL) tradicional, combinando sus principios con la potencia 
+de las redes neuronales profundas (\textit{Deep Learning}). Mientras que los métodos clásicos 
+de RL, como el \textit{Q-learning}, son eficaces en problemas con espacios de estados discretos 
+y de baja dimensionalidad, presentan limitaciones significativas cuando se aplican a entornos 
+complejos y continuos.
+
+El uso de redes neuronales como aproximadores de funciones en RL permitió superar estas 
+limitaciones. Las redes neuronales profundas son capaces de procesar entradas de alta 
+dimensionalidad y de extraer características complejas directamente de los datos sin la necesidad 
+de diseñar manualmente las características relevantes. 
+
+\subsubsection{Principales Enfoques y Algoritmos de DRL}
+
+El desarrollo de DRL ha dado lugar a diversos enfoques que combinan RL y Deep Learning, dando 
+lugar a algoritmos innovadores que han transformado la forma en que se aborda el aprendizaje 
+por refuerzo en entornos complejos. A continuación, se presentan los enfoques principales en 
+DRL, junto con ejemplos representativos de cada uno.
+
+\subsubsection{Métodos Basados en Funciones de Valor}
+
+Los métodos basados en funciones de valor son aquellos en los que el objetivo es aprender 
+una función que prediga el valor de tomar una acción en un estado dado. El ejemplo más 
+destacado de este enfoque es el \textit{Deep Q-Network} (DQN). DQN, introducido por 
+\textit{DeepMind}, utiliza redes neuronales profundas para aproximar la función \(Q(s, a)\), 
+lo que permitió manejar entornos con espacios de estados grandes y continuos.
+
+En DQN, una red neuronal recibe como entrada el estado del entorno y produce una estimación 
+de los valores \(Q(s, a)\) para cada acción posible. La red se entrena utilizando el 
+algoritmo de \textit{Q-learning} tradicional, pero con varias modificaciones clave para 
+estabilizar el aprendizaje, como el uso de un \textit{buffer} de \textit{replay} para 
+almacenar transiciones de experiencias pasadas y el uso de una red objetivo 
+(\textit{target network}) que se actualiza periódicamente para reducir la inestabilidad 
+en la actualización de los valores \(Q\).
+
+\subsubsection{Métodos de Gradiente de Política}
+
+Los métodos de gradiente de política representan un enfoque alternativo en DRL, en el cual, 
+en lugar de aprender una función de valor, el agente aprende directamente una política 
+parametrizada \(\pi_{\theta}(a|s)\) que maximiza la recompensa esperada. La principal 
+ventaja de estos métodos es su capacidad para manejar espacios de acción continuos y 
+para aprender políticas estocásticas.
+
+Un algoritmo básico dentro de esta categoría es \textit{REINFORCE}, que utiliza el gradiente 
+de la recompensa esperada para actualizar los parámetros de la política. Aunque REINFORCE es 
+sencillo y conceptualmente atractivo, su principal limitación es la alta varianza en las 
+estimaciones del gradiente, lo que puede llevar a un aprendizaje lento y poco estable.
+
+\subsubsection{Métodos Actor-Critic}
+
+Los métodos \textit{Actor-Critic} combinan lo mejor de ambos mundos al utilizar tanto una 
+función de valor como una política parametrizada. En este enfoque, el \textit{actor} es 
+responsable de seleccionar las acciones basadas en la política \(\pi_{\theta}(a|s)\), mientras 
+que el \textit{crítico} estima el valor de la política actual utilizando una función de valor 
+\(V^{\pi}(s)\) o \(Q^{\pi}(s, a)\).
+
+Un ejemplo notable es el \textit{Asynchronous Advantage Actor-Critic} (A3C), que introduce 
+el concepto de ventaja (\textit{advantage}), definida como la diferencia entre el valor de 
+la acción y el valor esperado del estado (\(A(s, a) = Q(s, a) - V(s)\)). A3C mejora la 
+estabilidad del aprendizaje al usar múltiples actores que interactúan con copias del entorno 
+en paralelo, lo que también mejora la eficiencia computacional.
+
+\subsection{Proximal Policy Optimization (PPO) y su Implementación}
+
+\subsubsection{Introducción a Proximal Policy Optimization (PPO)}
+
+Proximal Policy Optimization (PPO) es un algoritmo de \textit{Deep Reinforcement Learning} 
+(DRL) desarrollado por \textit{OpenAI}, que ha demostrado ser exitoso en una amplia variedad 
+de tareas, desde el control robótico hasta videojuegos complejos como \textit{Dota 2}. 
+PPO es un método de gradiente de política (\textit{Policy Gradient}), lo que significa 
+que aprende directamente de la experiencia en tiempo real generada por el agente en su 
+interacción con el entorno, a diferencia de los métodos basados en \textit{Q-learning}, 
+que pueden aprender de datos almacenados.
+
+PPO fue diseñado para encontrar un equilibrio entre la eficiencia de la muestra, la facilidad 
+de implementación y la estabilidad en el entrenamiento. Esto lo convierte en una herramienta 
+potente y versátil para abordar problemas de aprendizaje por refuerzo en entornos continuos y 
+de alta dimensionalidad.
+
+En este trabajo, PPO se utilizará para la generación de estrategias de trading, aprovechando 
+su capacidad para manejar entornos complejos y dinámicos como los mercados financieros. Este 
+algoritmo ha sido seleccionado debido a su robustez y simplicidad en la implementación, 
+características que lo hacen ideal para desarrollar una estrategia de trading que pueda 
+adaptarse a las condiciones cambiantes del mercado.
+
+PPO fue presentado por primera vez en el paper de \textit{Schulman et al.} titulado 
+"\textit{Proximal Policy Optimization Algorithms}" \cite{Schulman2017}, que ha sido ampliamente 
+citado en la literatura de aprendizaje por refuerzo debido a su enfoque innovador y eficaz.
+
+\subsubsection{Descripción Técnica de PPO}
+
+PPO introduce varias mejoras clave en la optimización de políticas para garantizar un 
+aprendizaje más estable. A diferencia de otros métodos que pueden permitir grandes cambios 
+en la política, PPO limita estos cambios para evitar desestabilizar el proceso de entrenamiento.
+
+\subsubsection{Problemas en el Aprendizaje por Refuerzo}
+
+A diferencia del aprendizaje supervisado, donde se trabaja con un conjunto de datos estático, 
+en el aprendizaje por refuerzo el conjunto de datos cambia constantemente porque el agente 
+genera sus propios datos a medida que interactúa con el entorno. Esto provoca que las 
+distribuciones de las observaciones y las recompensas varíen durante el entrenamiento, 
+lo que puede causar inestabilidad.
+
+Además, el aprendizaje por refuerzo es altamente sensible a la configuración de hiperparámetros 
+y la inicialización. Por ejemplo, una tasa de aprendizaje demasiado alta puede llevar a que 
+las actualizaciones de la política desvíen al agente hacia regiones del espacio de parámetros 
+donde su desempeño se deteriora drásticamente, sin posibilidad de recuperación.
+
+\subsubsection{Función de Objetivo en PPO}
+
+PPO aborda estos problemas proponiendo una función de objetivo que maximiza la recompensa 
+esperada mientras limita las actualizaciones de la política para evitar cambios excesivos. 
+La función de objetivo en PPO se expresa como:
+
+\[
+L^{PPO}(\theta) = \mathbb{E}_t \left[ \min\left(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t \right) \right]
+\]
+
+Aquí, \( r_t(\theta) \) es la razón de probabilidad entre la nueva política \(\pi_\theta(a|s)\) 
+y la política antigua \(\pi_{\theta_{\text{old}}}(a|s)\):
+
+\[
+r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{\text{old}}}(a_t|s_t)}
+\]
+
+El término \(\hat{A}_t\) es la estimación de la ventaja, que mide cuánto mejor o peor fue la 
+acción tomada en comparación con lo esperado. El operador \textit{clip} limita el valor de 
+\(r_t(\theta)\) dentro del rango \([1 - \epsilon, 1 + \epsilon]\), con \(\epsilon\) típicamente 
+igual a 0.2, para prevenir que las actualizaciones de la política sean demasiado agresivas,
+manteniendo así la estabilidad del entrenamiento.
+
+\subsubsection{Ventaja y Estimación del Valor}
+
+Para calcular la ventaja \(\hat{A}_t\), PPO utiliza dos componentes:
+
+\begin{itemize}
+    \item \textbf{Retorno descontado}: Es la suma de las recompensas acumuladas, descontadas 
+    por un factor \(\gamma\) que valora más las recompensas inmediatas.
+    \item \textbf{Función de valor}: Estima el valor esperado de estar en un estado dado, 
+    calculando la recompensa total esperada desde ese estado en adelante.
+\end{itemize}
+
+La ventaja se calcula restando la función de valor del retorno descontado, proporcionando 
+una medida de si la acción tomada fue mejor o peor que el promedio esperado.
+
+\subsubsection{Procedimiento de Entrenamiento}
+
+PPO recolecta nuevas trayectorias de interacciones con el entorno en cada iteración, 
+utilizando estas trayectorias para actualizar la política. A diferencia de otros métodos, 
+no utiliza un \textit{replay buffer}, lo que significa que las experiencias se utilizan 
+una sola vez para hacer la actualización, y luego se descartan.
+
+Este proceso iterativo continúa hasta que las mejoras en la política se estabilizan, 
+lo que indica que el algoritmo ha convergido. PPO equilibra la simplicidad y la robustez, 
+permitiendo un entrenamiento estable incluso en entornos complejos y dinámicos.
+
+
+\section{Meta-labeling}
+
+\subsection{Concepto y Definición de Meta-Labeling}
+
+
+El \textit{Meta-Labeling} es una técnica avanzada que ha demostrado ser particularmente útil
+en la creación de estrategias de trading robustas, especialmente en el contexto del aprendizaje
+automático y la gestión de riesgos. 
+
+Este método consiste en la superposición de una capa
+adicional de análisis sobre una decisión de trading ya existente, evaluando la probabilidad 
+de éxito de las señales generadas por un modelo base. En lugar de limitarse
+a una sola predicción binaria (por ejemplo, comprar o no comprar un activo), el Meta-
+Labeling aplica una segunda etapa de modelado para determinar si la señal inicial tiene
+una alta probabilidad de ser correcta. Este enfoque permite refinar la decisión final,
+mitigando riesgos y mejorando el rendimiento general del modelo de trading.
+
+El proceso típico de Meta-Labeling involucra dos modelos:
+\begin{enumerate}
+    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: Este modelo genera la señal de 
+    trading.
+    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El meta-modelo se entrena para 
+    predecir la fiabilidad de las señales generadas por el modelo primario. A cada 
+    señal generada por $\mathcal{M}_1$ se le asigna un \textit{meta-label}, que 
+    indica si dicha señal resultó en una operación exitosa o fallida.
+\end{enumerate}
+
+Formalmente, para una observación $i$, el modelo primario $\mathcal{M}_1$ genera 
+una predicción $\hat{y}_i \in \{-1, 0, 1\}$. El meta-label $z_i \in \{0, 1\}$ se 
+define de la siguiente manera:
+
+\[
+z_i = \begin{cases} 
+1 & \text{si la operación resultante de la señal } \hat{y}_i \text{ fue exitosa}, \\
+0 & \text{si la operación resultante de la señal } \hat{y}_i \text{ falló}.
+\end{cases}
+\]
+
+Aquí, $z_i = 1$ indica que la señal emitida por $\mathcal{M}_1$ fue confiable y 
+resultó en una operación exitosa (por ejemplo, una ganancia), mientras que $z_i = 0$ 
+indica que la señal no fue confiable y resultó en una operación fallida (por ejemplo, 
+una pérdida).
+
+El meta-modelo $\mathcal{M}_2$ se entrena utilizando las mismas características 
+$\mathbf{x}_i$ que alimentan al modelo primario, así como la señal generada por 
+$\mathcal{M}_1$, y otros indicadores adicionales que no fueron utilizados en el
+modelo primario. Estos indicadores adicionales pueden incluir variables exógenas 
+o nuevas características que ayuden a mejorar la capacidad del meta-modelo para 
+evaluar la fiabilidad de las señales originales.
+
+Esta estructura de dos niveles ofrece una ventaja significativa, ya que permite 
+refinar las decisiones de trading al evaluar de manera más precisa la 
+probabilidad de éxito de las señales iniciales. El Meta-Labeling, por tanto, 
+no solo añade una capa de seguridad al proceso de toma de decisiones, sino 
+que también mejora la precisión y el rendimiento general de la estrategia de trading.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./figures/meta_labeling.png}
+    \caption{Diagrama Meta-Labeling (Adaptación de \textit{Hudson and Thames})}
+    \label{fig:meta_labeling_diagram}
+\end{figure}
+
+Uno de los principales beneficios del Meta-Labeling es su capacidad para mejorar 
+el rendimiento de un predictor que, por sí solo, puede no ser suficientemente 
+robusto \cite{does_meta_labeling_add}. Supongamos que $\mathcal{M}_1$ es un modelo 
+primario con una precisión moderada y un \textit{recall} bajo, lo que significa que 
+emite muchas señales incorrectas (falsos positivos). Al aplicar Meta-Labeling, se 
+puede ajustar el \textit{recall} y la precisión, ya que $\mathcal{M}_2$ filtra las 
+señales generadas por $\mathcal{M}_1$, reduciendo el número de falsos positivos.
+
+El rendimiento de un modelo de clasificación se evalúa comúnmente mediante métricas 
+como la precisión y el \textit{recall}. Para un modelo primario $\mathcal{M}_1$, 
+estas métricas se definen como:
+\[
+\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}},
+\]
+donde TP, FP y FN son verdaderos positivos, falsos positivos y falsos negativos, 
+respectivamente. Si $\mathcal{M}_1$ genera muchas señales falsas (altos FP), 
+la precisión disminuye, lo que puede llevar a decisiones de trading no óptimas.
+
+El Meta-Labeling se propone como una solución a este problema. Al entrenar 
+$\mathcal{M}_2$ para predecir la probabilidad de éxito de las señales de 
+$\mathcal{M}_1$, es posible aumentar la precisión del sistema general. Esto 
+se debe a que $\mathcal{M}_2$ actúa como un filtro adicional que reduce los 
+FP, manteniendo o incluso mejorando el \textit{recall}:
+\[
+\text{Precisión}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FP}_{\text{Meta}}}, \quad \text{Recall}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FN}_{\text{Meta}}},
+\]
+donde $\text{TP}_{\text{Meta}}$, $\text{FP}_{\text{Meta}}$, y $\text{FN}_{\text{Meta}}$ 
+son los valores ajustados después de aplicar el Meta-Labeling.
+
+
+\subsubsection{Optimización del Ratio de Sharpe mediante Meta-Labeling}
+
+Uno de los aspectos más destacados del Meta-Labeling es su capacidad para optimizar el 
+ratio de Sharpe de una estrategia de trading, mejorando el rendimiento ajustado al riesgo. 
+
+
+En su forma más general, el ratio de Sharpe se define como la razón entre el exceso 
+de retorno de una inversión sobre la tasa libre de riesgo y la desviación estándar 
+de esos retornos. Sin embargo, en el contexto de resultados binarios, como en las 
+estrategias de trading donde las decisiones se reducen a "ganar" o "perder", el ratio 
+de Sharpe puede adaptarse utilizando la siguiente fórmula, tal como se describe en 
+\textit{Advances in Financial Machine Learning} 
+de Marcos López de Prado:
+
+\[
+\theta(p, n, \pi^-, \pi^+) = \frac{(\pi^+ - \pi^-) p + \pi^-}{(\pi^+ - \pi^-) \sqrt{p \cdot (1 - p)}} \cdot \sqrt{n}
+\]
+
+Donde:
+\begin{itemize}
+    \item $\pi^+$ es el retorno asociado a un resultado positivo.
+    \item $\pi^-$ es el retorno asociado a un resultado negativo.
+    \item $p$ es la probabilidad de obtener un resultado positivo, es decir, la 
+    probabilidad de que una operación sea exitosa.
+    \item $n$ es el número de resultados o decisiones (como el número de 
+    operaciones realizadas en un año).
+\end{itemize}
+
+Esta fórmula captura el rendimiento ajustado al riesgo en situaciones donde las 
+decisiones de trading producen resultados binarios. La diferencia $\pi^+ - \pi^-$ 
+representa el diferencial entre el retorno positivo y el negativo, que se ajusta 
+por la volatilidad de los resultados, medida como $\sqrt{p \cdot (1 - p)}$. Esto 
+refleja la incertidumbre inherente al sistema, basada en la probabilidad de un 
+resultado positivo y la frecuencia de las operaciones.
+Un valor alto de $\theta$ indica que la estrategia tiene un buen rendimiento 
+relativo al riesgo asumido.
+
+
+
+\subsubsection{Impacto del Meta-Labeling en el Ratio de Sharpe}
+
+El Meta-Labeling puede jugar un papel crucial en la optimización de $\theta$. Cuando 
+las ganancias ($\pi^+$) son significativamente menores que las pérdidas ($\pi^- \ll -\pi^+$), 
+el ratio de Sharpe tiende a ser bajo, lo que refleja una estrategia con un rendimiento 
+ajustado al riesgo desfavorable. En este caso, una forma efectiva de 
+mejorar $\theta$ es aumentando la probabilidad de éxito $p$, aunque a costa de 
+reducir el número de operaciones $n$. Aquí es donde entra en juego el Meta-Labeling.
+
+\begin{itemize}
+    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: El modelo primario es responsable de identificar 
+    las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, 
+    este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en 
+    consecuencia, el ratio de Sharpe.
+    
+    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El modelo secundario se encarga de ajustar el umbral 
+    de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la 
+    capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, 
+    lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
+\end{itemize}
+
+Por lo tanto, el Meta-Labeling puede mejorar \(\theta\) de las siguientes maneras:
+
+\begin{itemize}
+    \item \textbf{Mejora de la Probabilidad de Éxito ($p$)}: Al aplicar Meta-Labeling, 
+    se ajusta el umbral de aceptación de las señales generadas por el modelo primario. 
+    Al filtrar las señales para seleccionar solo aquellas con una mayor probabilidad 
+    de éxito, el Meta-Labeling aumenta $p$, mejorando así el retorno ponderado promedio en el 
+    numerador de la fórmula.
+    
+    \item \textbf{Reducción del Riesgo (\(\sqrt{p \cdot (1 - p)}\))}: Al incrementar \(p\), 
+    se reduce la variabilidad de los resultados, lo que disminuye el riesgo relativo (representado 
+    por el denominador de la fórmula). Esto significa que las operaciones seleccionadas son menos 
+    propensas a ser erráticas, lo que estabiliza el rendimiento de la estrategia.
+    
+    \item \textbf{Ajuste del Número de Operaciones ($n$)}: Aunque el número de operaciones puede 
+    disminuir (menor $n$), las que se realizan tienen una mayor calidad y probabilidad de éxito. 
+    Como \(n\) aparece fuera de la raíz cuadrada en la fórmula, un menor número de operaciones de 
+    alta calidad puede tener un impacto significativo en la mejora del ratio de Sharpe.
+\end{itemize}
+
+
+Por ejemplo, si una estrategia inicialmente genera muchas señales de trading, 
+pero con un alto riesgo de pérdidas, el Meta-Labeling puede reducir estas señales 
+seleccionando solo aquellas con alta probabilidad de éxito, lo que resulta en menos 
+operaciones, pero más seguras. Esto no solo mejora la precisión y el \textit{recall} 
+de la estrategia, sino que también optimiza el ratio de Sharpe al evitar grandes 
+pérdidas y mejorar el rendimiento ajustado al riesgo.
+
+En resumen, el Meta-Labeling permite que una estrategia de trading mejore tanto en 
+términos de rendimiento como de estabilidad, maximizando las ganancias relativas al 
+riesgo asumido. Esta técnica es especialmente valiosa en contextos donde es crucial 
+evitar grandes pérdidas y maximizar la probabilidad de éxito de las 
+operaciones \cite{lopezdeprado2018afml}.
+
+
+\subsubsection{Beneficios del F1-Score y del Control de Tamaño de las Apuestas}
+
+El Meta-Labeling es particularmente útil para lograr mayores \textit{F1-scores}. 
+Primero, se construye un modelo que logre un alto \textit{recall}, incluso si la 
+precisión no es particularmente alta. Luego, se corrige la baja precisión aplicando 
+Meta-Labeling a los positivos identificados por el modelo primario. Esto permite 
+obtener un \textit{F1-score} más equilibrado y un modelo más robusto en la 
+identificación de oportunidades de trading.
+
+Además, el Meta-Labeling permite desarrollar un sistema de ML que, en lugar de 
+ser una caja negra, actúa como una caja blanca, en la que se puede entender y 
+ajustar la lógica detrás de las decisiones tomadas. Esto es crucial para limitar 
+los efectos del sobreajuste, ya que el ML no decide el lado de la apuesta, sino 
+solo el tamaño de la misma. En este sentido, el Meta-Labeling permite gestionar 
+adecuadamente el tamaño de las apuestas, evitando situaciones en las que se 
+logre alta precisión en pequeñas apuestas, pero baja precisión en apuestas 
+grandes, lo que podría llevar a la ruina \cite{lopezdeprado2018afml}.
+
+\subsection{Etiquetado de Datos Financieros}
+
+Para aplicar Meta-Labeling de manera efectiva, es imprescindible etiquetar correctamente 
+los datos financieros. El etiquetado de datos consiste en asignar una etiqueta a cada 
+señal de trading que indique si la operación resultante fue exitosa o fallida. 
+
+Este proceso es crucial, ya que el etiquetado correcto de las señales es lo que 
+permitirá al meta-modelo aprender y predecir la fiabilidad de futuras señales 
+emitidas por el modelo primario.
+
+\subsection{Método del Horizonte Temporal Fijo}
+
+El \textit{método del horizonte temporal fijo} es una técnica ampliamente utilizada en la literatura financiera para etiquetar datos. Este método asigna etiquetas a las observaciones basándose en el retorno del activo durante un período de tiempo predefinido después de que se genera una señal de trading.
+
+\subsubsection{Descripción del Método}
+
+Consideremos:
+
+\begin{itemize}
+    \item Una matriz de características $\mathbf{X}$ con $I$ filas, donde cada fila representa una observación $\mathbf{X}_i$ correspondiente a un instante temporal $t$.
+    \item Un umbral fijo $\tau$ que define la magnitud mínima del retorno necesaria para considerar una operación como exitosa o fallida.
+    \item Un horizonte temporal fijo $h$, que representa el número de barras de tiempo que se observan después de la generación de la señal.
+\end{itemize}
+
+El procedimiento de etiquetado se define de la siguiente manera:
+
+\begin{enumerate}
+    \item \textbf{Generación de la Señal}: En el tiempo $t_{i,0}$, inmediatamente después de observar $\mathbf{X}_i$, se genera una señal de trading.
+    \item \textbf{Cálculo del Retorno}: Se calcula el retorno del precio del activo desde $t_{i,0}$ hasta $t_{i,0} + h$ mediante la siguiente expresión:
+    \begin{equation}
+        r_{t_{i,0}, t_{i,0}+h} = \frac{P_{t_{i,0}+h}}{P_{t_{i,0}}} - 1,
+    \end{equation}
+    donde $P_t$ representa el precio del activo en el tiempo $t$.
+    \item \textbf{Asignación de Etiquetas}: La etiqueta $y_i$ se asigna según el valor de $r_{t_{i,0}, t_{i,0}+h}$ comparado con el umbral $\tau$:
+    \begin{equation}
+        y_i = 
+        \begin{cases} 
+            1 & \text{si } r_{t_{i,0}, t_{i,0}+h} > \tau, \\
+            -1 & \text{si } r_{t_{i,0}, t_{i,0}+h} < -\tau, \\
+            0 & \text{si } |r_{t_{i,0}, t_{i,0}+h}| \leq \tau.
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+
+
+A pesar de su simplicidad y amplia adopción, este método presenta varias limitaciones importantes:
+
+\begin{enumerate}
+    \item \textbf{Ignorancia de la Volatilidad Variable}: El uso de un umbral fijo $\tau$ 
+    no considera que la volatilidad del mercado puede variar significativamente en diferentes 
+    momentos. Por ejemplo, durante períodos de alta volatilidad, un umbral $\tau$ puede 
+    ser demasiado bajo, etiquetando muchas observaciones como positivas o negativas de 
+    manera inapropiada. Contrariamente, durante períodos de baja volatilidad, el mismo 
+    umbral puede ser demasiado alto, resultando en la mayoría de las observaciones 
+    etiquetadas como neutrales.
+    
+    \item \textbf{Desconsideración de la Ruta de Precios}: El método solo considera el 
+    precio inicial y final dentro del horizonte temporal, ignorando el camino seguido 
+    por el precio entre estos puntos.Esto es problemático porque en la práctica, las 
+    estrategias de trading están sujetas a niveles de \textit{stop-loss} y 
+    \textit{take-profit} que pueden activarse antes de que finalice el horizonte temporal.
+    Ignorar estos eventos intermedios puede llevar a etiquetados engañosos que no reflejan 
+    las condiciones reales de mercado y gestión de riesgo.
+
+    \item \textbf{Dependencia de Barras de Tiempo}: El método se basa en barras de tiempo 
+    fijas, que pueden no capturar adecuadamente la actividad del mercado, especialmente 
+    en activos con volúmenes de negociación variables. Esto puede resultar en una 
+    representación inconsistente de la información del mercado y afectar negativamente 
+    la calidad del etiquetado.
+
+\end{enumerate}
+
+Estas limitaciones pueden conducir a un etiquetado inexacto y, por lo tanto, afectar 
+la capacidad del modelo para aprender y predecir efectivamente.
+
+\subsection{Método de las Tres Barreras}
+
+El \textit{Método de las Tres Barreras} (\textit{Three-Barrier Method}) es una 
+técnica alternativa de etiquetado que proporciona una mayor precisión que el 
+método del horizonte temporal fijo, especialmente en entornos de trading donde 
+la ruta seguida por el precio, así como los niveles de \textit{stop-loss} y 
+\textit{take-profit}, son fundamentales.
+
+Este método consiste en definir tres barreras que determinan cómo se etiqueta 
+una observación en función de cuál de ellas es alcanzada primero. Las barreras 
+son las siguientes:
+
+\begin{itemize}
+    \item \textbf{Barrera Superior (\textit{Take Profit})}: Representa un nivel 
+    de precio predefinido que, si se alcanza, indica que la operación ha sido 
+    exitosa. En este caso, se asigna una etiqueta de $y_i = 1$.
+    \item \textbf{Barrera Inferior (\textit{Stop-Loss})}: Es un nivel de 
+    precio que, si se toca primero, indica que la operación ha fallado, por lo 
+    que se asigna una etiqueta de $y_i = -1$.
+    \item \textbf{Barrera Temporal (\textit{Expiration Limit})}: Define el número 
+    máximo de barras de tiempo después de las cuales se fuerza el cierre de la
+    operación, independientemente de si se ha alcanzado alguna de las otras dos 
+    barreras. Si se toca esta barrera antes que las otras, se puede asignar 
+    una etiqueta de $y_i = 0$, o bien, según la preferencia, se puede etiquetar 
+    en función del signo del retorno acumulado hasta ese momento.
+\end{itemize}
+
+\textbf{Figura~\ref{fig:three_barrier_method}} ilustra cómo funcionan estas tres 
+barreras. En la imagen, se observa un ejemplo de trayectoria del precio donde las 
+barreras determinan el etiquetado de la señal:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{./figures/three_barried_method.png}
+    \caption{Ilustración del método de las trés barreras}
+    \label{fig:three_barrier_method}
+\end{figure}
+
+A diferencia del método del horizonte temporal fijo, el \textit{Three-Barrier Method} 
+es dependiente de la ruta (\textit{path-dependent}), lo que significa que toma en cuenta 
+toda la trayectoria del precio desde el momento en que se genera la señal ($t_{i,0}$) 
+hasta que se toca una de las barreras. 
+
+Este método permite etiquetar de manera más realista las operaciones, ya que considera 
+tanto los límites de toma de ganancias y pérdidas como un límite temporal, proporcionando 
+una visión más completa del comportamiento del precio.
+
+Este enfoque también ofrece varias ventajas clave. En primer lugar, al considerar 
+dinámicamente los niveles de toma de ganancias y stop-loss, que pueden ajustarse en 
+función de la volatilidad, el método reduce la probabilidad de etiquetar incorrectamente 
+las observaciones. Esto es especialmente importante en mercados volátiles, donde los 
+precios pueden fluctuar considerablemente en cortos períodos de tiempo. Además, 
+la inclusión de una barrera temporal introduce una capa adicional de control, 
+permitiendo cerrar una operación si no se alcanzan ni el nivel de toma de ganancias 
+ni el de pérdidas dentro del tiempo estipulado, lo que ayuda a evitar situaciones en 
+las que se mantenga una posición de manera indefinida sin obtener un beneficio claro.
+
+En resumen, el \textit{Método de las Tres Barreras} no solo mejora la precisión del 
+etiquetado al tener en cuenta toda la ruta del precio, sino que también proporciona 
+un mecanismo más flexible y adaptativo para la gestión de operaciones en estrategias 
+de trading. Al combinar estos elementos, este método contribuye significativamente a 
+la creación de estrategias de trading más robustas y efectivas, optimizando el 
+rendimiento ajustado al riesgo en un entorno financiero incierto.
+
+
+\chapter{Metodología y Resultados}
+\section{Datos Utilizados}
+
+En este trabajo se utilizarán dos conjuntos de datos financieros: los datos de Bitcoin y los 
+datos del SPY (SPDR S\&P 500 ETF Trust). Ambas series temporales cubren el período desde el 
+1 de enero de 2018 hasta el 30 de junio de 2024. La división de los datos se realizará de la 
+siguiente manera: el conjunto de datos in-sample abarcará desde el inicio de la serie hasta 
+el 31 de diciembre de 2022, mientras que el conjunto de datos out-of-sample cubrirá desde el 
+1 de enero de 2023 hasta el final del periodo.
+
+El conjunto in-sample se utiliza para entrenar los modelos de aprendizaje automático, 
+ajustando los parámetros y calibrando el rendimiento del agente de aprendizaje por refuerzo. 
+Por otro lado, el conjunto out-of-sample sirve para evaluar la generalización del modelo a 
+nuevos datos que no fueron utilizados durante el entrenamiento, proporcionando así una 
+estimación más precisa del rendimiento real del modelo en escenarios futuros. Esta separación 
+es fundamental en inteligencia artificial y machine learning para evitar el sobreajuste y 
+asegurar que el modelo sea robusto y capaz de adaptarse a variaciones en los datos.
+
+
+
+\subsubsection{Datos de Bitcoin}
+
+Bitcoin es una criptomoneda y un sistema de pago descentralizado que ha ganado popularidad y relevancia en los mercados financieros. 
+Los datos de Bitcoin que utilizaremos incluyen los precios de cierre por minuto. A continuación se muestra la serie temporal de precios 
+de Bitcoin:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figures/BTC_USD_Close_Price_Data_2018-2024.png}
+    \caption{Serie Temporal de Precios de Bitcoin}
+    \label{fig:bitcoin-prices}
+\end{figure}
+
+\subsubsection{Datos del SPY}
+
+El SPY es un ETF que sigue el rendimiento del índice S\&P 500. Los datos del SPY que utilizaremos también incluyen los precios de cierre 
+por minuto. A continuación se muestra la serie temporal de precios del SPY:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/SPY_Close_Price_Data_2018-2024.png}
+    \caption{Serie Temporal de Precios del SPY}
+    \label{fig:spy-prices}
+\end{figure}
+\section{Adaptación de la Metodología de barras de desequilibrio con Datos de Minuto}
 
 La metodología presentada en el libro de Marcos López de Prado está diseñada originalmente para trabajar con datos de tick, 
 los cuales proporcionan un registro extremadamente detallado de cada transacción individual en el mercado. Los datos de tick 
@@ -878,482 +1711,6 @@ aplicación de la metodología propuesta.
     \caption{Comparativa de QQ-plots de los retornos del SPY (arriba) y BTC (abajo)}
     \label{fig:qqplot_comparison}
 \end{figure}
-
-\chapter{Deep Reinforcement Learning}
-
-\section{Introducción al Aprendizaje por Refuerzo (Reinforcement Learning)}
-
-\subsection{Definición y Contexto General}
-
-El \textit{Aprendizaje por Refuerzo} (Reinforcement Learning, RL) es una rama de la inteligencia 
-artificial que se centra en cómo un agente aprende a tomar decisiones secuenciales optimizadas 
-mediante la interacción con un entorno dinámico. A diferencia de otros tipos de aprendizaje, como 
-el \textit{aprendizaje supervisado}, donde el modelo aprende patrones extraídos a partir de ejemplos 
-previamente etiquetados, o el \textit{aprendizaje no supervisado}, donde el modelo busca patrones 
-en datos sin etiquetas, el RL implica un aprendizaje activo donde el agente recibe retroalimentación 
-en forma de recompensas o penalizaciones por las acciones que toma. Este proceso permite al 
-agente aprender sin ejemplos de comportamiento óptimo, optimizando en su lugar una señal de recompensa.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{./figures/A-brief-schema-of-Reinforcement-Learning-26.png}
-    \caption{Esquema Reiforcement Learning}
-    \label{fig:RF-schema}
-\end{figure}
-
-En cada paso de tiempo \(t\), el agente recibe una una observación \(O_t\) y una recompensa \(R_t\).
-La observación recibida le permite ejecutar una acción \(A_t\), la cual provocará que el entorno cambie
-y emita una nueva observación \(O_{t+1}\) y una nueva recompensa \(R_{t+1}\).
-
-\subsubsection{Hipótesis de la Recompensa}
-
-Una recompensa \(R_t\) es una señal de retroalimentación escalar que indica cómo de buena ha sido la accion 
-tomada por el agente en el paso \(t\). 
-
-A partir de esta señal de recopensa se formula
-la \textit{hipótesis de la recompensa}, que afirma que en un esquema de aprendizaje por refuerzo, cualquier 
-objetivo puede ser formalizado como el resultado de maximizar una recompensa acumulativa. Es decir, el objetivo del agente puede ser expresado como la maximización de una función de recompensa a lo 
-largo del tiempo.
-
-Esta función de recompensa se conoce como \textit{retorno} (\(G_t\)), y se define matemáticamente como el sumatorio
-de las recompensas futuras, descontadas por un factor de descuento  \(\gamma\):
-
-\[
-G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
-\]
-El retorno \(G_t\) es lo que el agente intenta maximizar, y es la base sobre la cual se definen otros elementos como la función de valor.
-
-
-Esto proporciona un marco ampliamente aplicable en situaciones donde 
-las decisiones se toman en una serie de pasos, lo que incluye problemas de control robótico, juegos, 
-y \textit{trading} financiero.
-
-En el contexto particular del trading financiero, debido a la naturaleza secuencial y dinámica de 
-los mercados, los agentes deben tomar decisiones basadas en información incompleta y en constante 
-cambio, buscando maximizar una recompensa a largo plazo, como la rentabilidad de una cartera.
-
-
-\subsection{Componentes Básicos del Aprendizaje por Refuerzo}
-
-El aprendizaje por refuerzo se formaliza mediante un \textit{Proceso de Decisión de Markov} (MDP), 
-que se define por un cuarteto \(\langle S, A, P, R \rangle\) el cual describe el problema de decisión.
-
-Un MDP se representa por un conjunto de estados \(S\), 
-un conjunto de acciones \(A\), una función de transición de estados \(P(s'|s, a)\), y una función de 
-recompensa \(R(s, a)\). El objetivo del agente es aprender una política \(\pi(a|s)\) que maximice la 
-recompensa acumulada a lo largo del tiempo.
-
-Un proceso de decisión se dice que es Markov si la probabilidad de transición depende únicamente
-del estado y acción actuales, no de la historia completa:
-
-\[
-p(r, s' | S_t, A_t) = p(r, s' | H_t, A_t)
-\]
-
-Esto significa que el estado contiene toda la información relevante de la historia, siendo la historia 
-la secuencia completa de observaciones, acciones y recompensas. No quiere decir que la historia contenga
-toda la información, sino más bien que el añadir cualquier información adicional no afectará la decisión.
-
-\begin{itemize}
-    \item \textbf{Estados (\(S\))}: Representan todas las posibles situaciones en las que se puede 
-    encontrar el agente dentro del entorno.
-    \item \textbf{Acciones (\(A\))}: Conjunto de todas las decisiones que el agente puede tomar 
-    desde cualquier estado dado.
-    \item \textbf{Función de Transición de Estados (\(P\))}: Describe la probabilidad de transitar 
-    del estado \(s\) al estado \(s'\) como resultado de realizar una acción \(a\), es decir, \(P(s'|s, a)\).
-    \item \textbf{Función de Recompensa (\(R\))}: Proporciona una recompensa \(r\) que el agente 
-    recibe al transitar del estado \(s\) al estado \(s'\) al realizar la acción \(a\), es decir, \(R(s, a, s')\).
-\end{itemize}
-
-El objetivo del agente en RL es aprender una \textit{política} \(\pi(a|s)\) que maximice la recompensa 
-acumulada a lo largo del tiempo. La política puede ser determinista, donde una acción específica es 
-seleccionada para cada estado, o estocástica, donde se asigna una distribución de probabilidad a las
-acciones en cada estado.
-
-Un concepto fundamental en RL es la \textit{función de valor}, que mide cuán favorable es un estado 
-o una acción en términos de la recompensa esperada:
-
-\begin{itemize}
-    \item \textbf{Función de Valor de Estado (\(V^{\pi}(s)\))}: Estima la recompensa total esperada 
-    comenzando desde el estado \(s\) y siguiendo la política \(\pi\). Formalmente, se define como:
-    \[
-    V^{\pi}(s) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, \pi\right]
-    \]
-    donde \(\gamma \in [0, 1]\) es el factor de descuento que determina la importancia de las 
-    recompensas futuras. Esta función refleja el valor a largo plazo de estar en un estado particular 
-    bajo una política dada.
-
-    La función de valor del estado, \(V^{\pi}(s)\), trata de cuantificar \textit{cómo de bueno} es 
-    estar en un estado \(s\) cuando se sigue una política \(\pi\).
-
-    \item \textbf{Función de Valor de Acción (\(Q^{\pi}(s, a)\))}: Extiende la función de valor del 
-    estado para considerar no solo el estado \(s\), sino también la acción \(a\) tomada en ese estado. 
-    Esta función estima la recompensa total esperada al tomar la acción \(a\) en el estado \(s\) y 
-    seguir la política \(\pi\) posteriormente:
-    \[
-    Q^{\pi}(s, a) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, a_0 = a, \pi\right]
-    \]
-    La función de valor de la acción, \(Q^{\pi}(s, a)\), trata de medir \textit{cómo de buena} es una 
-    acción \(a\) específica en un estado \(s\) determinado cuando se sigue la política \(\pi\) después.
- 
-\end{itemize}
-
-En resumen, la función del valor del estado, \(V^{\pi}(s)\), mide cuán bueno es estar en un estado dado 
-bajo una política \(\pi\), mientras que \(Q^{\pi}(s, a)\) mide cuán buena es una acción específica en 
-ese estado.
-
-\subsubsection{Política}
-
-La \textbf{política} (\textit{policy}) es la función que guía la selección de acciones en función del estado actual del entorno. Existen dos variantes principales:
-
-\begin{itemize}
-    \item \textbf{Política determinista:} Representada como $\pi(s)$, esta política asigna una acción específica $a$ a cada estado $s$. Formalmente, $\pi(s) = a$, donde $a$ es la acción elegida para el estado $s$.
-
-    \item \textbf{Política estocástica:} Denotada como $\pi(a|s)$, esta política define una distribución de probabilidad sobre las acciones posibles. Es decir, $\pi(a|s) = \mathbb{P}(A = a \mid S = s)$, donde $a$ es seleccionada según la probabilidad correspondiente en el estado $s$.
-\end{itemize}
-
-La política determinista es útil en entornos estables, mientras que la estocástica es preferible en situaciones con alta incertidumbre o donde la exploración es necesaria.
-
-
-\subsubsection{Exploración vs. Explotación}
-
-En el Aprendizaje por Refuerzo, un desafío clave es el equilibrio entre \textit{exploración} y 
-\textit{explotación}. Este balance es fundamental para el aprendizaje efectivo del agente:
-
-\begin{itemize}
-    \item \textbf{Exploración}: El agente intenta nuevas acciones para descubrir si existen mejores 
-    recompensas disponibles. La exploración es crucial cuando el agente no tiene suficiente conocimiento 
-    del entorno y necesita recolectar más información.
-    \item \textbf{Explotación}: El agente selecciona la mejor acción conocida basada en su 
-    política actual para maximizar la recompensa inmediata. La explotación se basa en la información 
-    acumulada y tiene como objetivo maximizar la recompensa a corto plazo.
-\end{itemize}
-
-El \textit{trade-off} entre exploración y explotación es crucial porque un agente que explora 
-demasiado podría no aprovechar las recompensas conocidas, mientras que un agente que explota 
-demasiado podría perder oportunidades para descubrir estrategias más efectivas. 
-
-Existen diversas estrategias para manejar este trade-off, como la \textit{política epsilon-greedy}, 
-donde con una probabilidad \(\epsilon\), el agente explora una acción al azar, y con 
-una probabilidad \(1-\epsilon\), explota la mejor acción conocida. El valor de \(\epsilon\) 
-generalmente disminuye a medida que el agente gana más confianza en su política, lo que permite 
-una mayor explotación con el tiempo.
-
-
-\subsection{El Problema de la Toma de Decisiones Óptimas en el Tiempo - La ecuación de Bellman}
-
-
-En el contexto del aprendizaje por refuerzo, uno de los problemas fundamentales es 
-\textbf{cómo un agente puede tomar decisiones óptimas en situaciones donde las consecuencias de 
-sus acciones no son inmediatas, sino que se extienden en el tiempo}. Las decisiones actuales no 
-solo influyen en la recompensa inmediata, sino también en las recompensas futuras. 
-
-Algunas decisiones pueden ofrecer beneficios inmediatos pero desviar al agente de un objetivo 
-más valioso en el futuro, mientras que otras pueden tener un alto coste presente, pero ser 
-cruciales para un éxito posterior.
-
-Este desafío, conocido como el problema de la maximización del retorno total esperado, 
-requiere una estrategia que considere tanto las recompensas inmediatas como las futuras, 
-ponderadas para reflejar su importancia relativa. La ecuación de Bellman se introduce como 
-una herramienta esencial para descomponer este problema global en subproblemas más manejables, 
-\textbf{permitiendo al agente evaluar el impacto a largo plazo de sus decisiones actuales de 
-manera eficiente y sistemática}.
-
-La ecuación de Bellman descompone el problema global de maximización del retorno total 
-esperado en subproblemas más manejables. 
-
-El valor de un estado \(V^\pi(s)\) bajo una política \(\pi\) se define como el valor esperado 
-del retorno total que se puede obtener comenzando desde ese estado \(s\) y siguiendo la política 
-\(\pi\). Matemáticamente, se expresa como:
-
-\begin{equation}
-V^\pi(s) = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid s_t = s \right]
-\end{equation}
-
-Esta ecuación describe el valor esperado del retorno acumulado desde el estado \(s\). 
-Para hacerla más práctica, es posible descomponer esta expresión en dos partes: la 
-recompensa inmediata y el valor de los estados futuros. Separando el primer término de 
-la suma, se obtiene:
-
-\begin{equation}
-V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma \sum_{k=1}^{\infty} \gamma^{k-1} R_{t+k+1} \mid s_t = s \right]
-\end{equation}
-
-Aquí, \(R_{t+1}\) es la recompensa inmediata obtenida al tomar una acción en el estado \(s\), 
-y el resto de la suma representa el valor descontado de las recompensas futuras, que 
-corresponde al valor de \(V^\pi(s_{t+1})\). De esta forma, es posible reescribir la ecuación como:
-
-\begin{equation}
-V^\pi(s) = \mathbb{E}_\pi \left[ R_{t+1} + \gamma V^\pi(s_{t+1}) \mid s_t = s \right]
-\end{equation}
-
-Para expandir esta expectativa, se consideran todas las posibles acciones \(a\) que el agente 
-puede tomar en el estado \(s\), y todas las posibles transiciones a estados futuros \(s'\) 
-después de tomar la acción \(a\). Esto lleva a la forma completa de la ecuación de Bellman:
-
-\begin{equation}
-V^\pi(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V^\pi(s') \right]
-\end{equation}
-
-Aquí:
-\begin{itemize}
-    \item \(\pi(a|s)\) es la probabilidad de tomar la acción \(a\) dado el estado \(s\).
-    \item \(P(s'|s,a)\) es la probabilidad de transición al estado \(s'\) dado el estado \(s\) y la acción \(a\).
-    \item \(R(s,a,s')\) es la recompensa inmediata por la transición de \(s\) a \(s'\) mediante la acción \(a\).
-    \item \(\gamma\) es el factor de descuento, que pondera la importancia relativa de las recompensas futuras.
-\end{itemize}
-
-Esta ecuación establece que el valor de un estado es la suma de la recompensa inmediata 
-y el valor futuro esperado, ponderado por las probabilidades de las acciones y las 
-transiciones de estado. Así, la ecuación de Bellman permite calcular los valores de 
-los estados de manera recursiva, evaluando tanto el impacto inmediato como el impacto a 
-largo plazo de las decisiones actuales.
-
-\subsubsection{Cálculo Numérico: Iteración de Valores}
-
-Para calcular los valores \(V^\pi(s)\) numéricamente, se suele utilizar un método iterativo. 
-Inicialmente, se asigna un valor arbitrario a cada estado, por ejemplo, \(V_0(s) = 0\) para 
-todos los \(s\). Luego, estos valores se actualizan iterativamente utilizando la ecuación de 
-Bellman:
-
-\begin{equation}
-V_{k+1}(s) = \max_{a} \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V_k(s') \right]
-\end{equation}
-
-El proceso comienza con los estados finales, cuyos valores se pueden calcular directamente. 
-Para un estado final \(s_f\), donde no hay más decisiones ni transiciones posibles, el 
-valor \(V^\pi(s_f)\) se define como:
-
-\begin{equation}
-V^\pi(s_f) = 0 \quad \text{(sin recompensas futuras)} 
-\end{equation}
-
-o, si hay una recompensa final al alcanzar \(s_f\):
-
-\begin{equation}
-V^\pi(s_f) = R_f
-\end{equation}
-
-A partir de estos valores finales, se propaga hacia atrás a través del tiempo, actualizando 
-los valores de los estados anteriores en función de los valores ya calculados de los estados 
-futuros. Este proceso se repite hasta que los valores convergen, es decir, cuando \(V_{k+1}(s) 
-\approx V_k(s)\) para todos los estados \(s\).
-
-
-\subsection{Métodos Clásicos de Aprendizaje por Refuerzo}
-
-Existen varios algoritmos clásicos de RL que permiten a los agentes aprender políticas óptimas. Los 
-algoritmos se clasifican principalmente en dos categorías: \textit{on-policy} y \textit{off-policy}. 
-Estos términos se refieren a la relación entre la política que se está evaluando y mejorando y la 
-política que se está utilizando para generar las acciones y, por lo tanto, las experiencias (es decir, 
-las transiciones estado-acción-recompensa) que se utilizan para actualizar el modelo.
-
-Un algorítmo de tipo \textit{on-policy} es aquel en el que la política que se optimiza es la misma que 
-se utiliza para interactuar con el entorno y generar experiencias.Es decir, se evalúa y mejora la misma
-política que se sigue durante el proceso de aprendizaje. Mientras que un algorítmo del tipo \textit{off-policy}
-es quel en el que la política que se intenta optimizar es diferente de la política utilizada para generar
-las experiencias. Esto permite optimizar una política mientras se sigue otra.
-
-Un ejemplo de algoritmos representativos de cada una de estas categorías son los siguientes:
-
-\begin{itemize}
-    \item \textbf{Q-learning}: Un algoritmo \textit{off-policy} que aprende la función de valor de 
-    acción \(Q(s, a)\) actualizando iterativamente las estimaciones en función de las recompensas recibidas:
-    \[
-    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)\right]
-    \]
-    donde \(\alpha\) es la tasa de aprendizaje. Como algoritmo \textit{off-policy}, Q-learning aprende la 
-    política óptima independientemente de la política que el agente sigue durante la exploración. 
-    Esto significa que la política utilizada para seleccionar acciones (\textit{behavior policy}) 
-    puede ser diferente de la política que se está optimizando (\textit{target policy}).
-
-    \item \textbf{SARSA}: Un algoritmo \textit{on-policy} que, a diferencia de Q-learning, sigue la 
-    política actual para actualizar la función \(Q(s, a)\). La actualización en SARSA se realiza 
-    utilizando la acción que el agente realmente toma, lo que significa que la política utilizada 
-    para seleccionar acciones es la misma que se está optimizando:
-    \[
-    Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)\right]
-    \]
-    Como resultado, SARSA tiende a ser más conservador en su aprendizaje, ya que la política sigue 
-    siendo consistente entre el aprendizaje y la ejecución.
-
-\end{itemize}
-
-
-Los algoritmos \textit{on-policy}, como SARSA, tienen la ventaja de ser coherentes con la política 
-actual, lo que puede resultar en un aprendizaje más seguro y estable en entornos dinámicos. Sin embargo, 
-pueden ser menos eficientes, ya que dependen exclusivamente de las experiencias generadas por la misma 
-política que se está optimizando, lo que puede limitar la exploración. Por otro lado, los algoritmos 
-off-policy, como Q-Learning, son más flexibles y permiten un aprendizaje más eficiente al poder optimizar 
-una política óptima mientras se sigue una política diferente, más exploratoria. Sin embargo, esta 
-flexibilidad puede conllevar complejidad adicional y posibles problemas de estabilidad durante el 
-proceso de aprendizaje.
-
-Estos métodos son fundamentales para entender cómo los agentes pueden aprender a tomar decisiones 
-óptimas en entornos inciertos y son la base sobre la cual se construyen los métodos más avanzados 
-como el \textit{Deep Reinforcement Learning} (DRL).
-
-
-\section{Evolución del Deep Reinforcement Learning (DRL)}
-
-\subsection{Combinación con Redes Neuronales}
-
-El \textit{Deep Reinforcement Learning} (DRL) surge como una evolución natural del 
-\textit{Aprendizaje por Refuerzo} (RL) tradicional, combinando sus principios con la potencia 
-de las redes neuronales profundas (\textit{Deep Learning}). Mientras que los métodos clásicos 
-de RL, como el \textit{Q-learning}, son eficaces en problemas con espacios de estados discretos 
-y de baja dimensionalidad, presentan limitaciones significativas cuando se aplican a entornos 
-complejos y continuos.
-
-El uso de redes neuronales como aproximadores de funciones en RL permitió superar estas 
-limitaciones. Las redes neuronales profundas son capaces de procesar entradas de alta 
-dimensionalidad y de extraer características complejas directamente de los datos sin la necesidad 
-de diseñar manualmente las características relevantes. 
-
-\subsection{Principales Enfoques y Algoritmos de DRL}
-
-El desarrollo de DRL ha dado lugar a diversos enfoques que combinan RL y Deep Learning, dando 
-lugar a algoritmos innovadores que han transformado la forma en que se aborda el aprendizaje 
-por refuerzo en entornos complejos. A continuación, se presentan los enfoques principales en 
-DRL, junto con ejemplos representativos de cada uno.
-
-\subsubsection{Métodos Basados en Funciones de Valor}
-
-Los métodos basados en funciones de valor son aquellos en los que el objetivo es aprender 
-una función que prediga el valor de tomar una acción en un estado dado. El ejemplo más 
-destacado de este enfoque es el \textit{Deep Q-Network} (DQN). DQN, introducido por 
-\textit{DeepMind}, utiliza redes neuronales profundas para aproximar la función \(Q(s, a)\), 
-lo que permitió manejar entornos con espacios de estados grandes y continuos.
-
-En DQN, una red neuronal recibe como entrada el estado del entorno y produce una estimación 
-de los valores \(Q(s, a)\) para cada acción posible. La red se entrena utilizando el 
-algoritmo de \textit{Q-learning} tradicional, pero con varias modificaciones clave para 
-estabilizar el aprendizaje, como el uso de un \textit{buffer} de \textit{replay} para 
-almacenar transiciones de experiencias pasadas y el uso de una red objetivo 
-(\textit{target network}) que se actualiza periódicamente para reducir la inestabilidad 
-en la actualización de los valores \(Q\).
-
-\subsubsection{Métodos de Gradiente de Política}
-
-Los métodos de gradiente de política representan un enfoque alternativo en DRL, en el cual, 
-en lugar de aprender una función de valor, el agente aprende directamente una política 
-parametrizada \(\pi_{\theta}(a|s)\) que maximiza la recompensa esperada. La principal 
-ventaja de estos métodos es su capacidad para manejar espacios de acción continuos y 
-para aprender políticas estocásticas.
-
-Un algoritmo básico dentro de esta categoría es \textit{REINFORCE}, que utiliza el gradiente 
-de la recompensa esperada para actualizar los parámetros de la política. Aunque REINFORCE es 
-sencillo y conceptualmente atractivo, su principal limitación es la alta varianza en las 
-estimaciones del gradiente, lo que puede llevar a un aprendizaje lento y poco estable.
-
-\subsubsection{Métodos Actor-Critic}
-
-Los métodos \textit{Actor-Critic} combinan lo mejor de ambos mundos al utilizar tanto una 
-función de valor como una política parametrizada. En este enfoque, el \textit{actor} es 
-responsable de seleccionar las acciones basadas en la política \(\pi_{\theta}(a|s)\), mientras 
-que el \textit{crítico} estima el valor de la política actual utilizando una función de valor 
-\(V^{\pi}(s)\) o \(Q^{\pi}(s, a)\).
-
-Un ejemplo notable es el \textit{Asynchronous Advantage Actor-Critic} (A3C), que introduce 
-el concepto de ventaja (\textit{advantage}), definida como la diferencia entre el valor de 
-la acción y el valor esperado del estado (\(A(s, a) = Q(s, a) - V(s)\)). A3C mejora la 
-estabilidad del aprendizaje al usar múltiples actores que interactúan con copias del entorno 
-en paralelo, lo que también mejora la eficiencia computacional.
-
-\section{Proximal Policy Optimization (PPO) y su Implementación}
-
-\subsection{Introducción a Proximal Policy Optimization (PPO)}
-
-Proximal Policy Optimization (PPO) es un algoritmo de \textit{Deep Reinforcement Learning} 
-(DRL) desarrollado por \textit{OpenAI}, que ha demostrado ser exitoso en una amplia variedad 
-de tareas, desde el control robótico hasta videojuegos complejos como \textit{Dota 2}. 
-PPO es un método de gradiente de política (\textit{Policy Gradient}), lo que significa 
-que aprende directamente de la experiencia en tiempo real generada por el agente en su 
-interacción con el entorno, a diferencia de los métodos basados en \textit{Q-learning}, 
-que pueden aprender de datos almacenados.
-
-PPO fue diseñado para encontrar un equilibrio entre la eficiencia de la muestra, la facilidad 
-de implementación y la estabilidad en el entrenamiento. Esto lo convierte en una herramienta 
-potente y versátil para abordar problemas de aprendizaje por refuerzo en entornos continuos y 
-de alta dimensionalidad.
-
-En este trabajo, PPO se utilizará para la generación de estrategias de trading, aprovechando 
-su capacidad para manejar entornos complejos y dinámicos como los mercados financieros. Este 
-algoritmo ha sido seleccionado debido a su robustez y simplicidad en la implementación, 
-características que lo hacen ideal para desarrollar una estrategia de trading que pueda 
-adaptarse a las condiciones cambiantes del mercado.
-
-PPO fue presentado por primera vez en el paper de \textit{Schulman et al.} titulado 
-"\textit{Proximal Policy Optimization Algorithms}" \cite{Schulman2017}, que ha sido ampliamente 
-citado en la literatura de aprendizaje por refuerzo debido a su enfoque innovador y eficaz.
-
-\subsection{Descripción Técnica de PPO}
-
-PPO introduce varias mejoras clave en la optimización de políticas para garantizar un 
-aprendizaje más estable. A diferencia de otros métodos que pueden permitir grandes cambios 
-en la política, PPO limita estos cambios para evitar desestabilizar el proceso de entrenamiento.
-
-\subsubsection{Problemas en el Aprendizaje por Refuerzo}
-
-A diferencia del aprendizaje supervisado, donde se trabaja con un conjunto de datos estático, 
-en el aprendizaje por refuerzo el conjunto de datos cambia constantemente porque el agente 
-genera sus propios datos a medida que interactúa con el entorno. Esto provoca que las 
-distribuciones de las observaciones y las recompensas varíen durante el entrenamiento, 
-lo que puede causar inestabilidad.
-
-Además, el aprendizaje por refuerzo es altamente sensible a la configuración de hiperparámetros 
-y la inicialización. Por ejemplo, una tasa de aprendizaje demasiado alta puede llevar a que 
-las actualizaciones de la política desvíen al agente hacia regiones del espacio de parámetros 
-donde su desempeño se deteriora drásticamente, sin posibilidad de recuperación.
-
-\subsubsection{Función de Objetivo en PPO}
-
-PPO aborda estos problemas proponiendo una función de objetivo que maximiza la recompensa 
-esperada mientras limita las actualizaciones de la política para evitar cambios excesivos. 
-La función de objetivo en PPO se expresa como:
-
-\[
-L^{PPO}(\theta) = \mathbb{E}_t \left[ \min\left(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t \right) \right]
-\]
-
-Aquí, \( r_t(\theta) \) es la razón de probabilidad entre la nueva política \(\pi_\theta(a|s)\) 
-y la política antigua \(\pi_{\theta_{\text{old}}}(a|s)\):
-
-\[
-r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{\text{old}}}(a_t|s_t)}
-\]
-
-El término \(\hat{A}_t\) es la estimación de la ventaja, que mide cuánto mejor o peor fue la 
-acción tomada en comparación con lo esperado. El operador \textit{clip} limita el valor de 
-\(r_t(\theta)\) dentro del rango \([1 - \epsilon, 1 + \epsilon]\), con \(\epsilon\) típicamente 
-igual a 0.2, para prevenir que las actualizaciones de la política sean demasiado agresivas,
-manteniendo así la estabilidad del entrenamiento.
-
-\subsubsection{Ventaja y Estimación del Valor}
-
-Para calcular la ventaja \(\hat{A}_t\), PPO utiliza dos componentes:
-
-\begin{itemize}
-    \item \textbf{Retorno descontado}: Es la suma de las recompensas acumuladas, descontadas 
-    por un factor \(\gamma\) que valora más las recompensas inmediatas.
-    \item \textbf{Función de valor}: Estima el valor esperado de estar en un estado dado, 
-    calculando la recompensa total esperada desde ese estado en adelante.
-\end{itemize}
-
-La ventaja se calcula restando la función de valor del retorno descontado, proporcionando 
-una medida de si la acción tomada fue mejor o peor que el promedio esperado.
-
-\subsubsection{Procedimiento de Entrenamiento}
-
-PPO recolecta nuevas trayectorias de interacciones con el entorno en cada iteración, 
-utilizando estas trayectorias para actualizar la política. A diferencia de otros métodos, 
-no utiliza un \textit{replay buffer}, lo que significa que las experiencias se utilizan 
-una sola vez para hacer la actualización, y luego se descartan.
-
-Este proceso iterativo continúa hasta que las mejoras en la política se estabilizan, 
-lo que indica que el algoritmo ha convergido. PPO equilibra la simplicidad y la robustez, 
-permitiendo un entrenamiento estable incluso en entornos complejos y dinámicos.
-
 \section{Implementación del Entorno de Entrenamiento con Gymnasium}
 
 \subsection{Introducción a Gymnasium}
@@ -1529,8 +1886,7 @@ por evitar una pérdida potencial. Inversamente, si el precio de la acción sube
 ha comprado, se le penaliza, lo que fomenta una mayor proactividad en sus decisiones de trading.
 
 Este diseño permite al agente aprender a equilibrar entre maximizar retornos y minimizar riesgos.
-
-\section{Entrenamiento y resultados}
+\subsection{Entrenamiento y resultados}
 
 El entrenamiento del agente PPO se ha realizado con los parámetros presentados en la Tabla \ref{tab:ppo_training_params} 
 sobre las series temporales de los activos SPY y BTC obtenidos en la sección \ref{sec:resultado-imbalance}. 
@@ -1632,360 +1988,6 @@ combinaciones que permitan mejorar los resultados obtenidos.
   
 \end{uselscape}
 
-
-
-
-
-
-
-
-
-\chapter{Meta-labeling}
-
-\section{Concepto y Definición de Meta-Labeling}
-
-
-El \textit{Meta-Labeling} es una técnica avanzada que ha demostrado ser particularmente útil
-en la creación de estrategias de trading robustas, especialmente en el contexto del aprendizaje
-automático y la gestión de riesgos. 
-
-Este método consiste en la superposición de una capa
-adicional de análisis sobre una decisión de trading ya existente, evaluando la probabilidad 
-de éxito de las señales generadas por un modelo base. En lugar de limitarse
-a una sola predicción binaria (por ejemplo, comprar o no comprar un activo), el Meta-
-Labeling aplica una segunda etapa de modelado para determinar si la señal inicial tiene
-una alta probabilidad de ser correcta. Este enfoque permite refinar la decisión final,
-mitigando riesgos y mejorando el rendimiento general del modelo de trading.
-
-El proceso típico de Meta-Labeling involucra dos modelos:
-\begin{enumerate}
-    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: Este modelo genera la señal de 
-    trading.
-    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El meta-modelo se entrena para 
-    predecir la fiabilidad de las señales generadas por el modelo primario. A cada 
-    señal generada por $\mathcal{M}_1$ se le asigna un \textit{meta-label}, que 
-    indica si dicha señal resultó en una operación exitosa o fallida.
-\end{enumerate}
-
-Formalmente, para una observación $i$, el modelo primario $\mathcal{M}_1$ genera 
-una predicción $\hat{y}_i \in \{-1, 0, 1\}$. El meta-label $z_i \in \{0, 1\}$ se 
-define de la siguiente manera:
-
-\[
-z_i = \begin{cases} 
-1 & \text{si la operación resultante de la señal } \hat{y}_i \text{ fue exitosa}, \\
-0 & \text{si la operación resultante de la señal } \hat{y}_i \text{ falló}.
-\end{cases}
-\]
-
-Aquí, $z_i = 1$ indica que la señal emitida por $\mathcal{M}_1$ fue confiable y 
-resultó en una operación exitosa (por ejemplo, una ganancia), mientras que $z_i = 0$ 
-indica que la señal no fue confiable y resultó en una operación fallida (por ejemplo, 
-una pérdida).
-
-El meta-modelo $\mathcal{M}_2$ se entrena utilizando las mismas características 
-$\mathbf{x}_i$ que alimentan al modelo primario, así como la señal generada por 
-$\mathcal{M}_1$, y otros indicadores adicionales que no fueron utilizados en el
-modelo primario. Estos indicadores adicionales pueden incluir variables exógenas 
-o nuevas características que ayuden a mejorar la capacidad del meta-modelo para 
-evaluar la fiabilidad de las señales originales.
-
-Esta estructura de dos niveles ofrece una ventaja significativa, ya que permite 
-refinar las decisiones de trading al evaluar de manera más precisa la 
-probabilidad de éxito de las señales iniciales. El Meta-Labeling, por tanto, 
-no solo añade una capa de seguridad al proceso de toma de decisiones, sino 
-que también mejora la precisión y el rendimiento general de la estrategia de trading.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{./figures/meta_labeling.png}
-    \caption{Diagrama Meta-Labeling (Adaptación de \textit{Hudson and Thames})}
-    \label{fig:meta_labeling_diagram}
-\end{figure}
-
-Uno de los principales beneficios del Meta-Labeling es su capacidad para mejorar 
-el rendimiento de un predictor que, por sí solo, puede no ser suficientemente 
-robusto \cite{does_meta_labeling_add}. Supongamos que $\mathcal{M}_1$ es un modelo 
-primario con una precisión moderada y un \textit{recall} bajo, lo que significa que 
-emite muchas señales incorrectas (falsos positivos). Al aplicar Meta-Labeling, se 
-puede ajustar el \textit{recall} y la precisión, ya que $\mathcal{M}_2$ filtra las 
-señales generadas por $\mathcal{M}_1$, reduciendo el número de falsos positivos.
-
-El rendimiento de un modelo de clasificación se evalúa comúnmente mediante métricas 
-como la precisión y el \textit{recall}. Para un modelo primario $\mathcal{M}_1$, 
-estas métricas se definen como:
-\[
-\text{Precisión} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}},
-\]
-donde TP, FP y FN son verdaderos positivos, falsos positivos y falsos negativos, 
-respectivamente. Si $\mathcal{M}_1$ genera muchas señales falsas (altos FP), 
-la precisión disminuye, lo que puede llevar a decisiones de trading no óptimas.
-
-El Meta-Labeling se propone como una solución a este problema. Al entrenar 
-$\mathcal{M}_2$ para predecir la probabilidad de éxito de las señales de 
-$\mathcal{M}_1$, es posible aumentar la precisión del sistema general. Esto 
-se debe a que $\mathcal{M}_2$ actúa como un filtro adicional que reduce los 
-FP, manteniendo o incluso mejorando el \textit{recall}:
-\[
-\text{Precisión}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FP}_{\text{Meta}}}, \quad \text{Recall}_{\text{Meta}} = \frac{\text{TP}_{\text{Meta}}}{\text{TP}_{\text{Meta}} + \text{FN}_{\text{Meta}}},
-\]
-donde $\text{TP}_{\text{Meta}}$, $\text{FP}_{\text{Meta}}$, y $\text{FN}_{\text{Meta}}$ 
-son los valores ajustados después de aplicar el Meta-Labeling.
-
-
-\subsection{Optimización del Ratio de Sharpe mediante Meta-Labeling}
-
-Uno de los aspectos más destacados del Meta-Labeling es su capacidad para optimizar el 
-ratio de Sharpe de una estrategia de trading, mejorando el rendimiento ajustado al riesgo. 
-
-
-En su forma más general, el ratio de Sharpe se define como la razón entre el exceso 
-de retorno de una inversión sobre la tasa libre de riesgo y la desviación estándar 
-de esos retornos. Sin embargo, en el contexto de resultados binarios, como en las 
-estrategias de trading donde las decisiones se reducen a "ganar" o "perder", el ratio 
-de Sharpe puede adaptarse utilizando la siguiente fórmula, tal como se describe en 
-\textit{Advances in Financial Machine Learning} 
-de Marcos López de Prado:
-
-\[
-\theta(p, n, \pi^-, \pi^+) = \frac{(\pi^+ - \pi^-) p + \pi^-}{(\pi^+ - \pi^-) \sqrt{p \cdot (1 - p)}} \cdot \sqrt{n}
-\]
-
-Donde:
-\begin{itemize}
-    \item $\pi^+$ es el retorno asociado a un resultado positivo.
-    \item $\pi^-$ es el retorno asociado a un resultado negativo.
-    \item $p$ es la probabilidad de obtener un resultado positivo, es decir, la 
-    probabilidad de que una operación sea exitosa.
-    \item $n$ es el número de resultados o decisiones (como el número de 
-    operaciones realizadas en un año).
-\end{itemize}
-
-Esta fórmula captura el rendimiento ajustado al riesgo en situaciones donde las 
-decisiones de trading producen resultados binarios. La diferencia $\pi^+ - \pi^-$ 
-representa el diferencial entre el retorno positivo y el negativo, que se ajusta 
-por la volatilidad de los resultados, medida como $\sqrt{p \cdot (1 - p)}$. Esto 
-refleja la incertidumbre inherente al sistema, basada en la probabilidad de un 
-resultado positivo y la frecuencia de las operaciones.
-Un valor alto de $\theta$ indica que la estrategia tiene un buen rendimiento 
-relativo al riesgo asumido.
-
-
-
-\subsection{Impacto del Meta-Labeling en el Ratio de Sharpe}
-
-El Meta-Labeling puede jugar un papel crucial en la optimización de $\theta$. Cuando 
-las ganancias ($\pi^+$) son significativamente menores que las pérdidas ($\pi^- \ll -\pi^+$), 
-el ratio de Sharpe tiende a ser bajo, lo que refleja una estrategia con un rendimiento 
-ajustado al riesgo desfavorable. En este caso, una forma efectiva de 
-mejorar $\theta$ es aumentando la probabilidad de éxito $p$, aunque a costa de 
-reducir el número de operaciones $n$. Aquí es donde entra en juego el Meta-Labeling.
-
-\begin{itemize}
-    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: El modelo primario es responsable de identificar 
-    las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, 
-    este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en 
-    consecuencia, el ratio de Sharpe.
-    
-    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El modelo secundario se encarga de ajustar el umbral 
-    de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la 
-    capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, 
-    lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
-\end{itemize}
-
-Por lo tanto, el Meta-Labeling puede mejorar \(\theta\) de las siguientes maneras:
-
-\begin{itemize}
-    \item \textbf{Mejora de la Probabilidad de Éxito ($p$)}: Al aplicar Meta-Labeling, 
-    se ajusta el umbral de aceptación de las señales generadas por el modelo primario. 
-    Al filtrar las señales para seleccionar solo aquellas con una mayor probabilidad 
-    de éxito, el Meta-Labeling aumenta $p$, mejorando así el retorno ponderado promedio en el 
-    numerador de la fórmula.
-    
-    \item \textbf{Reducción del Riesgo (\(\sqrt{p \cdot (1 - p)}\))}: Al incrementar \(p\), 
-    se reduce la variabilidad de los resultados, lo que disminuye el riesgo relativo (representado 
-    por el denominador de la fórmula). Esto significa que las operaciones seleccionadas son menos 
-    propensas a ser erráticas, lo que estabiliza el rendimiento de la estrategia.
-    
-    \item \textbf{Ajuste del Número de Operaciones ($n$)}: Aunque el número de operaciones puede 
-    disminuir (menor $n$), las que se realizan tienen una mayor calidad y probabilidad de éxito. 
-    Como \(n\) aparece fuera de la raíz cuadrada en la fórmula, un menor número de operaciones de 
-    alta calidad puede tener un impacto significativo en la mejora del ratio de Sharpe.
-\end{itemize}
-
-
-Por ejemplo, si una estrategia inicialmente genera muchas señales de trading, 
-pero con un alto riesgo de pérdidas, el Meta-Labeling puede reducir estas señales 
-seleccionando solo aquellas con alta probabilidad de éxito, lo que resulta en menos 
-operaciones, pero más seguras. Esto no solo mejora la precisión y el \textit{recall} 
-de la estrategia, sino que también optimiza el ratio de Sharpe al evitar grandes 
-pérdidas y mejorar el rendimiento ajustado al riesgo.
-
-En resumen, el Meta-Labeling permite que una estrategia de trading mejore tanto en 
-términos de rendimiento como de estabilidad, maximizando las ganancias relativas al 
-riesgo asumido. Esta técnica es especialmente valiosa en contextos donde es crucial 
-evitar grandes pérdidas y maximizar la probabilidad de éxito de las 
-operaciones \cite{lopezdeprado2018afml}.
-
-
-\subsubsection{Beneficios del F1-Score y del Control de Tamaño de las Apuestas}
-
-El Meta-Labeling es particularmente útil para lograr mayores \textit{F1-scores}. 
-Primero, se construye un modelo que logre un alto \textit{recall}, incluso si la 
-precisión no es particularmente alta. Luego, se corrige la baja precisión aplicando 
-Meta-Labeling a los positivos identificados por el modelo primario. Esto permite 
-obtener un \textit{F1-score} más equilibrado y un modelo más robusto en la 
-identificación de oportunidades de trading.
-
-Además, el Meta-Labeling permite desarrollar un sistema de ML que, en lugar de 
-ser una caja negra, actúa como una caja blanca, en la que se puede entender y 
-ajustar la lógica detrás de las decisiones tomadas. Esto es crucial para limitar 
-los efectos del sobreajuste, ya que el ML no decide el lado de la apuesta, sino 
-solo el tamaño de la misma. En este sentido, el Meta-Labeling permite gestionar 
-adecuadamente el tamaño de las apuestas, evitando situaciones en las que se 
-logre alta precisión en pequeñas apuestas, pero baja precisión en apuestas 
-grandes, lo que podría llevar a la ruina \cite{lopezdeprado2018afml}.
-
-
-\section{Etiquetado de Datos Financieros}
-
-Para aplicar Meta-Labeling de manera efectiva, es imprescindible etiquetar correctamente 
-los datos financieros. El etiquetado de datos consiste en asignar una etiqueta a cada 
-señal de trading que indique si la operación resultante fue exitosa o fallida. 
-
-Este proceso es crucial, ya que el etiquetado correcto de las señales es lo que 
-permitirá al meta-modelo aprender y predecir la fiabilidad de futuras señales 
-emitidas por el modelo primario.
-
-\subsection{Método del Horizonte Temporal Fijo}
-
-El \textit{método del horizonte temporal fijo} es una técnica ampliamente utilizada en la literatura financiera para etiquetar datos. Este método asigna etiquetas a las observaciones basándose en el retorno del activo durante un período de tiempo predefinido después de que se genera una señal de trading.
-
-\subsubsection{Descripción del Método}
-
-Consideremos:
-
-\begin{itemize}
-    \item Una matriz de características $\mathbf{X}$ con $I$ filas, donde cada fila representa una observación $\mathbf{X}_i$ correspondiente a un instante temporal $t$.
-    \item Un umbral fijo $\tau$ que define la magnitud mínima del retorno necesaria para considerar una operación como exitosa o fallida.
-    \item Un horizonte temporal fijo $h$, que representa el número de barras de tiempo que se observan después de la generación de la señal.
-\end{itemize}
-
-El procedimiento de etiquetado se define de la siguiente manera:
-
-\begin{enumerate}
-    \item \textbf{Generación de la Señal}: En el tiempo $t_{i,0}$, inmediatamente después de observar $\mathbf{X}_i$, se genera una señal de trading.
-    \item \textbf{Cálculo del Retorno}: Se calcula el retorno del precio del activo desde $t_{i,0}$ hasta $t_{i,0} + h$ mediante la siguiente expresión:
-    \begin{equation}
-        r_{t_{i,0}, t_{i,0}+h} = \frac{P_{t_{i,0}+h}}{P_{t_{i,0}}} - 1,
-    \end{equation}
-    donde $P_t$ representa el precio del activo en el tiempo $t$.
-    \item \textbf{Asignación de Etiquetas}: La etiqueta $y_i$ se asigna según el valor de $r_{t_{i,0}, t_{i,0}+h}$ comparado con el umbral $\tau$:
-    \begin{equation}
-        y_i = 
-        \begin{cases} 
-            1 & \text{si } r_{t_{i,0}, t_{i,0}+h} > \tau, \\
-            -1 & \text{si } r_{t_{i,0}, t_{i,0}+h} < -\tau, \\
-            0 & \text{si } |r_{t_{i,0}, t_{i,0}+h}| \leq \tau.
-        \end{cases}
-    \end{equation}
-\end{enumerate}
-
-
-A pesar de su simplicidad y amplia adopción, este método presenta varias limitaciones importantes:
-
-\begin{enumerate}
-    \item \textbf{Ignorancia de la Volatilidad Variable}: El uso de un umbral fijo $\tau$ 
-    no considera que la volatilidad del mercado puede variar significativamente en diferentes 
-    momentos. Por ejemplo, durante períodos de alta volatilidad, un umbral $\tau$ puede 
-    ser demasiado bajo, etiquetando muchas observaciones como positivas o negativas de 
-    manera inapropiada. Contrariamente, durante períodos de baja volatilidad, el mismo 
-    umbral puede ser demasiado alto, resultando en la mayoría de las observaciones 
-    etiquetadas como neutrales.
-    
-    \item \textbf{Desconsideración de la Ruta de Precios}: El método solo considera el 
-    precio inicial y final dentro del horizonte temporal, ignorando el camino seguido 
-    por el precio entre estos puntos.Esto es problemático porque en la práctica, las 
-    estrategias de trading están sujetas a niveles de \textit{stop-loss} y 
-    \textit{take-profit} que pueden activarse antes de que finalice el horizonte temporal.
-    Ignorar estos eventos intermedios puede llevar a etiquetados engañosos que no reflejan 
-    las condiciones reales de mercado y gestión de riesgo.
-
-    \item \textbf{Dependencia de Barras de Tiempo}: El método se basa en barras de tiempo 
-    fijas, que pueden no capturar adecuadamente la actividad del mercado, especialmente 
-    en activos con volúmenes de negociación variables. Esto puede resultar en una 
-    representación inconsistente de la información del mercado y afectar negativamente 
-    la calidad del etiquetado.
-
-\end{enumerate}
-
-Estas limitaciones pueden conducir a un etiquetado inexacto y, por lo tanto, afectar 
-la capacidad del modelo para aprender y predecir efectivamente.
-
-\subsection{Método de las Tres Barreras}
-
-El \textit{Método de las Tres Barreras} (\textit{Three-Barrier Method}) es una 
-técnica alternativa de etiquetado que proporciona una mayor precisión que el 
-método del horizonte temporal fijo, especialmente en entornos de trading donde 
-la ruta seguida por el precio, así como los niveles de \textit{stop-loss} y 
-\textit{take-profit}, son fundamentales.
-
-Este método consiste en definir tres barreras que determinan cómo se etiqueta 
-una observación en función de cuál de ellas es alcanzada primero. Las barreras 
-son las siguientes:
-
-\begin{itemize}
-    \item \textbf{Barrera Superior (\textit{Take Profit})}: Representa un nivel 
-    de precio predefinido que, si se alcanza, indica que la operación ha sido 
-    exitosa. En este caso, se asigna una etiqueta de $y_i = 1$.
-    \item \textbf{Barrera Inferior (\textit{Stop-Loss})}: Es un nivel de 
-    precio que, si se toca primero, indica que la operación ha fallado, por lo 
-    que se asigna una etiqueta de $y_i = -1$.
-    \item \textbf{Barrera Temporal (\textit{Expiration Limit})}: Define el número 
-    máximo de barras de tiempo después de las cuales se fuerza el cierre de la
-    operación, independientemente de si se ha alcanzado alguna de las otras dos 
-    barreras. Si se toca esta barrera antes que las otras, se puede asignar 
-    una etiqueta de $y_i = 0$, o bien, según la preferencia, se puede etiquetar 
-    en función del signo del retorno acumulado hasta ese momento.
-\end{itemize}
-
-\textbf{Figura~\ref{fig:three_barrier_method}} ilustra cómo funcionan estas tres 
-barreras. En la imagen, se observa un ejemplo de trayectoria del precio donde las 
-barreras determinan el etiquetado de la señal:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{./figures/three_barried_method.png}
-    \caption{Ilustración del método de las trés barreras}
-    \label{fig:three_barrier_method}
-\end{figure}
-
-A diferencia del método del horizonte temporal fijo, el \textit{Three-Barrier Method} 
-es dependiente de la ruta (\textit{path-dependent}), lo que significa que toma en cuenta 
-toda la trayectoria del precio desde el momento en que se genera la señal ($t_{i,0}$) 
-hasta que se toca una de las barreras. 
-
-Este método permite etiquetar de manera más realista las operaciones, ya que considera 
-tanto los límites de toma de ganancias y pérdidas como un límite temporal, proporcionando 
-una visión más completa del comportamiento del precio.
-
-Este enfoque también ofrece varias ventajas clave. En primer lugar, al considerar 
-dinámicamente los niveles de toma de ganancias y stop-loss, que pueden ajustarse en 
-función de la volatilidad, el método reduce la probabilidad de etiquetar incorrectamente 
-las observaciones. Esto es especialmente importante en mercados volátiles, donde los 
-precios pueden fluctuar considerablemente en cortos períodos de tiempo. Además, 
-la inclusión de una barrera temporal introduce una capa adicional de control, 
-permitiendo cerrar una operación si no se alcanzan ni el nivel de toma de ganancias 
-ni el de pérdidas dentro del tiempo estipulado, lo que ayuda a evitar situaciones en 
-las que se mantenga una posición de manera indefinida sin obtener un beneficio claro.
-
-En resumen, el \textit{Método de las Tres Barreras} no solo mejora la precisión del 
-etiquetado al tener en cuenta toda la ruta del precio, sino que también proporciona 
-un mecanismo más flexible y adaptativo para la gestión de operaciones en estrategias 
-de trading. Al combinar estos elementos, este método contribuye significativamente a 
-la creación de estrategias de trading más robustas y efectivas, optimizando el 
-rendimiento ajustado al riesgo en un entorno financiero incierto.
-
 \section{Implementación de Meta-Labeling en Trading Algorítmico}
 
 Para la obtención de las etiquetas base (\textit{labels}), que 
@@ -2076,7 +2078,7 @@ variable respuesta, se utiliza el modelo para realizar predicciones sobre el con
 datos \textit{out-of-sample}. 
 
 
-\section{Evaluación del Modelo y Resultados}
+\subsection{Evaluación del Modelo y Resultados}
 
 Una vez entrenado el modelo \textit{XGBoost} con los \textit{meta-labels}, se utiliza para realizar 
 predicciones sobre el conjunto de datos \textit{out-of-sample}. Estas predicciones se emplean para 
@@ -2246,7 +2248,7 @@ para los diferentes conjuntos de datos, antes y después de aplicar el \textit{m
 \end{table}
     
 
-\section{Análisis de Resultados y Conclusiones}
+\subsection{Análisis de Resultados y Conclusiones}
 
 Al examinar los resultados obtenidos tras la aplicación del \textit{meta-labeling}, se observa una tendencia general de 
 deterioro en las métricas de rendimiento del modelo, lo cual contrasta con las expectativas iniciales de mejora. La 
@@ -2301,7 +2303,6 @@ haya sido demasiado restrictivo, eliminando señales que, aunque inicialmente pa
 resultado en operaciones exitosas. Este análisis subraya la necesidad de revisar la metodología de \textit{meta-labeling} 
 utilizada o de explorar alternativas que puedan adaptarse mejor a la naturaleza volátil y compleja de los mercados 
 financieros analizados en este estudio.
-
 
 \section{Resultados Finales: Rendimiento Acumulado de las Estrategias}
 
@@ -2371,8 +2372,6 @@ se resumen los rendimientos finales acumulados para todos los conjuntos de datos
 
 
 
-
-
 \begin{table}[h!]
     \centering
     \begin{tabular}{lccc}
@@ -2429,7 +2428,6 @@ importancia de considerar el rendimiento global de una estrategia de trading, m�
 las métricas individuales de clasificación. El \textit{meta-labeling} se presenta como una 
 metodología que, a pesar de su conservadurismo, logra incrementar la rentabilidad al priorizar 
 la calidad sobre la cantidad de las operaciones ejecutadas.
-
 
 \chapter{Conclusiones}
 

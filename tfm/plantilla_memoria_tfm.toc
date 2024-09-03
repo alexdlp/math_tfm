@@ -12,19 +12,19 @@
 \contentsline {section}{\numberline {2.2}Hechos Estilizados}{5}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Datos de Alta Frecuencia}{6}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Datos Utilizados}{7}{subsection.2.2.2}%
-\contentsline {subsubsection}{Datos de Bitcoin}{7}{section*.5}%
+\contentsline {subsubsection}{Datos de Bitcoin}{8}{section*.5}%
 \contentsline {subsubsection}{Datos del SPY}{8}{section*.6}%
-\contentsline {section}{\numberline {2.3}Métricas Financieras}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Métricas Financieras}{9}{section.2.3}%
 \contentsline {subsubsection}{Cumulative Returns}{9}{section*.7}%
 \contentsline {subsubsection}{Annualized Return}{9}{section*.8}%
 \contentsline {subsubsection}{Sharpe Ratio}{9}{section*.9}%
 \contentsline {subsubsection}{Sortino Ratio}{9}{section*.10}%
-\contentsline {subsubsection}{Maximum Drawdown}{9}{section*.11}%
+\contentsline {subsubsection}{Maximum Drawdown}{10}{section*.11}%
 \contentsline {subsubsection}{Calmar Ratio}{10}{section*.12}%
 \contentsline {subsubsection}{Value at Risk (VaR)}{10}{section*.13}%
 \contentsline {subsubsection}{Alpha}{10}{section*.14}%
 \contentsline {subsubsection}{Beta}{10}{section*.15}%
-\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{11}{section.2.4}%
 \contentsline {subsubsection}{Precision}{11}{section*.16}%
 \contentsline {subsubsection}{Recall}{11}{section*.17}%
 \contentsline {subsubsection}{F1-Score}{11}{section*.18}%
@@ -77,10 +77,15 @@
 \contentsline {subsection}{\numberline {5.2.1}Método del Horizonte Temporal Fijo}{42}{subsection.5.2.1}%
 \contentsline {subsubsection}{Descripción del Método}{42}{section*.38}%
 \contentsline {subsection}{\numberline {5.2.2}Método de las Tres Barreras}{44}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Conclusiones}{45}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Resumen de Hallazgos Principales}{45}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Cumplimiento de los Objetivos}{46}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Limitaciones del Estudio}{46}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Implicaciones Prácticas}{46}{subsection.5.3.4}%
-\contentsline {subsection}{\numberline {5.3.5}Líneas Futuras de Investigación}{47}{subsection.5.3.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{48}{chapter*.39}%
+\contentsline {section}{\numberline {5.3}Implementación de Meta-Labeling en Trading Algorítmico}{45}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Conjunto de Datos de Entrenamiento (\textit {X})}{46}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Evaluación del Modelo y Resultados}{47}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Análisis de Resultados y Conclusiones}{47}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Resultados Finales: Rendimiento Acumulado de las Estrategias}{50}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Conclusiones}{56}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Resumen de los Hallazgos Principales}{56}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Cumplimiento de los Objetivos}{57}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Limitaciones del Estudio}{57}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Implicaciones Prácticas}{58}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Líneas Futuras de Investigación}{59}{section.6.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{61}{chapter*.39}%

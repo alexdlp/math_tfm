@@ -394,11 +394,25 @@ sobrecarga de procesamiento asociada con datos de mayor frecuencia.
 %     \label{fig:minute-data-example}
 % \end{figure}
 
+
 \subsection{Datos Utilizados}
 
-En este trabajo se utilizarán dos conjuntos de datos financieros: los datos de Bitcoin y los datos del SPY (SPDR S\&P 500 500 ETF Trust). 
-A continuación, se describen estos datos, se muestran sus series temporales y se analizan sus propiedades estadísticas para verificar 
-si cumplen con los hechos estilizados mencionados anteriormente.
+En este trabajo se utilizarán dos conjuntos de datos financieros: los datos de Bitcoin y los 
+datos del SPY (SPDR S\&P 500 ETF Trust). Ambas series temporales cubren el período desde el 
+1 de enero de 2018 hasta el 30 de junio de 2024. La división de los datos se realizará de la 
+siguiente manera: el conjunto de datos in-sample abarcará desde el inicio de la serie hasta 
+el 31 de diciembre de 2022, mientras que el conjunto de datos out-of-sample cubrirá desde el 
+1 de enero de 2023 hasta el final del periodo.
+
+El conjunto in-sample se utiliza para entrenar los modelos de aprendizaje automático, 
+ajustando los parámetros y calibrando el rendimiento del agente de aprendizaje por refuerzo. 
+Por otro lado, el conjunto out-of-sample sirve para evaluar la generalización del modelo a 
+nuevos datos que no fueron utilizados durante el entrenamiento, proporcionando así una 
+estimación más precisa del rendimiento real del modelo en escenarios futuros. Esta separación 
+es fundamental en inteligencia artificial y machine learning para evitar el sobreajuste y 
+asegurar que el modelo sea robusto y capaz de adaptarse a variaciones en los datos.
+
+
 
 \subsubsection{Datos de Bitcoin}
 
@@ -1482,7 +1496,7 @@ los siguientes scripts:
 \end{itemize}
 
 \subsubsection{Definición del espacio de observaciones}
-
+\label{sec:espacio_observaciones}
 
 El espacio de observaciones del entorno de trading se ha construido utilizando una 
 combinación de series temporales originales, indicadores técnicos calculados sobre 
@@ -1834,9 +1848,15 @@ mejorar $\theta$ es aumentando la probabilidad de éxito $p$, aunque a costa de
 reducir el número de operaciones $n$. Aquí es donde entra en juego el Meta-Labeling.
 
 \begin{itemize}
-    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: El modelo primario es responsable de identificar las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en consecuencia, el ratio de Sharpe.
+    \item \textbf{Modelo Primario ($\mathcal{M}_1$)}: El modelo primario es responsable de identificar 
+    las señales iniciales de trading, determinando los posibles retornos $\pi^-$ y $\pi^+$. Sin embargo, 
+    este modelo podría generar un número significativo de falsos positivos, lo que reduciría $p$ y, en 
+    consecuencia, el ratio de Sharpe.
     
-    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El modelo secundario se encarga de ajustar el umbral de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
+    \item \textbf{Meta-Modelo ($\mathcal{M}_2$)}: El modelo secundario se encarga de ajustar el umbral 
+    de aceptación para filtrar las señales generadas por el modelo primario. Este modelo tiene la 
+    capacidad de incrementar $p$ seleccionando solo las señales con mayor probabilidad de éxito, 
+    lo que reduce el número total de operaciones $n$, pero mejora la calidad de las mismas.
 \end{itemize}
 
 Por lo tanto, el Meta-Labeling puede mejorar \(\theta\) de las siguientes maneras:
@@ -1845,11 +1865,18 @@ Por lo tanto, el Meta-Labeling puede mejorar \(\theta\) de las siguientes manera
     \item \textbf{Mejora de la Probabilidad de Éxito ($p$)}: Al aplicar Meta-Labeling, 
     se ajusta el umbral de aceptación de las señales generadas por el modelo primario. 
     Al filtrar las señales para seleccionar solo aquellas con una mayor probabilidad 
-    de éxito, el Meta-Labeling aumenta $p$, mejorando así el retorno ponderado promedio en el numerador de la fórmula.
+    de éxito, el Meta-Labeling aumenta $p$, mejorando así el retorno ponderado promedio en el 
+    numerador de la fórmula.
     
-    \item \textbf{Reducción del Riesgo (\(\sqrt{p \cdot (1 - p)}\))}: Al incrementar \(p\), se reduce la variabilidad de los resultados, lo que disminuye el riesgo relativo (representado por el denominador de la fórmula). Esto significa que las operaciones seleccionadas son menos propensas a ser erráticas, lo que estabiliza el rendimiento de la estrategia.
+    \item \textbf{Reducción del Riesgo (\(\sqrt{p \cdot (1 - p)}\))}: Al incrementar \(p\), 
+    se reduce la variabilidad de los resultados, lo que disminuye el riesgo relativo (representado 
+    por el denominador de la fórmula). Esto significa que las operaciones seleccionadas son menos 
+    propensas a ser erráticas, lo que estabiliza el rendimiento de la estrategia.
     
-    \item \textbf{Ajuste del Número de Operaciones ($n$)}: Aunque el número de operaciones puede disminuir (menor $n$), las que se realizan tienen una mayor calidad y probabilidad de éxito. Como \(n\) aparece fuera de la raíz cuadrada en la fórmula, un menor número de operaciones de alta calidad puede tener un impacto significativo en la mejora del ratio de Sharpe.
+    \item \textbf{Ajuste del Número de Operaciones ($n$)}: Aunque el número de operaciones puede 
+    disminuir (menor $n$), las que se realizan tienen una mayor calidad y probabilidad de éxito. 
+    Como \(n\) aparece fuera de la raíz cuadrada en la fórmula, un menor número de operaciones de 
+    alta calidad puede tener un impacto significativo en la mejora del ratio de Sharpe.
 \end{itemize}
 
 
@@ -1999,7 +2026,6 @@ barreras determinan el etiquetado de la señal:
     \label{fig:three_barrier_method}
 \end{figure}
 
-
 A diferencia del método del horizonte temporal fijo, el \textit{Three-Barrier Method} 
 es dependiente de la ruta (\textit{path-dependent}), lo que significa que toma en cuenta 
 toda la trayectoria del precio desde el momento en que se genera la señal ($t_{i,0}$) 
@@ -2026,62 +2052,665 @@ de trading. Al combinar estos elementos, este método contribuye significativame
 la creación de estrategias de trading más robustas y efectivas, optimizando el 
 rendimiento ajustado al riesgo en un entorno financiero incierto.
 
-% Consiste en la utilización de un modelo secundario para afinar las predicciones del primario.
+\section{Implementación de Meta-Labeling en Trading Algorítmico}
 
-% \begin{itemize}
-%    \item \textbf{Generación de señales}: El modelo primario genera señales
-%    \item \textbf{Asignación de labeles}: Cada señal generada por el modelo primario se etiqueta como correcta o incorrecta en base al rendimiento observado.
-%    \item El libro propone varias maneras de hacerlo.
-%    \item \textbf{Entrenamiento del meta-modelo}: El meta-modelo se entrena utilizando estas etiquetas y otras features adicionales que puedan influir en la precision de la señla.
-%    \item \textbf{Prediccion de la calidad de la señales}: Una vez entrenado, el meta-modelo se utiliza para predecir la probabilidad de que las 
-%    futuras señales del modelo primario sean correctas.
-% \end{itemize}
+Para la obtención de las etiquetas base (\textit{labels}), que 
+son fundamentales para evaluar las señales generadas por el modelo primario, se han 
+desarrollado una serie de funciones que procesan los datos históricos de precios.
 
-\section{Conclusiones}
+A continuación, se describen brevemente las funciones desarrolladas:
 
-\subsection{Resumen de Hallazgos Principales}
+\begin{itemize}
+    
+    \item \texttt{calculate\_rolling\_volatility}: Calcula la volatilidad móvil de 
+    los precios de cierre, utilizando una media móvil ponderada exponencialmente (EWMA). 
+    Esta volatilidad es esencial para definir los umbrales de \textit{stop loss} y 
+    \textit{take profit}.
+    
+    \item \texttt{get\_horizons}: Determina los horizontes temporales futuros en 
+    los que se evalúan las señales de trading. Define el tiempo máximo (en minutos) 
+    para que un evento de \textit{stop loss} o \textit{take profit} ocurra.
+    
+    \item \texttt{get\_touches}: Calcula los puntos en el tiempo donde los precios 
+    tocan los niveles de \textit{stop loss} y \textit{take profit}, según los 
+    umbrales definidos por la volatilidad móvil.
+    
+    \item \texttt{get\_labels}: Asigna las etiquetas finales a las señales de 
+    trading basándose en los resultados de las funciones anteriores. Define si 
+    una señal es exitosa (\textit{take profit}), fallida (\textit{stop loss}), 
+    o neutra.
 
-A lo largo de este trabajo, se han implementado y evaluado varias técnicas avanzadas en el contexto de la creación de estrategias de trading, con el objetivo de determinar su efectividad y utilidad en la práctica.
+    \item \texttt{process\_ohlc\_data}: Procesa los datos OHLC (Open, High, Low, 
+    Close) para generar etiquetas de eventos mediante la orquestación del resto 
+    de funciones.
+    
+\end{itemize}
 
-En primer lugar, la implementación de barras de desequilibrio de volumen y dólares ha demostrado ser una alternativa viable a las barras de tiempo tradicionales. Estas barras han ofrecido una representación más precisa de la actividad del mercado, capturando mejor los puntos de desequilibrio entre oferta y demanda. Los resultados muestran que las estrategias basadas en estas barras tienden a ser más sensibles a los cambios en la dinámica del mercado, lo que puede mejorar la identificación de oportunidades de trading.
 
-Por otro lado, el entrenamiento de un algoritmo de \textit{deep reinforcement learning} sobre estas barras de desequilibrio ha producido resultados mixtos. Aunque se observó una mejora en la capacidad del agente para adaptarse a las condiciones del mercado en comparación con las barras de tiempo, la complejidad del modelo y la necesidad de un ajuste fino han presentado desafíos adicionales. Sin embargo, estos resultados sugieren que, con una optimización adecuada, las barras de desequilibrio podrían ofrecer una base sólida para estrategias de trading más adaptativas.
+Las etiquetas base (\textit{labels}) se generan evaluando el comportamiento de las 
+señales de trading en relación con la volatilidad diaria y un horizonte temporal 
+predefinido. La volatilidad diaria, calculada mediante la función 
+\texttt{calculate\_rolling\_volatility}, se utiliza para establecer los umbrales 
+que determinan si una señal es exitosa o fallida. Cuando una señal supera el 
+umbral superior definido por la volatilidad móvil diaria, se le asigna la 
+etiqueta \textbf{1} (\textit{take profit}). Si, por el contrario, la señal cae 
+por debajo del umbral inferior, se etiqueta como \textbf{-1} (\textit{stop loss}).
 
-Finalmente, la aplicación de la técnica de \textit{Meta-Labeling} ha mostrado un impacto positivo en la precisión de las señales generadas por el modelo de \textit{deep reinforcement learning}. Al actuar como una capa adicional de validación, el \textit{Meta-Labeling} ha mejorado las métricas de precisión y \textit{recall}, lo que sugiere que esta técnica es especialmente útil para filtrar señales y reducir la incidencia de operaciones fallidas. Este refinamiento ha permitido optimizar el rendimiento ajustado al riesgo, haciendo que la estrategia de trading sea más robusta en entornos volátiles.
+Para aquellas señales que no alcanzan ni el límite superior ni el inferior dentro 
+de un horizonte temporal específico, se utiliza la función \texttt{get\_horizons}, 
+que asigna la etiqueta \textbf{0}. Este horizonte temporal se ha fijado en un 
+periodo de 5 días, equivalente a 7200 minutos (\texttt{60*24*5}).
 
-\subsection{Cumplimiento de los Objetivos}
+Finalmente, la función \texttt{get\_labels} consolida estas decisiones, asignando 
+la etiqueta correspondiente a cada muestra de datos. Así, las etiquetas base 
+reflejan con precisión el comportamiento de las señales en función de los umbrales 
+de volatilidad y los horizontes temporales establecidos.
 
-Los objetivos planteados al inicio de este trabajo se han cumplido en gran medida. En primer lugar, se ha logrado desarrollar y evaluar una estrategia de trading utilizando técnicas avanzadas como las barras de desequilibrio, el \textit{deep reinforcement learning}, y el \textit{Meta-Labeling}. Estos esfuerzos han resultado en una comprensión más profunda de cómo estas herramientas pueden integrarse para mejorar el rendimiento de las estrategias de trading.
+Una vez obtenidas las etiquetas base (\textit{labels}) para las señales de trading, se procede a la creación de los \textit{meta-labels}. Los \textit{meta-labels} se generan al comparar las señales predichas por el modelo primario de trading con las etiquetas base:
 
-Además, se ha aprendido a implementar y ajustar algoritmos de \textit{deep reinforcement learning}, aprovechando librerías como \textit{Gymnasium} y \textit{Stable Baselines}. A través de la comparación de diferentes enfoques, se ha demostrado que el uso de barras de desequilibrio y \textit{Meta-Labeling} puede proporcionar ventajas significativas en ciertos contextos. Aunque se encontraron desafíos en la implementación, especialmente en términos de ajuste y optimización, el proceso ha sido valioso para adquirir habilidades prácticas en el uso de estas metodologías.
+\begin{itemize}
+    \item Si la señal predicha por el modelo coincide con la etiqueta base (\textit{label} = 1 o \textit{label} = -1), el \textit{meta-label} se asigna como \textbf{1}, indicando un éxito.
+    \item Si la señal predicha por el modelo no coincide con la etiqueta base o si la etiqueta base es 0, el \textit{meta-label} se asigna como \textbf{0}, indicando un fracaso.
+\end{itemize}
 
-Finalmente, la comparativa entre técnicas ha revelado insights importantes sobre su efectividad y sus limitaciones. Los resultados obtenidos sugieren que, aunque cada técnica tiene sus propios méritos, la combinación de barras de desequilibrio y \textit{Meta-Labeling} ofrece un enfoque prometedor para desarrollar estrategias de trading más adaptativas y precisas.
+De esta manera, los \textit{meta-labels} se utilizan como la variable respuesta (\textit{y}) en el proceso de entrenamiento del modelo de \textit{XGBoost}.
 
-\subsection{Limitaciones del Estudio}
+\subsection{Conjunto de Datos de Entrenamiento (\textit{X})}
 
-A pesar de los resultados positivos, este estudio presenta algunas limitaciones que deben tenerse en cuenta. Una de las principales limitaciones es la complejidad técnica asociada con la implementación y ajuste de los algoritmos de \textit{deep reinforcement learning}. La necesidad de un poder computacional significativo y el tiempo requerido para entrenar estos modelos ha sido un desafío constante durante la investigación.
+El conjunto de datos de entrada (\textit{X}) para el modelo \textit{XGBoost} se conforma a 
+partir de varias fuentes:
 
-Otra limitación importante es la generalización de los resultados. Los experimentos realizados se basaron en datos específicos y en un conjunto limitado de escenarios de mercado. Por lo tanto, los resultados obtenidos pueden no ser directamente aplicables a otros mercados o condiciones sin una adecuada recalibración de los modelos.
+\begin{itemize}
+    \item \textbf{Datos originales de mercado}: Datos originales de mercado utilizados para 
+    el entrenamiento del modelo \textit{PPO} presentados en la Sección \ref{sec:espacio_observaciones}.
+    \item \textbf{Señales del modelo primario}: Señales generadas por el modelo 
+    principal de trading que indican puntos de entrada o salida en el mercado, $\mathcal{A} = \{-1, 0, 1\}$.
+    \item \textbf{Indicador basado en cadenas de Markov}: Las cadenas de Markov ocultas 
+    (\textit{Hidden Markov Models}, HMM) son modelos estadísticos que permiten describir 
+    un sistema que cambia de estado de manera probabilística. En el contexto de series 
+    temporales financieras, un \textit{HMM} puede identificar diferentes regímenes del 
+    mercado, que corresponden a distintos patrones de comportamiento en los precios, 
+    como fases de alta volatilidad o de mercado estable. Cada régimen se define como 
+    un estado oculto en la cadena de Markov, y las transiciones entre estados se 
+    modelan en función de probabilidades. Este indicador se introduce como un 
+    componente adicional en el conjunto de datos de entrada (\textit{X}).
+    
+\end{itemize}
 
-Además, la dependencia de la calidad de los datos también representa una limitación significativa. La efectividad de las barras de desequilibrio y del \textit{Meta-Labeling} está estrechamente ligada a la precisión y la integridad de los datos utilizados. Cualquier anomalía en los datos podría haber afectado los resultados y, en consecuencia, las conclusiones derivadas de este estudio.
+Una vez entrenado el modelo de \textit{XGBoost} utilizando los \textit{meta-labels} como 
+variable respuesta, se utiliza el modelo para realizar predicciones sobre el conjunto de 
+datos \textit{out-of-sample}. 
 
-\subsection{Implicaciones Prácticas}
 
-Los hallazgos de este trabajo tienen importantes implicaciones prácticas para el desarrollo de estrategias de trading en el entorno financiero actual. En primer lugar, la adopción de barras de desequilibrio como una alternativa a las barras de tiempo tradicionales ofrece a los traders y desarrolladores de algoritmos una herramienta más afinada para capturar la dinámica del mercado. Esto podría mejorar la precisión de las estrategias de trading, especialmente en mercados donde la volatilidad y el volumen juegan un papel crucial.
+\section{Evaluación del Modelo y Resultados}
 
-El uso de \textit{deep reinforcement learning} en conjunto con barras de desequilibrio también muestra un gran potencial para desarrollar estrategias más adaptativas, capaces de ajustarse a las condiciones cambiantes del mercado. Sin embargo, la complejidad de su implementación sugiere que, aunque es prometedora, esta técnica requiere un enfoque cuidadoso y una considerable inversión en recursos computacionales.
+Una vez entrenado el modelo \textit{XGBoost} con los \textit{meta-labels}, se utiliza para realizar 
+predicciones sobre el conjunto de datos \textit{out-of-sample}. Estas predicciones se emplean para 
+filtrar las señales generadas por el modelo primario. El proceso de filtrado es sencillo: si la 
+predicción del \textit{meta-label} es 1, la señal del modelo primario prevalece; en caso contrario, 
+la señal es descartada.
 
-Por último, la técnica de \textit{Meta-Labeling} podría ser particularmente valiosa para los gestores de riesgo y desarrolladores de estrategias que buscan mejorar la precisión de sus modelos sin sacrificar la flexibilidad. Al refinar las señales generadas por el modelo primario, el \textit{Meta-Labeling} ayuda a reducir la exposición a operaciones fallidas, lo que podría traducirse en una mejor gestión del riesgo y una optimización del rendimiento ajustado al riesgo.
+Este enfoque permite mejorar la robustez de las decisiones de trading, asegurando que solo se 
+consideren aquellas señales que han sido validadas por el proceso de \textit{meta-labeling}. Para 
+evaluar el impacto de este filtro, se comparan las señales del modelo primario con los \textit{labels} 
+obtenidos mediante la técnica \textit{Three Barrier Method} en el conjunto de 
+datos \textit{out-of-sample}, tanto antes como después de aplicar el \textit{meta-labeling}.
 
-\subsection{Líneas Futuras de Investigación}
+Es importante señalar que, debido a las limitaciones computacionales y el tiempo necesario para 
+procesar el gran volumen de datos, no fue posible generar las señales del modelo primario sobre el 
+conjunto de datos \textit{in-sample} para los datos originales de BTC. Por esta razón, los 
+resultados correspondientes a este caso no se presentan en este análisis.
 
-Este trabajo abre varias posibles líneas de investigación futura. Una dirección interesante sería explorar mejoras en las técnicas implementadas, particularmente en la optimización de los algoritmos de \textit{deep reinforcement learning}. Ajustes en los hiperparámetros, la incorporación de técnicas de aprendizaje más avanzadas, o la combinación con otros métodos de \textit{machine learning} podrían resultar en mejoras significativas en la efectividad de las estrategias de trading.
+Las métricas de evaluación se presentan en forma de un reporte de clasificación multiclase, donde 
+las clases son -1, 0, y 1. Este reporte permite analizar el desempeño del modelo en términos de 
+\textit{precision}, \textit{recall} y \textit{f1-score}, para cada una de las clases, 
+así como la \textit{accuracy} general del modelo. A continuación, se muestran las comparativas 
+para los diferentes conjuntos de datos, antes y después de aplicar el \textit{meta-labeling}.
 
-Otra área de investigación futura podría centrarse en la aplicación de estas técnicas en diferentes mercados o activos financieros. Esto permitiría evaluar la robustez y generalización de los resultados obtenidos, así como adaptar las estrategias a distintos contextos financieros.
 
-Además, sería valioso investigar la integración de nuevas fuentes de datos o indicadores en las estrategias de trading, como datos alternativos o indicadores de sentimiento, que podrían complementar los enfoques actuales y proporcionar una visión más completa del mercado.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    \textbf{Clase} & \textbf{Métrica} & \textbf{Antes (BTC Dollar)} & \textbf{Después (BTC Dollar)} \\
+    \hline
+    \multirow{3}{*}{\textbf{-1.0}} & \textbf{Precision} & 0.48 & 0.48 \\
+                                   & \textbf{Recall}    & 0.30 & 0.24 \\
+                                   & \textbf{F1-Score}  & 0.37 & 0.32 \\
+                                   & \textbf{Support}   & 76435 & 76435 \\
+    \hline
+    \multirow{3}{*}{\textbf{0.0}} & \textbf{Precision}  & 0.00 & 0.00 \\
+                                  & \textbf{Recall}     & 0.48 & 0.73 \\
+                                  & \textbf{F1-Score}   & 0.00 & 0.00 \\
+                                  & \textbf{Support}    & 52 & 52 \\
+    \hline
+    \multirow{3}{*}{\textbf{1.0}} & \textbf{Precision}  & 0.52 & 0.54 \\
+                                  & \textbf{Recall}     & 0.34 & 0.09 \\
+                                  & \textbf{F1-Score}   & 0.41 & 0.15 \\
+                                  & \textbf{Support}    & 81919 & 81919 \\
+    \hline
+    \textbf{General} & \textbf{Accuracy} & 0.32 & 0.16 \\
+    \hline
+    \end{tabular}
+    \caption{Comparación del reporte de clasificación antes y después de aplicar \textit{meta-labeling} para BTC Dollar.}
+    \label{tab:classification_report_btc_dollar}
+\end{table}
 
-En resumen, aunque este trabajo ha proporcionado resultados prometedores, la investigación en el campo del \textit{deep reinforcement learning} aplicado al trading está lejos de ser concluyente. Existe un vasto potencial para continuar explorando y refinando estas técnicas, y las contribuciones de este estudio representan solo el comienzo de un camino mucho más amplio y complejo en la intersección entre \textit{machine learning} y finanzas.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    \textbf{Clase} & \textbf{Métrica} & \textbf{Antes (BTC Volume)} & \textbf{Después (BTC Volume)} \\
+    \hline
+    \multirow{3}{*}{\textbf{-1.0}} & \textbf{Precision} & 0.48 & 0.48 \\
+                                    & \textbf{Recall}    & 0.24 & 0.15 \\
+                                    & \textbf{F1-Score}  & 0.32 & 0.23 \\
+                                    & \textbf{Support}   & 5503 & 5503 \\
+    \hline
+    \multirow{3}{*}{\textbf{0.0}} & \textbf{Precision}  & 0.00 & 0.00 \\
+                                    & \textbf{Recall}     & 0.00 & 0.00 \\
+                                    & \textbf{F1-Score}   & 0.00 & 0.00 \\
+                                    & \textbf{Support}    & 0 & 0 \\
+    \hline
+    \multirow{3}{*}{\textbf{1.0}} & \textbf{Precision}  & 0.53 & 0.52 \\
+                                    & \textbf{Recall}     & 0.13 & 0.06 \\
+                                    & \textbf{F1-Score}   & 0.21 & 0.11 \\
+                                    & \textbf{Support}    & 6066 & 6066 \\
+    \hline
+    \textbf{General} & \textbf{Accuracy} & 0.18 & 0.10 \\
+    \hline
+    \end{tabular}
+    \caption{Comparación del reporte de clasificación antes y después de aplicar \textit{meta-labeling} para BTC Volume.}
+    \label{tab:classification_report_btc_volume}
+\end{table}
+    
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    \textbf{Clase} & \textbf{Métrica} & \textbf{Antes (SPY Original)} & \textbf{Después (SPY Original)} \\
+    \hline
+    \multirow{3}{*}{\textbf{-1.0}} & \textbf{Precision} & 0.46 & 0.45 \\
+                                   & \textbf{Recall}    & 0.25 & 0.12 \\
+                                   & \textbf{F1-Score}  & 0.32 & 0.19 \\
+                                   & \textbf{Support}   & 22352 & 22352 \\
+    \hline
+    \multirow{3}{*}{\textbf{0.0}} & \textbf{Precision}  & 0.01 & 0.01 \\
+                                  & \textbf{Recall}     & 0.33 & 0.71 \\
+                                  & \textbf{F1-Score}   & 0.01 & 0.01 \\
+                                  & \textbf{Support}    & 326 & 326 \\
+    \hline
+    \multirow{3}{*}{\textbf{1.0}} & \textbf{Precision}  & 0.53 & 0.54 \\
+                                  & \textbf{Recall}     & 0.40 & 0.15 \\
+                                  & \textbf{F1-Score}   & 0.46 & 0.23 \\
+                                  & \textbf{Support}    & 25478 & 25478 \\
+    \hline
+    \textbf{General} & \textbf{Accuracy} & 0.33 & 0.14 \\
+    \hline
+    \end{tabular}
+    \caption{Comparación del reporte de clasificación antes y después de aplicar \textit{meta-labeling} para SPY Original.}
+    \label{tab:classification_report_spy_original}
+\end{table}
+    
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    \textbf{Clase} & \textbf{Métrica} & \textbf{Antes (SPY Volume)} & \textbf{Después (SPY Volume)} \\
+    \hline
+    \multirow{3}{*}{\textbf{-1.0}} & \textbf{Precision} & 0.46 & 0.49 \\
+                                   & \textbf{Recall}    & 0.42 & 0.18 \\
+                                   & \textbf{F1-Score}  & 0.44 & 0.26 \\
+                                   & \textbf{Support}   & 1540 & 1540 \\
+    \hline
+    \multirow{3}{*}{\textbf{0.0}} & \textbf{Precision}  & 0.01 & 0.01 \\
+                                  & \textbf{Recall}     & 0.24 & 0.76 \\
+                                  & \textbf{F1-Score}   & 0.01 & 0.02 \\
+                                  & \textbf{Support}    & 29 & 29 \\
+    \hline
+    \multirow{3}{*}{\textbf{1.0}} & \textbf{Precision}  & 0.53 & 0.52 \\
+                                  & \textbf{Recall}     & 0.19 & 0.09 \\
+                                  & \textbf{F1-Score}   & 0.28 & 0.16 \\
+                                  & \textbf{Support}    & 1847 & 1847 \\
+    \hline
+    \textbf{General} & \textbf{Accuracy} & 0.29 & 0.14 \\
+    \hline
+    \end{tabular}
+    \caption{Comparación del reporte de clasificación antes y después de aplicar \textit{meta-labeling} para SPY Volume.}
+    \label{tab:classification_report_spy_volume}
+\end{table}
+    
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    \textbf{Clase} & \textbf{Métrica} & \textbf{Antes (SPY Dollar)} & \textbf{Después (SPY Dollar)} \\
+    \hline
+    \multirow{3}{*}{\textbf{-1.0}} & \textbf{Precision} & 0.45 & 0.46 \\
+                                   & \textbf{Recall}    & 0.31 & 0.13 \\
+                                   & \textbf{F1-Score}  & 0.37 & 0.20 \\
+                                   & \textbf{Support}   & 3759 & 3759 \\
+    \hline
+    \multirow{3}{*}{\textbf{0.0}} & \textbf{Precision}  & 0.01 & 0.01 \\
+                                  & \textbf{Recall}     & 0.36 & 0.79 \\
+                                  & \textbf{F1-Score}   & 0.02 & 0.02 \\
+                                  & \textbf{Support}    & 67 & 67 \\
+    \hline
+    \multirow{3}{*}{\textbf{1.0}} & \textbf{Precision}  & 0.53 & 0.51 \\
+                                  & \textbf{Recall}     & 0.39 & 0.10 \\
+                                  & \textbf{F1-Score}   & 0.45 & 0.17 \\
+                                  & \textbf{Support}    & 4429 & 4429 \\
+    \hline
+    \textbf{General} & \textbf{Accuracy} & 0.35 & 0.12 \\
+    \hline
+    \end{tabular}
+    \caption{Comparación del reporte de clasificación antes y después de aplicar \textit{meta-labeling} para SPY Dollar.}
+    \label{tab:classification_report_spy_dollar}
+\end{table}
+    
+
+\section{Análisis de Resultados y Conclusiones}
+
+Al examinar los resultados obtenidos tras la aplicación del \textit{meta-labeling}, se observa una tendencia general de 
+deterioro en las métricas de rendimiento del modelo, lo cual contrasta con las expectativas iniciales de mejora. La 
+comparación entre los resultados obtenidos antes y después de aplicar el \textit{meta-labeling} en los diferentes 
+conjuntos de datos revela que, en la mayoría de los casos, la \textit{accuracy}, el \textit{recall} y el \textit{f1-score} 
+se vieron negativamente afectados.
+
+En el caso de BTC Dollar, se observó que, aunque la precisión para las clases -1 y 1 se mantuvo relativamente 
+constante o incluso mejoró ligeramente, el \textit{recall} disminuyó significativamente. Este descenso en el \textit{recall} 
+sugiere que el modelo fue menos efectivo en identificar correctamente tanto las señales positivas como negativas después de 
+aplicar el \textit{meta-labeling}. Esto se traduce en una menor capacidad del modelo para aprovechar las oportunidades de 
+trading o para evitar operaciones potencialmente fallidas, lo que impacta negativamente en el \textit{f1-score} general.
+
+Una tendencia similar se observó en BTC Volume, donde la \textit{accuracy} general se redujo de 0.18 a 0.10 tras el 
+\textit{meta-labeling}. En este caso, el \textit{recall} para la clase 1.0 (señales positivas) también disminuyó 
+considerablemente, lo que indica que el modelo perdió eficacia al identificar correctamente las señales de éxito. 
+Este resultado pone en evidencia que, aunque el \textit{meta-labeling} pretende filtrar y mejorar la calidad de las 
+señales del modelo primario, en la práctica, podría estar eliminando señales que, a pesar de su menor confianza 
+inicial, habrían resultado en operaciones exitosas.
+
+Para SPY, tanto en los conjuntos de datos originales como en los basados en volumen y dólares, el \textit{meta-labeling} 
+no solo no mejoró las métricas, sino que en muchos casos las empeoró. En SPY Original, la \textit{accuracy} cayó de 0.33 
+a 0.14, mientras que en SPY Volume y SPY Dollar, la \textit{accuracy} también disminuyó significativamente. En particular, 
+el \textit{recall} para las clases -1 y 1 se redujo notablemente en estos conjuntos de datos, lo que sugiere que el 
+modelo se volvió más conservador, optando con mayor frecuencia por no realizar operaciones (clase 0), en lugar de tomar 
+decisiones de trading. Esto es especialmente evidente en SPY Dollar, donde el \textit{recall} para la clase 0 aumentó de 
+manera considerable, mientras que el \textit{recall} para las clases de trading activas se desplomó.
+
+Un patrón que se repite en todas las comparaciones es la mejora generalizada en el \textit{recall} de la 
+predicción de la clase 0.0 (no trade) después de aplicar el \textit{meta-labeling}, mientras que para las clases -1 y 1, 
+la precisión apenas mejora, y el \textit{recall} baja considerablemente. Esto puede indicar que el modelo, tras el 
+filtrado con \textit{meta-labels}, se vuelve más conservador, optando por no tomar decisiones de trading en lugar 
+de arriesgarse con operaciones que podrían ser fallidas o exitosas.
+
+Es importante destacar que los resultados obtenidos pueden estar profundamente influenciados por los hiperparámetros 
+seleccionados durante la generación de los \textit{labels}. La elección de los umbrales de volatilidad, 
+los horizontes temporales y otros parámetros clave tiene un impacto directo en la distribución de las clases, 
+particularmente en la prevalencia de la clase 0 (no trade). En este análisis, se observó una baja proporción 
+de señales etiquetadas como 0 en comparación con las clases -1 y 1, lo que sugiere que los parámetros 
+elegidos han favorecido la clasificación de la mayoría de las señales como activas (trading) en lugar de neutras 
+(no trade). Esta configuración puede haber agudizado el conservadurismo observado en el modelo filtrado por 
+\textit{meta-labels}, ya que una menor cantidad de señales etiquetadas como 0 originalmente limita la capacidad 
+del \textit{meta-labeling} para realizar un filtrado más equilibrado. Por tanto, es fundamental reconocer que la 
+calibración de estos hiperparámetros es un proceso delicado, que requiere un ajuste cuidadoso para asegurar que 
+el \textit{meta-labeling} aporte valor añadido al proceso de decisión.
+
+En conjunto, estos resultados sugieren que el proceso de \textit{meta-labeling} aplicado no logró su objetivo de 
+mejorar la robustez de las señales de trading. En cambio, el modelo filtrado por el \textit{meta-labeling} mostró 
+una tendencia a reducir su capacidad para identificar correctamente las oportunidades de mercado, lo que resultó 
+en un desempeño inferior en términos de \textit{recall} y \textit{f1-score}. Es posible que el \textit{meta-labeling} 
+haya sido demasiado restrictivo, eliminando señales que, aunque inicialmente parecían menos seguras, podrían haber 
+resultado en operaciones exitosas. Este análisis subraya la necesidad de revisar la metodología de \textit{meta-labeling} 
+utilizada o de explorar alternativas que puedan adaptarse mejor a la naturaleza volátil y compleja de los mercados 
+financieros analizados en este estudio.
+
+
+\section{Resultados Finales: Rendimiento Acumulado de las Estrategias}
+
+
+En las Figuras \ref{fig:final_spy_cum_returns_comparison_img} y \ref{fig:final_btc_cum_returns_comparison_img}, 
+se muestran los gráficos del rendimiento acumulado de las estrategias para BTC Dollar y SPY Volume, respectivamente, 
+comparando el rendimiento antes y después de aplicar el \textit{meta-labeling}. En las Tablas 
+\ref{tab:final_spy_cum_returns_comparison_table} y \ref{tab:final_btc_cum_returns_comparison_table} se recogen 
+las metricas principales de las estrategias, mientras que en la Tabla \ref{tab:final_returns_comparison}, 
+se resumen los rendimientos finales acumulados para todos los conjuntos de datos analizados. 
+
+  % Forzamos un salto de página
+\begin{uselscape}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.05\textwidth]{./figures/final_spy_strategy_comparison_horizontal.png}
+        \caption{Comparativa de retornos acumulados de la estrategia final sobre SPY}
+        \label{fig:final_spy_cum_returns_comparison_img}
+    \end{figure}
+  
+    \begin{table}[h]
+        \centering
+        \begin{scriptsize}
+        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+        \hline
+        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+        \makecell{\textbf{Benchmark} \\ \textbf{(S\&P 500)}} & \textbf{0.146} & \textbf{0.216} & 0.133 & 0.191 & -0.058 & 3.705 & -0.001 & 0.000 & 1.000 \\ \hline
+        \makecell{\textbf{PPO Original} \\ \textbf{Bars}} & 0.015 & 0.021 & 0.020 & 0.028 & -0.070 & 0.300 & -0.000 & -0.000 & 0.630 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Original Bars}} & 0.096 & 0.140 & 0.134 & 0.199 & -0.036 & 3.835 & -0.000 & 0.000 & 0.439 \\ \hline
+        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & 0.478 & 0.662 & -0.028 & 4.208 & -0.001 & 0.002 & 0.355 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.076 & 0.111 & 0.413 & 0.570 & -0.030 & 3.705 & -0.001 & 0.001 & 0.421 \\ \hline
+        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & 0.073 & 0.107 & 0.227 & 0.322 & -0.036 & 2.928 & -0.001 & -0.000 & 0.544 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.074 & 0.108 & 0.276 & 0.387 & -0.044 & 2.474 & -0.001 & 0.001 & 0.374 \\ \hline
+        \end{tabular}
+        \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (S\&P 500).}
+        \label{tab:final_spy_cum_returns_comparison_table}
+        \end{scriptsize}
+    \end{table}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.05\textwidth]{./figures/final_btc_strategy_comparison_horizontal.png}
+        \caption{Comparativa de retornos acumulados de la estrategia final sobre BTC}
+        \label{fig:final_btc_cum_returns_comparison_img}
+    \end{figure}
+  
+    \begin{table}[h]
+        \centering
+        \begin{scriptsize}
+        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+        \hline
+        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+        \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & \textbf{0.418} & \textbf{0.640} & 0.160 & 0.224 & -0.234 & 2.734 & -0.006 & 0.000 & 1.000 \\ \hline
+        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.050 & 0.071 & 0.055 & 0.075 & -0.156 & 0.455 & -0.003 & -0.001 & 0.274 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.123 & 0.178 & 0.121 & 0.168 & -0.149 & 1.200 & -0.002 & 0.001 & 0.226 \\ \hline
+        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & -0.156 & -0.213 & -0.026 & -0.036 & -0.263 & -0.809 & -0.001 & -0.000 & 0.347 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.792 & 1.283 & 0.125 & 0.176 & -0.109 & 11.760 & -0.001 & 0.001 & 0.230 \\ \hline
+        \end{tabular}
+        \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (BTC).}
+        \label{tab:final_btc_cum_returns_comparison_table}
+        \end{scriptsize}
+    \end{table}
+    
+  
+\end{uselscape}
+
+
+
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lccc}
+    \hline
+    \textbf{Conjunto de Datos} & \textbf{Benchmark} & \textbf{Rendimiento Antes} & \textbf{Rendimiento Después} \\
+    \hline
+    BTC Dollar  & 41.8\% & -15.6\% & 79.2\% \\
+    BTC Volume  & 41.8\% & 5.0\% & 12.3\% \\
+    SPY Original  & 14.6\% & 1.5\% & 9.6\% \\
+    SPY Volume  & 14.6\% & 8.1\% & 7.6\% \\
+    SPY Dollar  & 14.6\% & 7.3\% & 7.4\% \\
+    \hline
+    \end{tabular}
+    \caption{Rendimiento acumulado final de las estrategias antes y después de aplicar \textit{meta-labeling}, comparado con el Benchmark.}
+    \label{tab:final_returns_comparison}
+\end{table}
+    
+
+Los resultados obtenidos muestran un panorama mixto en cuanto a la efectividad del \textit{meta-labeling}. 
+Por un lado, las métricas de precisión y \textit{recall} han experimentado un deterioro tras la aplicación 
+del \textit{meta-labeling}, lo que sugiere que el modelo filtrado se volvió más conservador, identificando 
+menos señales de trading que el modelo original. Sin embargo, y a pesar de esta aparente desventaja, el 
+rendimiento acumulado de la mayoría de las estrategias mejoró de manera significativa, con algunas 
+estrategias mostrando incrementos notables en su rentabilidad.
+
+Este fenómeno puede explicarse por la capacidad del \textit{meta-labeling} para reducir la exposición 
+a operaciones fallidas, incluso si esto implica la pérdida de algunas operaciones exitosas. Al aplicar 
+un filtro adicional a las señales generadas por el modelo primario, el \textit{meta-labeling} tiende a 
+evitar operaciones en escenarios de mayor incertidumbre o cuando las señales no son lo suficientemente 
+sólidas. Como resultado, aunque el número total de operaciones disminuye, las operaciones que se llevan 
+a cabo son, en promedio, más rentables. Esto se refleja en el rendimiento acumulado de las estrategias, 
+que mejora incluso en aquellos casos donde las métricas tradicionales de clasificación sugieren un 
+empeoramiento.
+
+En particular, las estrategias basadas en BTC Dollar y BTC Volume experimentaron mejoras destacables 
+en su rendimiento acumulado después de aplicar \textit{meta-labeling}, con BTC Dollar mostrando un 
+incremento sustancial que supera el rendimiento del Benchmark. Esto indica que el \textit{meta-labeling} 
+puede ser especialmente útil en mercados volátiles como el de las criptomonedas, donde las señales de 
+trading pueden ser más erráticas y el riesgo de operaciones fallidas es mayor. En este contexto, el 
+\textit{meta-labeling} actúa como una capa adicional de protección, seleccionando solo las señales 
+que pasan un filtro más estricto.
+
+Por otro lado, las estrategias basadas en el S\&P 500 también mostraron mejoras, aunque más modestas, 
+en su rendimiento acumulado. La menor volatilidad inherente al mercado de acciones podría explicar 
+por qué el impacto del \textit{meta-labeling} no es tan pronunciado en comparación con los mercados 
+de criptomonedas. Aun así, el hecho de que se observe una mejora, aunque ligera, sugiere que el 
+\textit{meta-labeling} sigue siendo una herramienta valiosa para filtrar señales en contextos 
+de menor volatilidad.
+
+En resumen, aunque el \textit{meta-labeling} ha mostrado un impacto negativo en las métricas 
+de precisión y \textit{recall}, su efecto global en las estrategias ha sido positivo, 
+mejorando el rendimiento acumulado de manera significativa. Este hallazgo subraya la 
+importancia de considerar el rendimiento global de una estrategia de trading, más allá de 
+las métricas individuales de clasificación. El \textit{meta-labeling} se presenta como una 
+metodología que, a pesar de su conservadurismo, logra incrementar la rentabilidad al priorizar 
+la calidad sobre la cantidad de las operaciones ejecutadas.
+
+
+\chapter{Conclusiones}
+
+\section{Resumen de los Hallazgos Principales}
+
+
+Este trabajo ha explorado la implementación de técnicas avanzadas de \textit{machine learning} 
+en el desarrollo de estrategias de trading, con un enfoque particular en la aplicación de 
+\textit{deep reinforcement learning} (DRL) para la generación de señales de trading. Además, 
+se han adoptado metodologías presentadas en el libro \textit{Advances in Financial Machine Learning} 
+de Marcos López de Prado, como las barras de desequilibrio y el \textit{Meta-Labeling}, para 
+la generación la eficacia de estas estrategias.
+
+Inicialmente, se implementaron y compararon diferentes tipos de representaciones del mercado, 
+como las barras de tiempo tradicionales frente a las barras de desequilibrio de volumen y dólares. 
+Estas técnicas pretenden capturar la dinámica subyacente del mercado de manera más precisa al 
+basarse en la actividad real en lugar de intervalos de tiempo fijos. Posteriormente, se 
+utilizó el algorigítmo \textit{PPO} para entrenar un modelo de generación de señales de trading sobre estos distintos 
+tipos de barras, evaluando cómo la representación del mercado afecta al rendimiento del modelo.
+
+Finalmente, se aplicó la técnica de \textit{Meta-Labeling} para refinar las señales generadas por el 
+modelo \textit{PPO}. Esta técnica agregó una capa adicional de análisis, mejorando la 
+capacidad del modelo para identificar las señales de trading más prometedoras. 
+
+Los resultados obtenidos muestran que, aunque la implementación del \textit{Meta-Labeling} 
+no siempre mejoró las métricas de precisión y \textit{recall}, en muchos casos llevó a un 
+aumento notable en el rendimiento acumulado de las estrategias. Esto sugiere que el 
+\textit{Meta-Labeling} puede actuar como un filtro eficaz para mejorar la calidad de las 
+operaciones ejecutadas, especialmente en mercados con alta volatilidad como el de las 
+criptomonedas.
+
+En conclusión, la combinación del \textit{deep reinforcement learning} con las metodologías 
+de \textit{Advances in Financial Machine Learning} ha demostrado ser un enfoque prometedor 
+para el desarrollo de estrategias de trading más robustas y adaptativas. Este trabajo 
+subraya el potencial de estas técnicas para optimizar la toma de decisiones en entornos 
+financieros complejos, mejorando tanto la calidad como la rentabilidad de las estrategias 
+implementadas.
+
+En conclusión, la combinación del \textit{deep reinforcement learning} con las metodologías 
+propuestas en \textit{Advances in Financial Machine Learning} parece tener el potencial 
+de ser efectiva en la generación de estrategias de trading, aunque su eficacia no se 
+manifiesta uniformemente en todos los mercados, activos o condiciones. Si bien estas 
+técnicas se han mostrado útiles como herramientas para el desarrollo de estrategias, 
+su implementación es compleja y requiere un diseño cuidadoso, ya que la optimización es 
+muy sensible a los hiperparámetros para obtener resultados satisfactorios. Esto sugiere que, 
+aunque prometedoras, estas metodologías demandan un enfoque riguroso y específico para 
+poder aprovechar plenamente su potencial en la práctica.
+
+
+\section{Cumplimiento de los Objetivos}
+
+Los objetivos planteados al inicio de este trabajo se han cumplido en gran medida. En 
+primer lugar, se ha logrado desarrollar y evaluar una estrategia de trading utilizando 
+técnicas avanzadas como las barras de desequilibrio, el \textit{deep reinforcement learning}, 
+y el \textit{Meta-Labeling}. Estos esfuerzos han resultado en una comprensión más profunda 
+de cómo estas herramientas pueden integrarse para mejorar el rendimiento de las estrategias 
+de trading.
+
+Además, se ha aprendido a implementar y ajustar algoritmos de \textit{deep reinforcement learning}, 
+aprovechando librerías como \textit{Gymnasium} y \textit{Stable Baselines}. A través de la 
+comparación de diferentes enfoques, se ha demostrado que el uso de barras de desequilibrio 
+y \textit{Meta-Labeling} puede proporcionar ventajas significativas en ciertos contextos. 
+Aunque se encontraron desafíos en la implementación, especialmente en términos de ajuste 
+y optimización, el proceso ha sido valioso para adquirir habilidades prácticas en el 
+uso de estas metodologías.
+
+Finalmente, la comparativa entre técnicas ha revelado insights importantes sobre su 
+efectividad y sus limitaciones. Los resultados obtenidos sugieren que, aunque cada 
+técnica tiene sus propios méritos, la combinación de barras de desequilibrio y 
+\textit{Meta-Labeling} ofrece un enfoque prometedor para desarrollar estrategias de 
+trading más adaptativas y precisas.
+
+
+\section{Limitaciones del Estudio}
+
+A lo largo de este trabajo se han identificado varias limitaciones que afectan tanto a 
+la implementación como a la generalización de los resultados obtenidos. Una de las 
+principales limitaciones ha sido la accesibilidad y disponibilidad de datos de calidad. 
+Los datos de ticks, que ofrecen una visión detallada del mercado, son costosos y difíciles 
+de manejar debido a su tamaño y complejidad. Esto ha llevado a la utilización de datos de
+ minuto, lo cual, aunque más manejable, puede no capturar completamente las sutilezas de 
+ las dinámicas del mercado que los datos de ticks sí podrían reflejar.
+
+Otra limitación significativa es la necesidad de un poder computacional considerable. El 
+entrenamiento y la inferencia con algoritmos de \textit{deep reinforcement learning} 
+requieren recursos computacionales extensivos. En muchas ocasiones, el tiempo necesario 
+para entrenar modelos complejos es prohibitivo, y, aun disponiendo de tiempo suficiente, 
+la infraestructura computacional limitada puede impedir la obtención de resultados óptimos. 
+Este desafío se acentúa al intentar aplicar estos modelos a datos de alta frecuencia o 
+grandes volúmenes de datos históricos.
+
+Otra limitación importante es la generalización de los resultados. Los experimentos 
+realizados en este estudio se basaron en datos específicos y en un conjunto limitado de 
+escenarios de mercado. Por lo tanto, los resultados obtenidos pueden no ser directamente 
+aplicables a otros mercados o condiciones sin una adecuada recalibración de los modelos. 
+Esto limita la aplicabilidad de las estrategias desarrolladas, ya que lo que funciona bien 
+en un contexto específico puede no ser efectivo en otro sin ajustes significativos.
+
+La sensibilidad a los hiperparámetros y al diseño del modelo también representa una 
+limitación crucial. Tanto la configuración de la función de recompensa como el diseño
+ del entorno de trading pueden influir significativamente en el rendimiento de las 
+ estrategias. La optimización de estos aspectos es un proceso delicado y sensible, 
+ donde pequeños cambios en los hiperparámetros pueden llevar a variaciones considerables 
+ en los resultados. Esto subraya la necesidad de un enfoque riguroso en la fase de diseño
+  y ajuste de los modelos.
+
+Finalmente, es importante destacar que el enfoque adoptado en este trabajo también enfrenta 
+limitaciones en cuanto a la escalabilidad. La capacidad de aplicar las metodologías 
+desarrolladas en este estudio a volúmenes de datos mucho mayores o a mercados diferentes 
+sin una recalibración exhaustiva de los modelos es cuestionable. La adaptabilidad de los 
+algoritmos a nuevos datos o condiciones de mercado requiere una flexibilidad en el diseño 
+que puede no estar presente en los modelos actuales, lo que podría limitar su efectividad 
+en entornos reales más diversos.
+
+En resumen, aunque este trabajo ha demostrado el potencial de las metodologías utilizadas, 
+es esencial tener en cuenta estas limitaciones al considerar la aplicabilidad y 
+generalización de los resultados. Las futuras investigaciones deberán abordar estos 
+desafíos para mejorar la robustez y la adaptabilidad de las estrategias de trading basadas 
+en \textit{machine learning}.
+
+
+
+\section{Implicaciones Prácticas}
+
+Los resultados de este estudio tienen importantes implicaciones prácticas para el desarrollo 
+y la implementación de estrategias de trading en entornos financieros. En primer lugar, la 
+aplicación de \textit{deep reinforcement learning} (DRL) junto con metodologías avanzadas 
+como las barras de desequilibrio y el \textit{Meta-Labeling}, propuestas en \textit{Advances 
+in Financial Machine Learning}, ofrece un enfoque innovador para la generación de estrategias de trading que pueden adaptarse dinámicamente a las condiciones cambiantes del mercado.
+
+Uno de los principales beneficios de estas técnicas es su capacidad para capturar dinámicas 
+de mercado más complejas y detalladas en comparación con los enfoques tradicionales basados 
+en barras de tiempo. Las barras de desequilibrio de volumen y dólares, al basarse en la actividad 
+real del mercado, permiten un análisis más fino de la oferta y la demanda, lo que puede mejorar 
+la precisión en la identificación de oportunidades de trading. Esto es especialmente relevante 
+en mercados volátiles, como el de criptomonedas, donde las señales de trading pueden ser más 
+erráticas y difíciles de interpretar utilizando metodologías tradicionales.
+
+Sin embargo, la implementación práctica de estas técnicas no está exenta de desafíos. El 
+poder computacional requerido para entrenar y ejecutar modelos de DRL es considerable, 
+lo que puede limitar su uso en entornos con recursos computacionales limitados. Además, 
+la necesidad de datos de alta calidad, como los datos de ticks, que son costosos y 
+difíciles de manejar, puede representar una barrera significativa para muchos actores 
+del mercado. Esto sugiere que, aunque prometedoras, estas metodologías requieren una 
+infraestructura tecnológica robusta y acceso a recursos que no siempre están disponibles.
+
+Otro aspecto crítico es la sensibilidad de estas técnicas a los hiperparámetros y al 
+diseño del entorno de trading. La optimización de los modelos y la calibración adecuada 
+de los hiperparámetros son esenciales para obtener resultados consistentes y rentables. 
+En la práctica, esto significa que los profesionales que buscan implementar estas 
+metodologías deben estar preparados para invertir tiempo y recursos en la fase de 
+experimentación y ajuste de los modelos.
+
+A pesar de estos desafíos, las técnicas presentadas en este estudio ofrecen un marco 
+valioso para el desarrollo de estrategias de trading más adaptativas y potencialmente 
+más rentables. En particular, la capacidad del \textit{Meta-Labeling} para mejorar la 
+calidad de las señales de trading y reducir la exposición a operaciones fallidas puede 
+ser especialmente útil para gestores de fondos y traders que buscan maximizar el rendimiento 
+mientras minimizan el riesgo.
+
+En conclusión, aunque la implementación práctica de las técnicas desarrolladas en este 
+estudio presenta desafíos significativos, sus beneficios potenciales las convierten en 
+herramientas atractivas para aquellos que buscan innovar en el campo del trading algorítmico. 
+Es esencial que los profesionales consideren cuidadosamente los requisitos técnicos y de 
+datos antes de adoptar estas metodologías, y que estén preparados para un proceso de 
+desarrollo y optimización riguroso.
+
+\section{Líneas Futuras de Investigación}
+
+A partir de los resultados y las limitaciones identificadas en este estudio, surgen 
+varias líneas futuras de investigación que podrían contribuir a mejorar y ampliar el 
+conocimiento en el campo del trading algorítmico basado en \textit{machine learning}.
+
+Una dirección importante para futuras investigaciones es la exploración de métodos 
+para mejorar la accesibilidad y el manejo de datos de alta frecuencia, como los datos 
+de ticks. Dado que estos datos ofrecen una representación más detallada del mercado, 
+el desarrollo de técnicas eficientes de procesamiento y análisis que puedan manejar 
+grandes volúmenes de datos de manera más efectiva podría abrir nuevas posibilidades 
+para el diseño de estrategias de trading más precisas y adaptativas.
+
+Otra área de investigación prometedora es el desarrollo de enfoques más robustos para 
+la optimización de hiperparámetros y el diseño de modelos. Dado que la sensibilidad a 
+los hiperparámetros es una limitación significativa en la implementación de modelos de 
+\textit{deep reinforcement learning} y \textit{Meta-Labeling}, se podrían explorar 
+técnicas automatizadas de optimización de hiperparámetros, como \textit{hyperparameter tuning} 
+basado en algoritmos genéticos o \textit{Bayesian optimization}, que podrían mejorar la 
+eficiencia y efectividad del proceso de ajuste de modelos.
+
+La generalización de los resultados a otros mercados y condiciones de mercado también 
+representa una línea de investigación crítica. Futuras investigaciones podrían enfocarse 
+en evaluar cómo las metodologías utilizadas en este estudio se desempeñan en diferentes 
+mercados financieros, como el forex, los commodities o incluso mercados emergentes. Además, 
+la exploración de diferentes horizontes temporales y escenarios de volatilidad podría 
+ofrecer una mejor comprensión de las condiciones bajo las cuales estas metodologías son 
+más efectivas.
+
+Además, la integración de enfoques híbridos que combinen \textit{deep reinforcement learning} 
+con otras técnicas de \textit{machine learning}, como \textit{supervised learning} o 
+\textit{unsupervised learning}, podría ser una vía fructífera. Estos enfoques híbridos 
+podrían aprovechar lo mejor de cada técnica, mejorando la capacidad del modelo para 
+adaptarse a diversas condiciones de mercado y optimizar la toma de decisiones.
+
+Finalmente, dado el avance continuo de la infraestructura tecnológica, futuras 
+investigaciones podrían explorar el uso de tecnologías como \textit{cloud computing} 
+y \textit{distributed computing} para superar las limitaciones computacionales que 
+actualmente restringen la implementación de modelos más complejos y la experimentación 
+con volúmenes de datos más grandes. El aprovechamiento de estas tecnologías podría 
+permitir una exploración más exhaustiva de diferentes configuraciones de modelos y 
+ampliar el alcance de las aplicaciones de \textit{machine learning} en el trading algorítmico.
+
+En conjunto, estas líneas futuras de investigación tienen el potencial de mejorar 
+significativamente la eficacia y la aplicabilidad de las estrategias de trading basadas 
+en \textit{machine learning}, y de abordar algunas de las limitaciones identificadas 
+en el presente estudio.
+
 
 
 %\phantomsection

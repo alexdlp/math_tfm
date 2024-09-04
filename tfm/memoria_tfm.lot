@@ -1,0 +1,20 @@
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Umbrales utilizados y numero de muestras obtenido}}{18}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Resultados de pruebas estadísticas de normalidad para SPY y BTC}}{20}{table.3.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Parámetros de entrenamiento del agente DRL.}}{36}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{37}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Resultados de los experimentos de PPO en diferentes tipos de barras comparados con el Benchmark (SPY).}}{38}{table.4.3}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Comparación del reporte de clasificación antes y después de aplicar \textit {meta-labeling} para BTC Dollar.}}{48}{table.5.1}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Comparación del reporte de clasificación antes y después de aplicar \textit {meta-labeling} para BTC Volume.}}{49}{table.5.2}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Comparación del reporte de clasificación antes y después de aplicar \textit {meta-labeling} para SPY Original.}}{49}{table.5.3}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Comparación del reporte de clasificación antes y después de aplicar \textit {meta-labeling} para SPY Volume.}}{50}{table.5.4}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Comparación del reporte de clasificación antes y después de aplicar \textit {meta-labeling} para SPY Dollar.}}{50}{table.5.5}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit {Meta-labeling}, comparados con el Benchmark (S\&P 500).}}{53}{table.5.6}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit {Meta-labeling}, comparados con el Benchmark (BTC).}}{54}{table.5.7}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Rendimiento acumulado final de las estrategias antes y después de aplicar \textit {meta-labeling}, comparado con el Benchmark.}}{55}{table.5.8}%
+\addvspace {10\p@ }

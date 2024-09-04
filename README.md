@@ -22,8 +22,3 @@ En esta carpeta se encuentran los scripts y resultados del proceso de validació
 ### 05_meta_labeling
 Esta carpeta incluye los scripts y resultados relacionados con la implementación de *meta-labeling*. 
 
-### tfm 
-Contiene el tfm.
-
-### tfmII
-Mismo texto, distinta estructura.

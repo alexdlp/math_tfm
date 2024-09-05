@@ -19,12 +19,12 @@
 \contentsline {subsubsection}{Annualized Return}{10}{section*.8}%
 \contentsline {subsubsection}{Sharpe Ratio}{10}{section*.9}%
 \contentsline {subsubsection}{Sortino Ratio}{10}{section*.10}%
-\contentsline {subsubsection}{Maximum Drawdown}{10}{section*.11}%
+\contentsline {subsubsection}{Maximum Drawdown}{11}{section*.11}%
 \contentsline {subsubsection}{Calmar Ratio}{11}{section*.12}%
 \contentsline {subsubsection}{Value at Risk (VaR)}{11}{section*.13}%
 \contentsline {subsubsection}{Alpha}{11}{section*.14}%
-\contentsline {subsubsection}{Beta}{11}{section*.15}%
-\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{11}{section.2.4}%
+\contentsline {subsubsection}{Beta}{12}{section*.15}%
+\contentsline {section}{\numberline {2.4}Métricas de Machine Learning}{12}{section.2.4}%
 \contentsline {subsubsection}{Precision}{12}{section*.16}%
 \contentsline {subsubsection}{Recall}{12}{section*.17}%
 \contentsline {subsubsection}{F1-Score}{12}{section*.18}%

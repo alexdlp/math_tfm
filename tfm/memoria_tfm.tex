@@ -316,7 +316,7 @@ los retornos lineales y logarítmicos.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/simple_and_log_ret_relation.png}
-    \caption{Relación entre retornos simples y logarítmicos}
+    \caption{Relación entre retornos simples y logarítmicos, adaptación de \cite{signal_processing}}
     \label{fig:log-returns}
 \end{figure}
 
@@ -510,23 +510,47 @@ donde $T$ es el número de años.
 
 \subsubsection{Sharpe Ratio}
 
-El \textit{Sharpe Ratio} mide el rendimiento ajustado al riesgo de una inversión, comparando el exceso de retorno de la inversión sobre la tasa libre de riesgo con la volatilidad de los retornos.
+El \textit{Sharpe Ratio} \cite{sharpe1994}, desarrollado por William F. Sharpe en 1966 y revisado 
+posteriormente en 1994, es una medida que evalúa el rendimiento ajustado al riesgo de una inversión. 
+Compara el exceso de retorno de una cartera sobre la tasa libre de riesgo con la volatilidad de esos 
+retornos. Este ratio es ampliamente utilizado en la gestión de portafolios y finanzas cuantitativas, 
+ya que permite a los inversores evaluar si los rendimientos obtenidos compensan adecuadamente el 
+riesgo asumido.
+
+Sharpe introdujo esta medida como una herramienta para comparar inversiones con diferentes 
+niveles de riesgo, permitiendo una mejor toma de decisiones en la optimización de carteras.
 
 \begin{equation}
 \text{Sharpe Ratio} = \frac{E[R_p - R_f]}{\sigma_p},
 \end{equation}
 
-donde $R_p$ es el retorno de la cartera, $R_f$ es la tasa libre de riesgo, y $\sigma_p$ es la desviación estándar de los retornos de la cartera.
+donde $R_p$ es el retorno de la cartera, $R_f$ es la tasa libre de riesgo, y $\sigma_p$ es 
+la desviación estándar de los retornos de la cartera. Un Sharpe Ratio más alto indica que la 
+inversión ha generado un retorno mayor por cada unidad de riesgo asumido.
 
 \subsubsection{Sortino Ratio}
 
-El \textit{Sortino Ratio} es una variación del Sharpe Ratio que solo considera la volatilidad de los retornos negativos (downside risk), proporcionando una medida del rendimiento ajustado al riesgo que penaliza solo los retornos por debajo de un umbral.
+
+El \textit{Sortino Ratio} \cite{sortino1994}, desarrollado por Frank A. Sortino en 1994, es una adaptación 
+del Sharpe Ratio que tiene en cuenta únicamente la volatilidad de los retornos negativos, o 
+\textit{downside risk}, ofreciendo así una visión más precisa del rendimiento ajustado al riesgo. 
+A diferencia del Sharpe Ratio, que penaliza tanto las subidas como las bajadas de la misma manera, 
+el Sortino Ratio solo castiga los retornos por debajo de un umbral predefinido, lo que es especialmente 
+útil para los inversores que desean minimizar las pérdidas.
+
+Sortino introdujo este ratio en su trabajo "Performance Measurement in a Downside Risk Framework", donde 
+argumenta que la verdadera preocupación de los inversores no es la volatilidad general, sino las pérdidas. 
+Este ratio es especialmente útil para evaluar estrategias de inversión que buscan limitar la volatilidad negativa, 
+recompensando las carteras con una mayor asimetría positiva (retornos altos y bajas pérdidas).
 
 \begin{equation}
 \text{Sortino Ratio} = \frac{E[R_p - R_f]}{\sigma_{d}},
 \end{equation}
 
-donde $\sigma_{d}$ es la desviación estándar de los retornos negativos.
+donde $\sigma_{d}$ es la desviación estándar de los retornos negativos. Un Sortino Ratio más alto 
+indica que la inversión está generando un mayor retorno ajustado al riesgo al penalizar únicamente 
+los movimientos negativos, lo que lo convierte en una herramienta esencial para los gestores de 
+carteras que buscan minimizar el riesgo a la baja.
 
 \subsubsection{Maximum Drawdown}
 
@@ -1265,7 +1289,7 @@ DRL, junto con ejemplos representativos de cada uno.
 Los métodos basados en funciones de valor son aquellos en los que el objetivo es aprender 
 una función que prediga el valor de tomar una acción en un estado dado. El ejemplo más 
 destacado de este enfoque es el \textit{Deep Q-Network} (DQN). DQN, introducido por 
-\textit{DeepMind}, utiliza redes neuronales profundas para aproximar la función \(Q(s, a)\), 
+\textit{DeepMind} \cite{deepmind_drl}, utiliza redes neuronales profundas para aproximar la función \(Q(s, a)\), 
 lo que permitió manejar entornos con espacios de estados grandes y continuos.
 
 En DQN, una red neuronal recibe como entrada el estado del entorno y produce una estimación 
@@ -1406,7 +1430,7 @@ permitiendo un entrenamiento estable incluso en entornos complejos y dinámicos.
 
 \subsection{Introducción a Gymnasium}
 
-Gymnasium es una biblioteca de Python ampliamente utilizada en el campo del 
+Gymnasium \cite{gymnasium2023} es una biblioteca de Python ampliamente utilizada en el campo del 
 \textit{Reinforcement Learning} (RL) para crear, gestionar y probar entornos 
 de simulación. Esta biblioteca es una evolución de OpenAI Gym, diseñada para 
 facilitar la construcción de entornos personalizados y la evaluación de algoritmos 
@@ -1421,7 +1445,7 @@ de diferentes algoritmos en condiciones controladas.
 \subsection{Creación del Entorno de Trading}
 
 Aunque existen entornos predefinidos en \textit{Gymnasium} para el entrenamiento de 
-algoritmos de trading, como \textit{Gym Trading Env} o \textit{FinRL}, la mayoría 
+algoritmos de trading, como \textit{Gym Trading Env} o \textit{FinRL} \cite{finrl_meta_2022}, la mayoría 
 de estos están diseñados para operar con múltiples activos financieros simultáneamente 
 o introducen variables adicionales como la compra a crédito de activos. 
 
@@ -2380,7 +2404,7 @@ se resumen los rendimientos finales acumulados para todos los conjuntos de datos
         \makecell{\textbf{Benchmark} \\ \textbf{(S\&P 500)}} & \textbf{0.146} & \textbf{0.216} & 0.133 & 0.191 & -0.058 & 3.705 & -0.001 & 0.000 & 1.000 \\ \hline
         \makecell{\textbf{PPO Original} \\ \textbf{Bars}} & 0.015 & 0.021 & 0.020 & 0.028 & -0.070 & 0.300 & -0.000 & -0.000 & 0.630 \\ \hline
         \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Original Bars}} & 0.096 & 0.140 & 0.134 & 0.199 & -0.036 & 3.835 & -0.000 & 0.000 & 0.439 \\ \hline
-        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & 0.478 & 0.662 & -0.028 & 4.208 & -0.001 & 0.002 & 0.355 \\ \hline
+        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & \textbf{0.478} & \textbf{0.662} & -0.028 & 4.208 & -0.001 & 0.002 & 0.355 \\ \hline
         \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.076 & 0.111 & 0.413 & 0.570 & -0.030 & 3.705 & -0.001 & 0.001 & 0.421 \\ \hline
         \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & 0.073 & 0.107 & 0.227 & 0.322 & -0.036 & 2.928 & -0.001 & -0.000 & 0.544 \\ \hline
         \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.074 & 0.108 & 0.276 & 0.387 & -0.044 & 2.474 & -0.001 & 0.001 & 0.374 \\ \hline
@@ -2403,11 +2427,11 @@ se resumen los rendimientos finales acumulados para todos los conjuntos de datos
         \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
         \hline
         & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
-        \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & \textbf{0.418} & \textbf{0.640} & 0.160 & 0.224 & -0.234 & 2.734 & -0.006 & 0.000 & 1.000 \\ \hline
+        \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & 0.418 & 0.640 & \textbf{0.160} & \textbf{0.224} & -0.234 & 2.734 & -0.006 & 0.000 & 1.000 \\ \hline
         \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.050 & 0.071 & 0.055 & 0.075 & -0.156 & 0.455 & -0.003 & -0.001 & 0.274 \\ \hline
         \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.123 & 0.178 & 0.121 & 0.168 & -0.149 & 1.200 & -0.002 & 0.001 & 0.226 \\ \hline
         \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & -0.156 & -0.213 & -0.026 & -0.036 & -0.263 & -0.809 & -0.001 & -0.000 & 0.347 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.792 & 1.283 & 0.125 & 0.176 & -0.109 & 11.760 & -0.001 & 0.001 & 0.230 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & \textbf{0.792} & \textbf{1.283} & 0.125 & 0.176 & -0.109 & 11.760 & -0.001 & 0.001 & 0.230 \\ \hline
         \end{tabular}
         \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (BTC).}
         \label{tab:final_btc_cum_returns_comparison_table}

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex memoria_tfm"] 1725479852.30538 "memoria_tfm.aux" "memoria_tfm.bbl" "memoria_tfm" 1725479950.85273 0
-  "./biblioTFM.bib" 1725477838 4041 1a922d6e1caeb0afee9fa6abc3e839cb ""
+["bibtex memoria_tfm"] 1725538478.08797 "memoria_tfm.aux" "memoria_tfm.bbl" "memoria_tfm" 1725538482.44269 0
+  "./biblioTFM.bib" 1725537853 5059 972ebc9e6f33025ddaa69c5ab012c4f0 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "memoria_tfm.aux" 1725479948 22742 251ee814f31763aadf2b8e023341f573 "pdflatex"
+  "memoria_tfm.aux" 1725538481 23174 ae1841adb0a809b7b6ed656b406b40c1 "pdflatex"
   (generated)
   "memoria_tfm.bbl"
   "memoria_tfm.blg"
   (rewritten before read)
-["pdflatex"] 1725479943.7067 "c:/Users/adelapuente/Desktop/math_tfm/tfm/memoria_tfm.tex" "memoria_tfm.pdf" "memoria_tfm" 1725479950.854 0
+["pdflatex"] 1725538478.35774 "c:/Users/adelapuente/Desktop/math_tfm/tfm/memoria_tfm.tex" "memoria_tfm.pdf" "memoria_tfm" 1725538482.44331 0
   "C:/Users/adelapuente/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1724938189 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/adelapuente/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1721566553 14064 2274f2b69e3d2b56f45a5e7f4f90ddb9 ""
   "C:/Users/adelapuente/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1721565417 24267549 e58742ab22b809d7c0d8466a0c189a35 ""
@@ -149,7 +149,7 @@
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1718356376 7243 e5dac1240636811edb77568b81818372 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/adelapuente/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/adelapuente/Desktop/math_tfm/tfm/memoria_tfm.tex" 1725479942 161518 0213bc6706fc34bbc8ac1b07ee3c5a3a ""
+  "c:/Users/adelapuente/Desktop/math_tfm/tfm/memoria_tfm.tex" 1725538472 163315 568bf366e01d981204625c6517f7c848 ""
   "figures/A-brief-schema-of-Reinforcement-Learning-26.png" 1723975887 25144 6c1db6ca674db88ac69789b750f7989b ""
   "figures/BTC_USD_Close_Price_Data_2018-2024.png" 1723488470 74249 19d3ad7320539e76db65140a8d7f4a94 ""
   "figures/BTC_histogram_comparation.png" 1723617733 78673 84439a4e95aed5e3df18cf05f5e8db68 ""
@@ -169,13 +169,13 @@
   "figures/simple_and_log_ret_relation.png" 1721588643 62398 f2f6dc16aa7c4593afc4c9f84f2466a4 ""
   "figures/spy_volume_explo.png" 1723452287 76159 f63c32afd77f261d6a485f1dad1e359f ""
   "figures/three_barried_method.png" 1725091425 54622 4a503460ae8b820f44f63a91ce8ca165 ""
-  "memoria_tfm.aux" 1725479948 22742 251ee814f31763aadf2b8e023341f573 "pdflatex"
-  "memoria_tfm.bbl" 1725479852 1880 a83646d92638e719342d0db94e8f5613 "bibtex memoria_tfm"
-  "memoria_tfm.lof" 1725479949 2194 a1bb9d65e25ecd844ae2034432981595 "pdflatex"
-  "memoria_tfm.lot" 1725479949 2423 7b9550e047198283f5da1acda43caf43 "pdflatex"
-  "memoria_tfm.out" 1725479948 12789 33eab64b9ca5829e092b96e2ec6a17fa "pdflatex"
-  "memoria_tfm.tex" 1725479942 161518 0213bc6706fc34bbc8ac1b07ee3c5a3a ""
-  "memoria_tfm.toc" 1725479949 7937 92e6c915b6fcb7be90d30d2e23e14ab5 "pdflatex"
+  "memoria_tfm.aux" 1725538481 23174 ae1841adb0a809b7b6ed656b406b40c1 "pdflatex"
+  "memoria_tfm.bbl" 1725538478 3180 36d7011585d75b42ec1667792c1e5bc7 "bibtex memoria_tfm"
+  "memoria_tfm.lof" 1725538481 2236 a0b5e6a1ae233f33acc04cb0961e45c6 "pdflatex"
+  "memoria_tfm.lot" 1725538481 2423 7b9550e047198283f5da1acda43caf43 "pdflatex"
+  "memoria_tfm.out" 1725538481 12789 33eab64b9ca5829e092b96e2ec6a17fa "pdflatex"
+  "memoria_tfm.tex" 1725538472 163315 568bf366e01d981204625c6517f7c848 ""
+  "memoria_tfm.toc" 1725538481 7937 4dab3c3f4229e9b5c40f29dabb14c237 "pdflatex"
   (generated)
   "memoria_tfm.aux"
   "memoria_tfm.lof"

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{does_meta_labeling_add}
 J.~Joubert A.~Singh.
@@ -24,6 +24,11 @@ Stefano~Giacomazzi Dantas and Daniel Guerreiro~e Silva.
 \newblock In {\em 2018 7th Brazilian Conference on Intelligent Systems
   (BRACIS)}, pages 133--138. IEEE, oct 2018.
 
+\bibitem{deepmind_drl}
+DeepMind.
+\newblock Deep reinforcement learning course.
+\newblock YouTube, 2021.
+
 \bibitem{easley2012volume}
 David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
 \newblock The volume clock: Insights into the high frequency paradigm.
@@ -32,6 +37,18 @@ David Easley, Marcos L{\'o}pez~de Prado, and Maureen O'Hara.
 \bibitem{quant_finance_stack_exchange}
 Quantitative Finance~Stack Exchange.
 \newblock Tick imbalance bars - advances in financial machine learning, 2019.
+
+\bibitem{signal_processing}
+Steven~M. Kay.
+\newblock {\em A Signal Processing Perspective on Financial Engineering}.
+\newblock John Wiley \& Sons, 2012.
+
+\bibitem{finrl_meta_2022}
+Xiao-Yang Liu, Ziyi Xia, Jingyang Rui, Jiechao Gao, Hongyang Yang, Ming Zhu,
+  Christina~Dan Wang, Zhaoran Wang, and Jian Guo.
+\newblock {FinRL-Meta}: Market environments and benchmarks for data-driven
+  financial reinforcement learning.
+\newblock {\em NeurIPS}, 2022.
 
 \bibitem{lopezdeprado2018afml}
 Marcos López~de Prado.
@@ -48,5 +65,23 @@ Tidor-Vlad Pricope.
 John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock Proximal policy optimization algorithms.
 \newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem{sharpe1994}
+William~F Sharpe.
+\newblock The sharpe ratio.
+\newblock {\em The Journal of Portfolio Management}, 21(1):49--58, 1994.
+
+\bibitem{sortino1994}
+Frank~A Sortino and Lee~N Price.
+\newblock Performance measurement in a downside risk framework.
+\newblock {\em The Journal of Investing}, 3(3):59--64, 1994.
+
+\bibitem{gymnasium2023}
+Mark Towers, Ariel Kwiatkowski, Jordan Terry, John~U. Balis, Gianluca~De Cola,
+  Tristan Deleu, Manuel Goul{\~a}o, Andreas Kallinteris, Markus Krimmel, Arjun
+  KG, Rodrigo Perez-Vicente, Andrea Pierr{\'e}, Sander Schulhoff, Jun~Jet Tai,
+  Hannah Tan, and Omar~G. Younis.
+\newblock Gymnasium: A standard interface for reinforcement learning
+  environments, 2023.
 
 \end{thebibliography}

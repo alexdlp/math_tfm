@@ -109,7 +109,7 @@ Máster Universitario en Modelización e Investigación Matemática, Estadístic
 \begin{Large}
 Director/es\\
 Josu Doncel Vicente\\
-Lugar y fecha de presentación prevista\\
+Leioa, 6 de Septiembre de 2024\\
 \end{Large}
 \end{center}
 \end{sffamily}
@@ -456,12 +456,14 @@ estimación más precisa del rendimiento real del modelo en escenarios futuros. 
 es fundamental en inteligencia artificial y machine learning para evitar el sobreajuste y 
 asegurar que el modelo sea robusto y capaz de adaptarse a variaciones en los datos.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/SPY_Close_Price_Data_2018-2024.png}
+    \caption{Serie Temporal de Precios del SPY}
+    \label{fig:spy-prices}
+\end{figure}
 
-
-\subsubsection{Datos de Bitcoin}
-
-Bitcoin es una criptomoneda y un sistema de pago descentralizado que ha ganado popularidad y relevancia en los mercados financieros. 
-Los datos de Bitcoin que utilizaremos incluyen los precios de cierre por minuto. A continuación se muestra la serie temporal de precios 
+Las Figuras \ref{fig:spy-prices} y \ref{fig:bitcoin-prices} muestran las series temporales de ambos activos: 
 de Bitcoin:
 
 \begin{figure}[H]
@@ -469,18 +471,6 @@ de Bitcoin:
     \includegraphics[width=0.8\textwidth]{./figures/BTC_USD_Close_Price_Data_2018-2024.png}
     \caption{Serie Temporal de Precios de Bitcoin}
     \label{fig:bitcoin-prices}
-\end{figure}
-
-\subsubsection{Datos del SPY}
-
-El SPY es un ETF que sigue el rendimiento del índice S\&P 500. Los datos del SPY que utilizaremos también incluyen los precios de cierre 
-por minuto. A continuación se muestra la serie temporal de precios del SPY:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/SPY_Close_Price_Data_2018-2024.png}
-    \caption{Serie Temporal de Precios del SPY}
-    \label{fig:spy-prices}
 \end{figure}
 
 
@@ -570,15 +560,15 @@ El \textit{Calmar Ratio} mide el rendimiento ajustado al riesgo de una inversió
 \text{Calmar Ratio} = \frac{\text{Annualized Return}}{\text{Maximum Drawdown}}.
 \end{equation}
 
-\subsubsection{Value at Risk (VaR)}
+% \subsubsection{Value at Risk (VaR)}
 
-El \textit{Value at Risk} (\textit{VaR}) mide la pérdida máxima esperada de una inversión en un período determinado, con un nivel de confianza específico. Es una medida de riesgo que indica el valor en riesgo.
+% El \textit{Value at Risk} (\textit{VaR}) mide la pérdida máxima esperada de una inversión en un período determinado, con un nivel de confianza específico. Es una medida de riesgo que indica el valor en riesgo.
 
-\begin{equation}
-\text{VaR}_{\alpha} = -\text{Quantile}_\alpha (R_p),
-\end{equation}
+% \begin{equation}
+% \text{VaR}_{\alpha} = -\text{Quantile}_\alpha (R_p),
+% \end{equation}
 
-donde $\alpha$ es el nivel de confianza y $R_p$ es la distribución de retornos de la cartera.
+% donde $\alpha$ es el nivel de confianza y $R_p$ es la distribución de retornos de la cartera.
 
 \subsubsection{Alpha}
 
@@ -2395,19 +2385,38 @@ se resumen los rendimientos finales acumulados para todos los conjuntos de datos
         \label{fig:final_spy_cum_returns_comparison_img}
     \end{figure}
   
+    % \begin{table}[h]
+    %     \centering
+    %     \begin{scriptsize}
+    %     \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+    %     \hline
+    %     & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+    %     \makecell{\textbf{Benchmark} \\ \textbf{(S\&P 500)}} & \textbf{0.146} & \textbf{0.216} & 0.133 & 0.191 & -0.058 & 3.705 & -0.001 & 0.000 & 1.000 \\ \hline
+    %     \makecell{\textbf{PPO Original} \\ \textbf{Bars}} & 0.015 & 0.021 & 0.020 & 0.028 & -0.070 & 0.300 & -0.000 & -0.000 & 0.630 \\ \hline
+    %     \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Original Bars}} & 0.096 & 0.140 & 0.134 & 0.199 & -0.036 & 3.835 & -0.000 & 0.000 & 0.439 \\ \hline
+    %     \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & \textbf{0.478} & \textbf{0.662} & -0.028 & 4.208 & -0.001 & 0.002 & 0.355 \\ \hline
+    %     \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.076 & 0.111 & 0.413 & 0.570 & -0.030 & 3.705 & -0.001 & 0.001 & 0.421 \\ \hline
+    %     \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & 0.073 & 0.107 & 0.227 & 0.322 & -0.036 & 2.928 & -0.001 & -0.000 & 0.544 \\ \hline
+    %     \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.074 & 0.108 & 0.276 & 0.387 & -0.044 & 2.474 & -0.001 & 0.001 & 0.374 \\ \hline
+    %     \end{tabular}
+    %     \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (S\&P 500).}
+    %     \label{tab:final_spy_cum_returns_comparison_table}
+    %     \end{scriptsize}
+    % \end{table}
+
     \begin{table}[h]
         \centering
         \begin{scriptsize}
-        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{5cm}|c|c|c|c|c|c|c|c|c|}
         \hline
-        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
-        \makecell{\textbf{Benchmark} \\ \textbf{(S\&P 500)}} & \textbf{0.146} & \textbf{0.216} & 0.133 & 0.191 & -0.058 & 3.705 & -0.001 & 0.000 & 1.000 \\ \hline
-        \makecell{\textbf{PPO Original} \\ \textbf{Bars}} & 0.015 & 0.021 & 0.020 & 0.028 & -0.070 & 0.300 & -0.000 & -0.000 & 0.630 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Original Bars}} & 0.096 & 0.140 & 0.134 & 0.199 & -0.036 & 3.835 & -0.000 & 0.000 & 0.439 \\ \hline
-        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & \textbf{0.478} & \textbf{0.662} & -0.028 & 4.208 & -0.001 & 0.002 & 0.355 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.076 & 0.111 & 0.413 & 0.570 & -0.030 & 3.705 & -0.001 & 0.001 & 0.421 \\ \hline
-        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & 0.073 & 0.107 & 0.227 & 0.322 & -0.036 & 2.928 & -0.001 & -0.000 & 0.544 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.074 & 0.108 & 0.276 & 0.387 & -0.044 & 2.474 & -0.001 & 0.001 & 0.374 \\ \hline
+        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+        \makecell{\textbf{Benchmark} \\ \textbf{(S\&P 500)}} & \textbf{0.146} & \textbf{0.216} & 0.133 & 0.191 & -0.058 & 3.705 & 0.000 & 1.000 \\ \hline
+        \makecell{\textbf{PPO Original} \\ \textbf{Bars}} & 0.015 & 0.021 & 0.020 & 0.028 & -0.070 & 0.300 & -0.000 & 0.630 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Original Bars}} & 0.096 & 0.140 & 0.134 & 0.199 & -0.036 & 3.835 & 0.000 & 0.439 \\ \hline
+        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.081 & 0.119 & \textbf{0.478} & \textbf{0.662} & -0.028 & 4.208 & 0.002 & 0.355 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.076 & 0.111 & 0.413 & 0.570 & -0.030 & 3.705 & 0.001 & 0.421 \\ \hline
+        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & 0.073 & 0.107 & 0.227 & 0.322 & -0.036 & 2.928 & -0.000 & 0.544 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & 0.074 & 0.108 & 0.276 & 0.387 & -0.044 & 2.474 & 0.001 & 0.374 \\ \hline
         \end{tabular}
         \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (S\&P 500).}
         \label{tab:final_spy_cum_returns_comparison_table}
@@ -2420,18 +2429,35 @@ se resumen los rendimientos finales acumulados para todos los conjuntos de datos
         \caption{Comparativa de retornos acumulados de la estrategia final sobre BTC}
         \label{fig:final_btc_cum_returns_comparison_img}
     \end{figure}
+
+    % \begin{table}[h]
+    %     \centering
+    %     \begin{scriptsize}
+    %     \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+    %     \hline
+    %     & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+    %     \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & 0.418 & 0.640 & \textbf{0.160} & \textbf{0.224} & -0.234 & 2.734 & -0.006 & 0.000 & 1.000 \\ \hline
+    %     \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.050 & 0.071 & 0.055 & 0.075 & -0.156 & 0.455 & -0.003 & -0.001 & 0.274 \\ \hline
+    %     \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.123 & 0.178 & 0.121 & 0.168 & -0.149 & 1.200 & -0.002 & 0.001 & 0.226 \\ \hline
+    %     \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & -0.156 & -0.213 & -0.026 & -0.036 & -0.263 & -0.809 & -0.001 & -0.000 & 0.347 \\ \hline
+    %     \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & \textbf{0.792} & \textbf{1.283} & 0.125 & 0.176 & -0.109 & 11.760 & -0.001 & 0.001 & 0.230 \\ \hline
+    %     \end{tabular}
+    %     \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (BTC).}
+    %     \label{tab:final_btc_cum_returns_comparison_table}
+    %     \end{scriptsize}
+    % \end{table}
   
     \begin{table}[h]
         \centering
         \begin{scriptsize}
-        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{4cm}|c|c|c|c|c|c|c|c|c|}
+        \begin{tabular}{|>{\scriptsize\centering\arraybackslash}m{5cm}|c|c|c|c|c|c|c|c|c|}
         \hline
-        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \makecell{\textbf{Value at} \\ \textbf{Risk (VaR)}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
-        \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & 0.418 & 0.640 & \textbf{0.160} & \textbf{0.224} & -0.234 & 2.734 & -0.006 & 0.000 & 1.000 \\ \hline
-        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.050 & 0.071 & 0.055 & 0.075 & -0.156 & 0.455 & -0.003 & -0.001 & 0.274 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.123 & 0.178 & 0.121 & 0.168 & -0.149 & 1.200 & -0.002 & 0.001 & 0.226 \\ \hline
-        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & -0.156 & -0.213 & -0.026 & -0.036 & -0.263 & -0.809 & -0.001 & -0.000 & 0.347 \\ \hline
-        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & \textbf{0.792} & \textbf{1.283} & 0.125 & 0.176 & -0.109 & 11.760 & -0.001 & 0.001 & 0.230 \\ \hline
+        & \makecell{\textbf{Cumulative} \\ \textbf{Returns}} & \makecell{\textbf{Annualized} \\ \textbf{Return}} & \makecell{\textbf{Sharpe} \\ \textbf{Ratio}} & \makecell{\textbf{Sortino} \\ \textbf{Ratio}} & \makecell{\textbf{Maximum} \\ \textbf{Drawdown}} & \makecell{\textbf{Calmar} \\ \textbf{Ratio}} & \textbf{Alpha} & \textbf{Beta} \\ \hline
+        \makecell{\textbf{Benchmark} \\ \textbf{(BTC)}} & 0.418 & 0.640 & \textbf{0.160} & \textbf{0.224} & -0.234 & 2.734 & 0.000 & 1.000 \\ \hline
+        \makecell{\textbf{PPO Volume} \\ \textbf{Bars}} & 0.050 & 0.071 & 0.055 & 0.075 & -0.156 & 0.455 & -0.001 & 0.274 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Volume Bars}} & 0.123 & 0.178 & 0.121 & 0.168 & -0.149 & 1.200 & 0.001 & 0.226 \\ \hline
+        \makecell{\textbf{PPO Dollar} \\ \textbf{Bars}} & -0.156 & -0.213 & -0.026 & -0.036 & -0.263 & -0.809 & -0.000 & 0.347 \\ \hline
+        \makecell{\textbf{PPO + Meta-labeling} \\ \textbf{Dollar Bars}} & \textbf{0.792} & \textbf{1.283} & 0.125 & 0.176 & -0.109 & 11.760 & 0.001 & 0.230 \\ \hline
         \end{tabular}
         \caption{Resultados del rendimiento acumulado y métricas de riesgo para PPO con y sin \textit{Meta-labeling}, comparados con el Benchmark (BTC).}
         \label{tab:final_btc_cum_returns_comparison_table}
@@ -2513,7 +2539,7 @@ en el desarrollo de estrategias de trading, con un enfoque particular en la apli
 \textit{deep reinforcement learning} (DRL) para la generación de señales de trading. Además, 
 se han adoptado metodologías presentadas en el libro \textit{Advances in Financial Machine Learning} 
 de Marcos López de Prado, como las barras de desequilibrio y el \textit{Meta-Labeling}, para 
-la generación la eficacia de estas estrategias.
+la generación de estas estrategias.
 
 Inicialmente, se implementaron y compararon diferentes tipos de representaciones del mercado, 
 como las barras de tiempo tradicionales frente a las barras de desequilibrio de volumen y dólares. 
@@ -2533,16 +2559,10 @@ aumento notable en el rendimiento acumulado de las estrategias. Esto sugiere que
 operaciones ejecutadas, especialmente en mercados con alta volatilidad como el de las 
 criptomonedas.
 
-En conclusión, la combinación del \textit{deep reinforcement learning} con las metodologías 
-de \textit{Advances in Financial Machine Learning} ha demostrado ser un enfoque prometedor 
-para el desarrollo de estrategias de trading más robustas y adaptativas. Este trabajo 
-subraya el potencial de estas técnicas para optimizar la toma de decisiones en entornos 
-financieros complejos, mejorando tanto la calidad como la rentabilidad de las estrategias 
-implementadas.
 
 En conclusión, la combinación del \textit{deep reinforcement learning} con las metodologías 
-propuestas en \textit{Advances in Financial Machine Learning} parece tener el potencial 
-de ser efectiva en la generación de estrategias de trading, aunque su eficacia no se 
+propuestas en \textit{Advances in Financial Machine Learning} proporciona un enfoque 
+potencialmente eficaz para la generación de estrategias de trading, aunque su rendimiento no se 
 manifiesta uniformemente en todos los mercados, activos o condiciones. Si bien estas 
 técnicas se han mostrado útiles como herramientas para el desarrollo de estrategias, 
 su implementación es compleja y requiere un diseño cuidadoso, ya que la optimización es 
@@ -2684,12 +2704,37 @@ A partir de los resultados y las limitaciones identificadas en este estudio, sur
 varias líneas futuras de investigación que podrían contribuir a mejorar y ampliar el 
 conocimiento en el campo del trading algorítmico basado en \textit{machine learning}.
 
-Una dirección importante para futuras investigaciones es la exploración de métodos 
-para mejorar la accesibilidad y el manejo de datos de alta frecuencia, como los datos 
-de ticks. Dado que estos datos ofrecen una representación más detallada del mercado, 
-el desarrollo de técnicas eficientes de procesamiento y análisis que puedan manejar 
-grandes volúmenes de datos de manera más efectiva podría abrir nuevas posibilidades 
-para el diseño de estrategias de trading más precisas y adaptativas.
+% Una dirección importante para futuras investigaciones es la exploración de métodos 
+% para mejorar la accesibilidad y el manejo de datos de alta frecuencia, como los datos 
+% de ticks. Dado que estos datos ofrecen una representación más detallada del mercado, 
+% el desarrollo de técnicas eficientes de procesamiento y análisis que puedan manejar 
+% grandes volúmenes de datos de manera más efectiva podría abrir nuevas posibilidades 
+% para el diseño de estrategias de trading más precisas y adaptativas.
+
+En primer lugar, una de las principales áreas de interés es la exploración de otros algoritmos de 
+aprendizaje por refuerzo, especialmente aquellos diseñados para espacios de acciónes continuos, como el 
+\textit{Deep Deterministic Policy Gradient} (DDPG) o el \textit{Soft Actor-Critic} (SAC). Estos enfoques 
+son particularmente útiles en mercados financieros, donde las decisiones de trading no se limitan a acciones 
+discretas como comprar o vender, sino que pueden implicar ajustes graduales y continuos en las posiciones. 
+El uso de estos algoritmos podría permitir una mayor flexibilidad en las estrategias de trading, adaptándose 
+de manera más precisa a los cambios dinámicos en los mercados.
+
+En este contexto, otro área de interés es el desarrollo de funciones de recompenssa 
+que no solo optimicen el rendimiento total de la estrategia, sino que también tengán en cuenta el riesgo, 
+mediante métricas como el \textit{Sharpe Ratio} o el \textit{Sortino Ratio}. Al introducir este tipo de 
+funciones de recompensa, los modelos de aprendizaje por refuerzo podrían ser entrenados no solo para 
+maximizar las ganancias, sino también para gestionar mejor el riesgo inherente a las operaciones. Este 
+enfoque ayudaría a reducir la volatilidad del portafolio y mejoraría la estabilidad de las estrategias 
+en diferentes condiciones de mercado.
+
+Además, la generalización de los resultados a otros mercados y condiciones de mercado también 
+representa una línea de investigación crítica. Futuras investigaciones podrían enfocarse 
+en evaluar cómo las metodologías utilizadas en este estudio se desempeñan en diferentes 
+mercados financieros, como el forex, los commodities o incluso mercados emergentes. Además, 
+la exploración de diferentes horizontes temporales y escenarios de volatilidad podría 
+ofrecer una mejor comprensión de las condiciones bajo las cuales estas metodologías son 
+más efectivas.
+
 
 Otra área de investigación prometedora es el desarrollo de enfoques más robustos para 
 la optimización de hiperparámetros y el diseño de modelos. Dado que la sensibilidad a 
@@ -2699,19 +2744,20 @@ técnicas automatizadas de optimización de hiperparámetros, como \textit{hyper
 basado en algoritmos genéticos o \textit{Bayesian optimization}, que podrían mejorar la 
 eficiencia y efectividad del proceso de ajuste de modelos.
 
-La generalización de los resultados a otros mercados y condiciones de mercado también 
-representa una línea de investigación crítica. Futuras investigaciones podrían enfocarse 
-en evaluar cómo las metodologías utilizadas en este estudio se desempeñan en diferentes 
-mercados financieros, como el forex, los commodities o incluso mercados emergentes. Además, 
-la exploración de diferentes horizontes temporales y escenarios de volatilidad podría 
-ofrecer una mejor comprensión de las condiciones bajo las cuales estas metodologías son 
-más efectivas.
 
-Además, la integración de enfoques híbridos que combinen \textit{deep reinforcement learning} 
-con otras técnicas de \textit{machine learning}, como \textit{supervised learning} o 
-\textit{unsupervised learning}, podría ser una vía fructífera. Estos enfoques híbridos 
-podrían aprovechar lo mejor de cada técnica, mejorando la capacidad del modelo para 
-adaptarse a diversas condiciones de mercado y optimizar la toma de decisiones.
+Asimismo, sería beneficioso explorar técnicas más avanzadas de gestión del riesgo y \textit{position sizing}. 
+Métodos basados en la volatilidad o reglas adaptativas de asignación de capital podrían integrarse en los 
+algoritmos de trading para ajustar el tamaño de las posiciones en función de la incertidumbre del mercado. 
+Esta adaptación dinámica permitiría a los modelos reducir el tamaño de las posiciones en periodos de 
+alta volatilidad y aumentarlas en situaciones de mayor estabilidad, optimizando así la relación riesgo/recompensa.
+
+% Además, una línea de investigación con gran potencial es la incorporación de información macroeconómica y fundamental 
+% en los modelos de aprendizaje por refuerzo. Actualmente, muchas de las estrategias basadas en DRL se 
+% entrenan principalmente con datos de series temporales de precios y volúmenes, pero la inclusión de indicadores 
+% macroeconómicos, datos de sentimiento del mercado o análisis fundamental podría mejorar significativamente la 
+% capacidad de los modelos para anticipar tendencias y cambios en las condiciones del mercado. Por ejemplo, 
+% variables como tasas de interés, datos de empleo o informes de beneficios corporativos podrían ayudar a que 
+% las estrategias sean más robustas y predictivas frente a eventos externos.
 
 Finalmente, dado el avance continuo de la infraestructura tecnológica, futuras 
 investigaciones podrían explorar el uso de tecnologías como \textit{cloud computing} 
@@ -2725,8 +2771,6 @@ En conjunto, estas líneas futuras de investigación tienen el potencial de mejo
 significativamente la eficacia y la aplicabilidad de las estrategias de trading basadas 
 en \textit{machine learning}, y de abordar algunas de las limitaciones identificadas 
 en el presente estudio.
-
-
 
 %\phantomsection
 %\addcontentsline{toc}{chapter}{BIBLIOGRAFIA}
